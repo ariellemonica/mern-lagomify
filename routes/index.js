@@ -1,15 +1,15 @@
+require('dotenv');
 const mongoose = require('mongoose');
 const router = require("express").Router();
 
 // Mongo Database
 const db = require('../models');
 
-mongoose.connect(
-  'mongodb://localhost/...',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  });
+// Connect to the Mongo DB
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/lagomifydb", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 // do some things - set up routes
 module.exports = (() => {
@@ -27,15 +27,22 @@ module.exports = (() => {
 
   router.get('/rooms', (req, res) => {
     // rooms and crap ...
-	});
-	
-	router.post('/item/:id', (req, res) => {
+  });
+
+  router.post('/item/:id', (req, res) => {
     // post an item for sale (put it in db) ...
-	});
-	
-	router.get('/*', (req, res) => {
+  });
+
+  router.get('/test', (req, res) => {
+    db.Test.create({
+      key: 'arbitrary'
+    })
+  })
+
+  router.get('/*', (req, res) => {
     // landing page ...
   });
+
 
   return router;
 })();
