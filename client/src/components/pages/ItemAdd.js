@@ -7,7 +7,7 @@ class ItemAdd extends React.Component {
         name: '',
         description: '',
         location: ''
-    }
+    };
 
     handleTextChange = (event) => {
         const { name, value } = event.target;
@@ -16,18 +16,15 @@ class ItemAdd extends React.Component {
         })
     }
 
-//mn - next step - find out why it's not getting to db
+    //mn - next step - find out why it's not getting to db
     handleButtonClick = (event) => {
-        console.log('Button clicked');
         event.preventDefault();
-        if (this.state.name && this.state.description && this.state.location) {
-            API.addItem({
-                name: this.state.name,
-                description: this.state.description,
-                location: this.state.location
-            })
-                .catch(err => console.log(err));
-        }
+        API.addItem({
+            name: this.state.name,
+            description: this.state.description,
+            location: this.state.location
+        })
+        // .catch(err => console.log(err));
     }
 
     render() {

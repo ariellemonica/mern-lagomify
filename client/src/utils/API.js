@@ -1,6 +1,7 @@
 export default {
     addItem: (item) => {
-        return fetch('/item', {
+        console.log(item)
+        return fetch('/api/item', {
             method: 'POST',
             body: JSON.stringify(item)
         })

@@ -36,6 +36,7 @@ module.exports = (() => {
   //hard coded for testing
   // use req.body when you get to it
   router.post('/item', (req, res) => {
+    console.log(req);
     db.Item.create({
       name: req.body.name,
       description: req.body.description,
