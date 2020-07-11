@@ -1,6 +1,6 @@
 import React from "react";
 import { TextField, Button } from '@material-ui/core';
-import API from "../../utils/API";
+import API from "../utils/API";
 
 class ItemAdd extends React.Component {
     state = {
