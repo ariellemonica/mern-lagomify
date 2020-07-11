@@ -48,10 +48,36 @@ module.exports = (() => {
     });
   })
 
+  // mn - simple find item by id - can be modified later
+  router.get('/item/:id', (req, res) => {
+    console.log('this is the item id: ' + req.params.id);
+    db.Item.findById(req.params.id)
+      .then((itemData) => {
+        console.log(itemData);
+        res.json(itemData);
+      })
+      .catch((err) => console.log(err));
+  })
+
+  // mn - update an item by id
+  router.post('/item/:id', (req, res) => {
+    console.log('this is the item id: ' + req.params.id);
+
+    db.Item.findByIdAndUpdate(req.params.id, {
+      name: req.body.name,
+      description: req.body.description,
+      location: req.body.location
+    }, () => {
+      console.log('record is updated ... hopefully')
+    }).then((itemData) => {
+      res.json(itemData);
+    })
+    .catch((err) => console.log(err));
+  })
+
   // router.get('/*', (req, res) => {
   //   // landing page ...
   // });
-
 
   return router;
 })();
