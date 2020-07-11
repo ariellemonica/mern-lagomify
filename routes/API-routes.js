@@ -34,17 +34,15 @@ module.exports = (() => {
   // });
 
   //hard coded for testing
-  router.post('/additem', (req, res) => {
+  // use req.body when you get to it
+  router.post('/item', (req, res) => {
+    console.log(req.body);
     db.Item.create({
-      name: 'Sunglasses',
-      description: 'Luminous Green',
-      location: 'Bakersfield',
-      imageUrl: 'https://www.someimage.com/image.png/',
-      donated: false,
-      tossed: false,
-      sold: false,
-      owner: 'Diarmuid',
-      createdBy: 'Diarmuid'
+      name: req.body.name,
+      description: req.body.description,
+      location: req.body.location,
+      owner: 'Test Owner',
+      createdBy: 'Test Creator'
     }).then(() => {
       res.send('Successfully added.');
     });
