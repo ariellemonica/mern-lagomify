@@ -31,7 +31,7 @@ class ItemAdd extends React.Component {
     render() {
         return (
             <>
-                <h1>Add Item Form!</h1>
+                <h1>Catalog Your Item</h1>
                 <form noValidate autocomplete="off">
                     <TextField name="name" value={this.state.name} label="Item Name" variant="outlined" onChange={this.handleTextChange} />
                     <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
