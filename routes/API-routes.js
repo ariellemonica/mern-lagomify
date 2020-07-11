@@ -13,26 +13,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/lagomifydb", {
 
 // do some things - set up routes
 module.exports = (() => {
-  // router.get('/', (req, res) => {
-  //   // landing page ...
-  // });
-
-  // router.get('/items', (req, res) => {
-  //   // items for sale page...
-  // });
-
-  // router.get('/learn', (req, res) => {
-  //   // learn more page ...
-  // });
-
-  // router.get('/rooms', (req, res) => {
-  //   // rooms and crap ...
-  // });
-
-  // router.post('/item/:id', (req, res) => {
-  //   // post an item for sale (put it in db) ...
-  // });
-
   //hard coded for testing
   // use req.body when you get to it
   router.post('/item', (req, res) => {
@@ -48,7 +28,8 @@ module.exports = (() => {
     });
   })
 
-  // mn - simple find item by id - can be modified later
+  // mn - simple find item by id - can be modified later or chris can blow this away if he's already written something, i wrote this mainly for testing
+  // mn - tested in BE via api call
   router.get('/item/:id', (req, res) => {
     console.log('this is the item id: ' + req.params.id);
     db.Item.findById(req.params.id)
@@ -60,9 +41,11 @@ module.exports = (() => {
   })
 
   // mn - update an item by id
+  // mn - tested in BE via api call
+  // mn - on frontend, what we'll want to do is make sure that the inputs follow the same name-value structure as add item page
   router.post('/item/:id', (req, res) => {
     console.log('this is the item id: ' + req.params.id);
-
+    // if we're allowing more fields to be updated, we can add more
     db.Item.findByIdAndUpdate(req.params.id, {
       name: req.body.name,
       description: req.body.description,
@@ -74,10 +57,6 @@ module.exports = (() => {
     })
     .catch((err) => console.log(err));
   })
-
-  // router.get('/*', (req, res) => {
-  //   // landing page ...
-  // });
 
   return router;
 })();
