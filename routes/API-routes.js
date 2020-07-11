@@ -41,8 +41,8 @@ module.exports = (() => {
       name: req.body.name,
       description: req.body.description,
       location: req.body.location,
-      owner: 'Diarmuid',
-      createdBy: 'Diarmuid'
+      owner: 'Test Owner',
+      createdBy: 'Test Creator'
     }).then(() => {
       res.send('Successfully added.');
     });
