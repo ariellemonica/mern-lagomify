@@ -1,6 +1,7 @@
 import React from "react";
 import { TextField, Button } from '@material-ui/core';
 import API from "../utils/API";
+import FileUpload from "../components/FileUpload";
 
 class ItemAdd extends React.Component {
     state = {
@@ -36,8 +37,9 @@ class ItemAdd extends React.Component {
                     <TextField name="name" value={this.state.name} label="Item Name" variant="outlined" onChange={this.handleTextChange} />
                     <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
                     <TextField name="location" value={this.state.location} label="Item's Location" variant="outlined" onChange={this.handleTextChange} />
+                    <FileUpload />
                     <Button variant="contained" color="primary" onClick={this.handleButtonClick}>
-                        Primary</Button>
+                        Add Item</Button>
                 </form>
             </>
         )
