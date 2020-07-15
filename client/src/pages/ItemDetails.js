@@ -22,9 +22,9 @@ class ItemDetails extends React.Component {
             <>
                 <h1>Item Details</h1>
                 <div>DEFAULT IMAGE HERE</div>
-                <p>{this.state.name}</p>
-                <p>{this.state.description}</p>
-                <p>{this.state.location}</p>
+                <p>Item Name: {this.state.name}</p>
+                <p>Item Description: {this.state.description}</p>
+                <p>Location: {this.state.location}</p>
                 <Button variant='contained' color='primary'>Donate</Button>
                 <Button variant='contained' color='primary'>Sell</Button>
                 <Button variant='contained' color='primary'>Toss</Button>
