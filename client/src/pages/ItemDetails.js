@@ -1,23 +1,30 @@
 import React from "react";
 import { Button } from '@material-ui/core';
-// import API from "../utils/API";
+import API from "../utils/API";
 
 class ItemDetails extends React.Component {
     state = {
         name: '',
         description: '',
         location: '',
-        status: ''
+        status: '',
+        imageUrl: ''
     };
 
+    async componentDidMount() {
+        const { match: { params } } = this.props;
+        const { name, description, location, status, imageUrl } = await API.getItem(params.id);
+        this.setState({ name, description, location, status, imageUrl });
+    }
 
     render() {
         return (
             <>
                 <h1>Item Details</h1>
-                <div>INSERT ITEM IMAGE HERE</div>
-                <p>Placeholder Item Name</p>
-                <p>Placeholder Item Description</p>
+                <div>DEFAULT IMAGE HERE</div>
+                <p>{this.state.name}</p>
+                <p>{this.state.description}</p>
+                <p>{this.state.location}</p>
                 <Button variant='contained' color='primary'>Donate</Button>
                 <Button variant='contained' color='primary'>Sell</Button>
                 <Button variant='contained' color='primary'>Toss</Button>

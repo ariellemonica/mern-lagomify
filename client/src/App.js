@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <Route exact path="/add" component={ ItemAdd } />
-      <Route exact path="/view-item" component={ ItemDetails } />
+      <Route exact path="/view-item/:id" component={ ItemDetails } />
       <Route exact path="/">
         <div className="App">
           <header className="App-header">

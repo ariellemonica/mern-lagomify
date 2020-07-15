@@ -12,7 +12,7 @@ export default {
     // mn - this one may need a modifier to target the id
     updateItem: (item) => {
         console.log(item)
-        return fetch('/api/item/:id', {
+        return fetch(`/api/item/${item.id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -20,25 +20,22 @@ export default {
             body: JSON.stringify(item)
         })
     },
-    // mn - this one will need to pass in the currently logged in user
-    getMyItems: (user) => {
-        console.log(user)
-        return fetch('/api/user/view-items'), {
+    // mn - current user - handled in BE request.auth.user
+    getMyItems: () => {
+        return fetch('/api/items'), {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(user)
+            }
         }
     },
-    viewItemDetails: (item) => {
-        console.log(item)
-        return fetch('/api/item/', item.id), {
+    getItem: (id) => {
+        console.log(id)
+        return fetch(`/api/item/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(item)
-        }
+            }
+        }).then((res) => res.json())
     }
 }
