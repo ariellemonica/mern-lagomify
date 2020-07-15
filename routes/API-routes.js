@@ -1,12 +1,12 @@
 require('dotenv');
 const mongoose = require('mongoose');
-const router = require("express").Router();
+const router = require('express').Router();
 
 // Mongo Database
 const db = require('../models');
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/lagomifydb", {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/lagomifydb', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -33,7 +33,7 @@ module.exports = (() => {
   //   // post an item for sale (put it in db) ...
   // });
 
-  //hard coded for testing
+  // hard coded for testing
   // use req.body when you get to it
   router.post('/item', (req, res) => {
     console.log(req.body);
@@ -46,12 +46,11 @@ module.exports = (() => {
     }).then(() => {
       res.send('Successfully added.');
     });
-  })
+  });
 
   // router.get('/*', (req, res) => {
   //   // landing page ...
   // });
-
 
   return router;
 })();
