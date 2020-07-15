@@ -1,13 +1,15 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ItemAdd from './pages/ItemAdd';
+import LearnMore from './pages/LearnMore';
 
-function App() {
+function App () {
   return (
     <Router>
       <Route exact path="/add" component={ItemAdd} />
+      <Route exact path="/resources" component={LearnMore} />
       <Route exact path="/">
         <div className="App">
           <header className="App-header">
