@@ -63,6 +63,8 @@ module.exports = (() => {
   // mn - capture user whose active section this is, pass through
   router.get('/user/view-items', (req, res) => {
     // console.log('this is the item user: ' + req.params.createdBy);
+    // req.auth.user.id -- use this for 'createdBy'
+    // mongoose populate to grab user's name
     db.Item.find({ createdBy: 'User 2'}, function(err, result) {
       if (err) {
         console.log(err);
