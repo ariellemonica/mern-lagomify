@@ -15,6 +15,7 @@ class ItemDetails extends React.Component {
         return (
             <>
                 <h1>Item Details</h1>
+                <div>INSERT ITEM IMAGE HERE</div>
                 <p>Placeholder Item Name</p>
                 <p>Placeholder Item Description</p>
                 <Button variant='contained' color='primary'>Donate</Button>
