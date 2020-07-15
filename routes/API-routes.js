@@ -49,7 +49,8 @@ module.exports = (() => {
     db.Item.findByIdAndUpdate(req.params.id, {
       name: req.body.name,
       description: req.body.description,
-      location: req.body.location
+      location: req.body.location,
+      status: req.body.status
     }, () => {
       console.log('record is updated ... hopefully')
     }).then((itemData) => {
