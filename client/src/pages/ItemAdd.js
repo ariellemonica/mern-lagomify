@@ -37,7 +37,7 @@ class ItemAdd extends React.Component {
                     <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
                     <TextField name="location" value={this.state.location} label="Item's Location" variant="outlined" onChange={this.handleTextChange} />
                     <Button variant="contained" color="primary" onClick={this.handleButtonClick}>
-                        Primary</Button>
+                        Add Item</Button>
                 </form>
             </>
         )
