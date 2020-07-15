@@ -59,5 +59,21 @@ module.exports = (() => {
     .catch((err) => console.log(err));
   })
 
+  // mn - hardcoded find by user - this will need to be updated
+  // mn - capture user whose active section this is, pass through
+  router.get('/user/view-items', (req, res) => {
+    // console.log('this is the item user: ' + req.params.createdBy);
+    db.Item.find({ createdBy: 'User 2'}, function(err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json(result)
+      }
+    }).then( (itemData) => {
+      console.log(itemData);
+      res.json(itemData);
+    }).catch((err) => console.log(err));
+  })
+
   return router;
 })();
