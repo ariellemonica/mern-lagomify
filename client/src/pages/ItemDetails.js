@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from '@material-ui/core';
-import API from "../utils/API";
+// import API from "../utils/API";
 
 class ItemDetails extends React.Component {
     state = {
