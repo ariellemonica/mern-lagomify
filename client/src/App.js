@@ -3,13 +3,12 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import Landing from './pages/Landing';
 import Member from './pages/Member';
 import Nav from './components/Nav/Nav';
-import Login from './components/Login/Login'
-import SignUp from './components/SignUp/SignUp'
+import Login from './components/Login/Login';
+import SignUp from './components/SignUp/SignUp';
 import './App.css';
-import {authContext} from './utils/appContext'
-import {getUser} from './utils/API'
-const passport = require("passport");
-
+import {authContext} from './utils/appContext';
+import {getUser} from './utils/API';
+import ItemAdd from './pages/ItemAdd';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,16 +21,17 @@ function App() {
 
   return (
     <Router>
-    <authContext.Provider value={{user}}>
-        <Nav/>
-      <Switch>
-        <Route path="/" exact component={()=> <Landing setUser={setUser}/>}/>
-        <Route path="/member" exact component={Member}/>
-        <Route path="/login" exact component={Login}/>
-        <Route path="/signup" exact component={SignUp}/>
-      </Switch>
-    </authContext.Provider>
- </Router>
+      <authContext.Provider value={{user}}>
+        <Nav />
+        <Switch>
+          <Route path="/" exact component={()=> <Landing setUser={setUser}/>} />
+          <Route path="/member" exact component={Member} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={SignUp} />
+          <Route exact path="/add" component={ItemAdd} />
+        </Switch>
+      </authContext.Provider>
+    </Router>
   );
 }
 

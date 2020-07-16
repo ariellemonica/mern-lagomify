@@ -13,47 +13,50 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/lagomifydb", {
 
 // do some things - set up routes
 module.exports = (() => {
-  // router.get('/', (req, res) => {
-  //   // landing page ...
-  // });
-
-  // router.get('/items', (req, res) => {
-  //   // items for sale page...
-  // });
-
-  // router.get('/learn', (req, res) => {
-  //   // learn more page ...
-  // });
-
-  // router.get('/rooms', (req, res) => {
-  //   // rooms and crap ...
-  // });
-
-  // router.post('/item/:id', (req, res) => {
-  //   // post an item for sale (put it in db) ...
-  // });
-
   //hard coded for testing
-  router.post('/additem', (req, res) => {
+  // use req.body when you get to it
+  router.post('/item', (req, res) => {
+    console.log(req.body);
     db.Item.create({
-      name: 'Sunglasses',
-      description: 'Luminous Green',
-      location: 'Bakersfield',
-      imageUrl: 'https://www.someimage.com/image.png/',
-      donated: false,
-      tossed: false,
-      sold: false,
-      owner: 'Diarmuid',
-      createdBy: 'Diarmuid'
+      name: req.body.name,
+      description: req.body.description,
+      location: req.body.location,
+      owner: 'Test Owner',
+      createdBy: 'Test Creator'
     }).then(() => {
       res.send('Successfully added.');
     });
   })
 
-  // router.get('/*', (req, res) => {
-  //   // landing page ...
-  // });
+  // mn - simple find item by id - can be modified later or chris can blow this away if he's already written something, i wrote this mainly for testing
+  // mn - tested in BE via api call
+  router.get('/item/:id', (req, res) => {
+    console.log('this is the item id: ' + req.params.id);
+    db.Item.findById(req.params.id)
+      .then((itemData) => {
+        console.log(itemData);
+        res.json(itemData);
+      })
+      .catch((err) => console.log(err));
+  })
 
+  // mn - update an item by id
+  // mn - tested in BE via api call
+  // mn - on frontend, what we'll want to do is make sure that the inputs follow the same name-value structure as add item page
+  router.post('/item/:id', (req, res) => {
+    console.log('this is the item id: ' + req.params.id);
+    // if we're allowing more fields to be updated, we can add more
+    db.Item.findByIdAndUpdate(req.params.id, {
+      name: req.body.name,
+      description: req.body.description,
+      location: req.body.location
+    }, () => {
+      console.log('record is updated ... hopefully')
+    }).then((itemData) => {
+      res.json(itemData);
+    })
+    .catch((err) => console.log(err));
+  })
 
   return router;
 })();
