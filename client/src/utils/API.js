@@ -9,6 +9,7 @@ export default {
             body: JSON.stringify(item)
         })
     },
+
     // mn - this one may need a modifier to target the id
     updateItem: (item) => {
         console.log(item)
@@ -18,8 +19,9 @@ export default {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(item)
-        })
+        }).then((res) => res.json())
     },
+
     // mn - current user - handled in BE request.auth.user
     getMyItems: () => {
         return fetch('/api/items'), {
@@ -29,6 +31,7 @@ export default {
             }
         }
     },
+
     getItem: (id) => {
         console.log(id)
         return fetch(`/api/item/${id}`, {

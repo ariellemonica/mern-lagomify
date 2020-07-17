@@ -4,6 +4,7 @@ import API from "../utils/API";
 
 class ItemDetails extends React.Component {
     state = {
+        _id: '',
         name: '',
         description: '',
         location: '',
@@ -13,8 +14,8 @@ class ItemDetails extends React.Component {
 
     async componentDidMount() {
         const { match: { params } } = this.props;
-        const { name, description, location, status, imageUrl } = await API.getItem(params.id);
-        this.setState({ name, description, location, status, imageUrl });
+        const { _id, name, description, location, status, imageUrl } = await API.getItem(params.id);
+        this.setState({ _id, name, description, location, status, imageUrl });
     }
 
     handleEditClick () {
@@ -25,17 +26,26 @@ class ItemDetails extends React.Component {
 
     handleDonateClick () {
         // changes status to 'toDonate'
+        this.setState( { status: 'toDonate' })
         // bring user to page for resources to donate
     }
 
     handleSellClick () {
         // changes status to 'toSell'
+        this.setState( { status: 'toSell' })
         // bring user to page for resources to sell
     }
 
-    handleTossClick () {
-        // changes status to 'toToss'
-        // brings user to page for resources to toss
+    handleTossClick = (event) => {
+        event.preventDefault();
+        console.log('the current status: ' + this.state.status);
+        API.updateItem({
+            name: this.state.name,
+            description: this.state.description,
+            location: this.state.location,
+            status: 'toToss'
+        })
+        .catch(err => console.log(err));
     }
 
 
@@ -43,7 +53,7 @@ class ItemDetails extends React.Component {
         return (
             <>
                 <h1>Item Details</h1>
-                <div>DEFAULT IMAGE HERE</div>
+                <div>PLACEHOLDER IMAGE HERE</div>
                 <p>Item Name: {this.state.name}</p>
                 <p>Item Description: {this.state.description}</p>
                 <p>Location: {this.state.location}</p>
