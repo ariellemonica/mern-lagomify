@@ -24,7 +24,6 @@ module.exports = (() => {
       type: String,
       required: true
     }
-
   }, { timestamps: true });
 
   return mongoose.model('Resource', ResourceSchema);
