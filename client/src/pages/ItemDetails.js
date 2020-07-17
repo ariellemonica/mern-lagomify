@@ -30,7 +30,7 @@ class ItemDetails extends React.Component {
         // bring user to page for resources to donate
     }
 
-    handleSellClick () {
+    handleSellClick = (event) => {
         // changes status to 'toSell'
         this.setState( { status: 'toSell' })
         // bring user to page for resources to sell
@@ -39,6 +39,7 @@ class ItemDetails extends React.Component {
     handleTossClick = (event) => {
         event.preventDefault();
         console.log('the current status: ' + this.state.status);
+        console.log('the current item id: ' + this.state._id);
         API.updateItem({
             _id: this.state._id,
             name: this.state.name,

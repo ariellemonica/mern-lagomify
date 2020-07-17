@@ -13,7 +13,7 @@ export default {
     // mn - this one may need a modifier to target the id
     updateItem: (item) => {
         console.log(item)
-        return fetch(`/api/item/${item.id}`, {
+        return fetch(`/api/item/${item._id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
