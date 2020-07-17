@@ -49,13 +49,32 @@ module.exports = (() => {
     db.Item.findByIdAndUpdate(req.params.id, {
       name: req.body.name,
       description: req.body.description,
-      location: req.body.location
+      location: req.body.location,
+      status: req.body.status
     }, () => {
       console.log('record is updated ... hopefully')
     }).then((itemData) => {
       res.json(itemData);
     })
     .catch((err) => console.log(err));
+  })
+
+  // mn - hardcoded find by user - this will need to be updated
+  // mn - capture user whose active section this is, pass through
+  router.get('/user/view-items', (req, res) => {
+    // console.log('this is the item user: ' + req.params.createdBy);
+    // req.auth.user.id -- use this for 'createdBy'
+    // mongoose populate to grab user's name
+    db.Item.find({ createdBy: 'User 2'}, function(err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json(result)
+      }
+    }).then( (itemData) => {
+      console.log(itemData);
+      res.json(itemData);
+    }).catch((err) => console.log(err));
   })
 
   return router;
