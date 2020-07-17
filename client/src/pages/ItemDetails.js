@@ -40,6 +40,7 @@ class ItemDetails extends React.Component {
         event.preventDefault();
         console.log('the current status: ' + this.state.status);
         API.updateItem({
+            _id: this.state._id,
             name: this.state.name,
             description: this.state.description,
             location: this.state.location,
