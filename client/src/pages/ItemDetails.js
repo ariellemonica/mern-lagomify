@@ -24,15 +24,36 @@ class ItemDetails extends React.Component {
         // or display form components on this page?
     }
 
-    handleDonateClick () {
+    handleDonateClick = (event) => {
         // changes status to 'toDonate'
-        this.setState( { status: 'toDonate' })
+        event.preventDefault();
+        console.log('the current status: ' + this.state.status);
+        console.log('the current item id: ' + this.state._id);
+        // changes status to 'toSell'
+        API.updateItem({
+            _id: this.state._id,
+            name: this.state.name,
+            description: this.state.description,
+            location: this.state.location,
+            status: 'toDonate'
+        })
+        .catch(err => console.log(err));
         // bring user to page for resources to donate
     }
 
     handleSellClick = (event) => {
+        event.preventDefault();
+        console.log('the current status: ' + this.state.status);
+        console.log('the current item id: ' + this.state._id);
         // changes status to 'toSell'
-        this.setState( { status: 'toSell' })
+        API.updateItem({
+            _id: this.state._id,
+            name: this.state.name,
+            description: this.state.description,
+            location: this.state.location,
+            status: 'toSell'
+        })
+        .catch(err => console.log(err));
         // bring user to page for resources to sell
     }
 
