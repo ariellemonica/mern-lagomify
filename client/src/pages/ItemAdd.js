@@ -25,7 +25,7 @@ class ItemAdd extends React.Component {
             description: this.state.description,
             location: this.state.location
         })
-        // .catch(err => console.log(err));
+            .catch(err => console.log(err));
     }
 
     render() {
