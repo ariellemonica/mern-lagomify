@@ -29,7 +29,7 @@ class ItemDetails extends React.Component {
         event.preventDefault();
         console.log('the current status: ' + this.state.status);
         console.log('the current item id: ' + this.state._id);
-        // changes status to 'toSell'
+        // changes status to 'toDonate'
         API.updateItem({
             _id: this.state._id,
             name: this.state.name,
