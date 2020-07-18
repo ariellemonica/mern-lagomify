@@ -7,7 +7,8 @@ class ItemAdd extends React.Component {
     state = {
       name: '',
       description: '',
-      location: ''
+      location: '',
+      files: null
     };
 
     handleTextChange = (event) => {
@@ -17,15 +18,15 @@ class ItemAdd extends React.Component {
       });
     }
 
+    handleState = (obj) => {
+        this.setState(obj);
+    };
+
     // mn - next step - find out why it's not getting to db
     handleButtonClick = (event) => {
         event.preventDefault();
         console.log('the current state: ' + this.state.name)
-        API.addItem({
-            name: this.state.name,
-            description: this.state.description,
-            location: this.state.location
-        })
+        API.addItem(this.state)
             .catch(err => console.log(err));
     }
 
@@ -37,7 +38,7 @@ class ItemAdd extends React.Component {
                     <TextField name="name" value={this.state.name} label="Item Name" variant="outlined" onChange={this.handleTextChange} />
                     <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
                     <TextField name="location" value={this.state.location} label="Item's Location" variant="outlined" onChange={this.handleTextChange} />
-                    <FileUpload/>
+                    <FileUpload handleState={this.handleState} />
                     <Button variant="contained" color="primary" onClick={this.handleButtonClick}>
                         Add Item</Button>
                 </form>

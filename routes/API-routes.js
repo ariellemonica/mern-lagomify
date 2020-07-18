@@ -1,7 +1,21 @@
 require('dotenv');
 
 const mongoose = require('mongoose');
+const multer = require('multer');
 const router = require('express').Router();
+const AWS = require('aws-sdk');
+const s3 = new AWS.S3();
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    subregion: 'us-west-2',
+});
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  // file size limitation in bytes
+  limits: { fileSize: 52428800 },
+});
 
 // Mongo Database
 const db = require('../models');
@@ -49,8 +63,11 @@ module.exports = (() => {
 
   // hard coded for testing
   // use req.body when you get to it
-  router.post('/item', (req, res) => {
+  router.post('/item', upload.single('test'), (req, res) => {
     console.log(req.body);
+    console.log(req.files);
+
+
     db.Item.create({
       name: req.body.name,
       description: req.body.description,

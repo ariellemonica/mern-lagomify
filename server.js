@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 // Add routes, both API, imageUpload and view
 app.use('/api', apiRoutes);
-app.use('/imageUpload', imageUploadRoutes)
+// app.use('/imageUpload', imageUploadRoutes)
 
 //app.post('/upload', (req, res) => {
   //upload(req, res, (err) => {
