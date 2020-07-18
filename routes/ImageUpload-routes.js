@@ -40,3 +40,5 @@ router.post('/upload', upload.single('theseNamesMustMatch'), (req, res) => {
       res.send('File uploaded to S3');
   })
 });
+
+module.exports = router;
