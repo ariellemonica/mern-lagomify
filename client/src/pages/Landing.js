@@ -4,6 +4,8 @@ import Button from '@material-ui/core/Button';
 import { GoogleLogin } from 'react-google-login';
 
 
+const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+console.log(CLIENT_ID);
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,13 +63,16 @@ export default ({setUser}) => {
       <div style={{ display: "inline-block" }}></div>
       <h1>Welcome to Lagomify</h1>
       <GoogleLogin 
-    clientId="970863529024-pdnpm3hav7hvmkjk4adqu6c0pi7011hg.apps.googleusercontent.com"
+    clientId="970863529024-kjrcmg8234d1ddve9rf3p4icpsrico0n.apps.googleusercontent.com"
     buttonText="Login with Google"
     onSuccess={responseGoogle}
     onFailure={handleFailure}
     cookiePolicy={'single_host_origin'}
   />
-        <Button className={classes.buttonStyle} href="/signup">
+  <div>
+
+  </div>
+        <Button className={classes.buttonStyle} variant="contained" color="primary" size="large" href="/signup">
           Create Account
         </Button>
       </div>
