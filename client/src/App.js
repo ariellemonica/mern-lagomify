@@ -35,6 +35,7 @@ function App() {
           <Route path="/signup" exact component={SignUp} />
           <Route exact path="/learn" component={LearnMore} />
           <Route exact path="/view-item/:id" component={ ItemDetails } />
+          {/* <Route path="/add" exact component={() => <ItemAdd user={user} /> } /> */}
           <Route exact path="/add" render={() => {
             return <ItemAdd user={user} />
           }} />

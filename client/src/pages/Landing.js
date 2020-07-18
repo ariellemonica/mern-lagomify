@@ -11,7 +11,17 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
     buttonStyle : {
-      backgroundColor: "rgb(255, 255, 255)", display: "inline-flex", alignItems: "center", color: "rgba(0, 0, 0, 0.54)", boxShadow: "rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px", padding: "9px", borderRadius: "2px", border: "1px solid transparent", fontSize: "14px", fontWeight: "500", fontFamily: "Roboto, sans-serif" 
+      backgroundColor: "rgb(255, 255, 255)", 
+      display: "inline-flex", 
+      alignItems: "center", 
+      color: "rgba(0, 0, 0, 0.54)", 
+      boxShadow: "rgba(0, 0, 0, 0.24) 0px 2px 2px 0px, rgba(0, 0, 0, 0.24) 0px 0px 1px 0px", 
+      padding: "9px", 
+      borderRadius: "2px", 
+      border: "1px solid transparent", 
+      fontSize: "14px", 
+      fontWeight: "500", 
+      fontFamily: "Roboto, sans-serif" 
     },
   },
 }));
@@ -42,9 +52,7 @@ export default ({setUser}) => {
             console.log('Unauthorized access.');
             
           }
-        });
-
-        
+        });     
       }
     
       const handleFailure = res => console.log("google auth failed - ", res)

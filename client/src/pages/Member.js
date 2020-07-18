@@ -7,6 +7,8 @@ import {authContext} from '../utils/appContext'
 
 // console.log(Auth.checkLoggedIn());
 
+
+
 export default ()=>{
     const {user} = useContext(authContext);
     console.log(user)
