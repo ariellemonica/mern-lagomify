@@ -1,23 +1,27 @@
-import React from "react";
+import React from 'react';
 import { TextField, Button } from '@material-ui/core';
+<<<<<<< HEAD
 import API from "../utils/API";
 import FileUpload from "../components/FileUpload";
+=======
+import API from '../utils/API';
+>>>>>>> master
 
 class ItemAdd extends React.Component {
     state = {
-        name: '',
-        description: '',
-        location: ''
+      name: '',
+      description: '',
+      location: ''
     };
 
     handleTextChange = (event) => {
-        const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        })
+      const { name, value } = event.target;
+      this.setState({
+        [name]: value
+      });
     }
 
-    //mn - next step - find out why it's not getting to db
+    // mn - next step - find out why it's not getting to db
     handleButtonClick = (event) => {
         event.preventDefault();
         console.log('the current state: ' + this.state.name)
@@ -26,13 +30,13 @@ class ItemAdd extends React.Component {
             description: this.state.description,
             location: this.state.location
         })
-        // .catch(err => console.log(err));
+            .catch(err => console.log(err));
     }
 
     render() {
         return (
             <>
-                <h1>Add Item Form!</h1>
+                <h1>Catalog Your Item</h1>
                 <form noValidate autocomplete="off">
                     <TextField name="name" value={this.state.name} label="Item Name" variant="outlined" onChange={this.handleTextChange} />
                     <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
@@ -47,4 +51,3 @@ class ItemAdd extends React.Component {
 }
 
 export default ItemAdd;
-

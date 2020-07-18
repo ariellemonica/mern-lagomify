@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "What Is Minimalism?",
+    "link": "https://www.becomingminimalist.com/what-is-minimalism/",
+    "image": "../assets/img/green-wooden-chair.jpg",
+    "alt": "Green Wooden Chair"
+  },  
+  {
+    "id": 2,
+    "title": "The 10 Most Important Things to Simplify in Your Life",
+    "link": "https://www.becomingminimalist.com/the-10-most-important-things-to-simplify-in-your-life/",
+    "image": "../assets/img/plant-in-clear-vase.jpg",
+    "alt": "Plant in a Clear Vase"
+  },
+  {
+    "id": 3,
+    "title": "A Helpful Guide to Becoming Unbusy",
+    "link": "https://www.becomingminimalist.com/un-busy/",
+    "image": "../assets/img/standing-man-looking-his-watch.jpg",
+    "alt": "Standing Man Looking at His Watch"
+  },
+  {
+    "id": 4,
+    "title": "How to Declutter Your Home: 10 Creative Decluttering Tips",
+    "link": "https://www.becomingminimalist.com/creative-ways-to-declutter/",
+    "image": "../assets/img/joshua-with-a-box-of-clutter.jpg",
+    "alt": "Joshua Becker with a Box of Clutter"
+  },
+  {
+    "id": 5,
+    "title": "How Many Clothes Do I Need? A Practical Guide to Owning Fewer Clothes",
+    "link": "https://www.becomingminimalist.com/a-practical-guide-to-owning-fewer-clothes/",
+    "image": "/assets/img/assorted-clothes-on-hangers.jpg",
+    "alt": "Assorted Clothes on Hangers"
+  }
+]
