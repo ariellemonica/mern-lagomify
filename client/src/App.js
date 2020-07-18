@@ -12,7 +12,7 @@ import ItemAdd from './pages/ItemAdd';
 import LearnMore from './pages/LearnMore';
 import ItemDetails from './pages/ItemDetails';
 
-function App() {
+function App () {
   let loggedIn = false;
   const [user, setUser] = useState(null);
   useEffect(()=>{

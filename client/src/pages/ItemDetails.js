@@ -1,5 +1,7 @@
 import React from "react";
 import { Button } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
+import { Main } from '../components';
 import API from "../utils/API";
 
 class ItemDetails extends React.Component {
@@ -74,17 +76,17 @@ class ItemDetails extends React.Component {
 
     render() {
         return (
-            <>
-                <h1>Item Details</h1>
+            <Main>
+                <Typography variant='h2'>Item Details</Typography>
                 <div>PLACEHOLDER IMAGE HERE</div>
-                <p>Item Name: {this.state.name}</p>
+                <Typography variant='h5'>{this.state.name}</Typography>
                 <p>Item Description: {this.state.description}</p>
                 <p>Location: {this.state.location}</p>
                 <Button variant='contained' color='primary' onClick={this.handleEditClick}>Edit Item</Button>
                 <Button variant='contained' color='primary'onClick={this.handleDonateClick}>Donate</Button>
                 <Button variant='contained' color='primary' onClick={this.handleSellClick}>Sell</Button>
                 <Button variant='contained' color='primary'onClick={this.handleTossClick}>Toss</Button>
-            </>
+            </Main>
         )
     }
 

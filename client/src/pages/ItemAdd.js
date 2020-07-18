@@ -1,28 +1,38 @@
 import React from 'react';
+// import { makeStyles } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
+import { Main } from '../components';
 import { TextField, Button } from '@material-ui/core';
 import API from '../utils/API';
 
- class ItemAdd extends React.Component {
-//     constructor(props) {
-//         super(props);
 
-//         this.state = {
-//             user: null,
-//             name: '',
-//             description: '',
-//             location: ''
-//         };
-//     }
-
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.user !== this.props.user) {
-    //         // they are probably logged in
-    //         console.log('they are probably logged in');
-    //         this.setState({
-    //             user: this.props.user
-    //         });
-    //     }
-    // }
+class ItemAdd extends React.Component {
+     //   constructor(props) {
+        //         super(props);
+        
+        //         this.state = {
+        //             user: null,
+        //             name: '',
+        //             description: '',
+        //             location: ''
+        //         };
+        //     }
+        
+            // componentDidUpdate(prevProps) {
+            //     if (prevProps.user !== this.props.user) {
+            //         // they are probably logged in
+            //         console.log('they are probably logged in');
+            //         this.setState({
+            //             user: this.props.user
+            //         });
+            //     }
+            // }
+        // const useStyles = makeStyles(() => ({
+        //     stretch: {
+        //         display: 'flex',
+        //         justifyContent: 'space-around'
+        //     }
+        // }));
     state = {
       name: '',
       description: '',
@@ -50,8 +60,8 @@ import API from '../utils/API';
 
     render() {
         return (
-            <>
-                <h1>Catalog Your Item</h1>
+            <Main>
+                <Typography variant='h2'>Catalog Your Item</Typography>
                 <form noValidate autoComplete="off">
                     <TextField name="name" value={this.state.name} label="Item Name" variant="outlined" onChange={this.handleTextChange} />
                     <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
@@ -59,7 +69,7 @@ import API from '../utils/API';
                     <Button variant="contained" color="primary" onClick={this.handleButtonClick}>
                         Add Item</Button>
                 </form>
-            </>
+            </Main>
         )
     }
 }
