@@ -1,6 +1,16 @@
 import React from 'react';
+// import { makeStyles } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
+import { Main } from '../components';
 import { TextField, Button } from '@material-ui/core';
 import API from '../utils/API';
+
+// const useStyles = makeStyles(() => ({
+//     stretch: {
+//         display: 'flex',
+//         justifyContent: 'space-around'
+//     }
+// }));
 
 class ItemAdd extends React.Component {
     state = {
@@ -30,8 +40,8 @@ class ItemAdd extends React.Component {
 
     render() {
         return (
-            <>
-                <h1>Catalog Your Item</h1>
+            <Main>
+                <Typography variant='h2'>Catalog Your Item</Typography>
                 <form noValidate autocomplete="off">
                     <TextField name="name" value={this.state.name} label="Item Name" variant="outlined" onChange={this.handleTextChange} />
                     <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
@@ -39,7 +49,7 @@ class ItemAdd extends React.Component {
                     <Button variant="contained" color="primary" onClick={this.handleButtonClick}>
                         Add Item</Button>
                 </form>
-            </>
+            </Main>
         )
     }
 }
