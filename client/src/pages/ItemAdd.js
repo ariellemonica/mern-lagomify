@@ -1,11 +1,7 @@
 import React from 'react';
 import { TextField, Button } from '@material-ui/core';
-<<<<<<< HEAD
 import API from "../utils/API";
 import FileUpload from "../components/FileUpload";
-=======
-import API from '../utils/API';
->>>>>>> master
 
 class ItemAdd extends React.Component {
     state = {
