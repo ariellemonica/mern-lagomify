@@ -15,7 +15,7 @@ mongoose.connect(
   });
 
 mongoose.connection
-  .on('error', console.err.bind(
+  .on('error', console.error.bind(
     console, 'There was an error connecting to the database.'))
   .once('connected', () => {
     console.log('Successfully connected to the database.');
