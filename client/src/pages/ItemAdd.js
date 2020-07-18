@@ -5,14 +5,34 @@ import { Main } from '../components';
 import { TextField, Button } from '@material-ui/core';
 import API from '../utils/API';
 
-// const useStyles = makeStyles(() => ({
-//     stretch: {
-//         display: 'flex',
-//         justifyContent: 'space-around'
-//     }
-// }));
 
 class ItemAdd extends React.Component {
+     //   constructor(props) {
+        //         super(props);
+        
+        //         this.state = {
+        //             user: null,
+        //             name: '',
+        //             description: '',
+        //             location: ''
+        //         };
+        //     }
+        
+            // componentDidUpdate(prevProps) {
+            //     if (prevProps.user !== this.props.user) {
+            //         // they are probably logged in
+            //         console.log('they are probably logged in');
+            //         this.setState({
+            //             user: this.props.user
+            //         });
+            //     }
+            // }
+        // const useStyles = makeStyles(() => ({
+        //     stretch: {
+        //         display: 'flex',
+        //         justifyContent: 'space-around'
+        //     }
+        // }));
     state = {
       name: '',
       description: '',
@@ -42,7 +62,7 @@ class ItemAdd extends React.Component {
         return (
             <Main>
                 <Typography variant='h2'>Catalog Your Item</Typography>
-                <form noValidate autocomplete="off">
+                <form noValidate autoComplete="off">
                     <TextField name="name" value={this.state.name} label="Item Name" variant="outlined" onChange={this.handleTextChange} />
                     <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
                     <TextField name="location" value={this.state.location} label="Item's Location" variant="outlined" onChange={this.handleTextChange} />
