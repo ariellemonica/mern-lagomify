@@ -3,12 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ItemAdd from './pages/ItemAdd';
-<<<<<<< HEAD
-/*import FileUpload from "./components/FileUpload";*/
-=======
 import LearnMore from './pages/LearnMore';
 import ItemDetails from './pages/ItemDetails';
->>>>>>> master
 
 function App () {
   return (

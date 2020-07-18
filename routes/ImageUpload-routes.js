@@ -1,6 +1,8 @@
-import express from 'express';
-import multer from 'multer';
-import AWS, { S3 } from 'aws-sdk';
+const router = require('express').Router();
+const multer = require('multer');
+// import AWS, { S3 } from 'aws-sdk';
+const AWS = require('aws-sdk');
+const S3 = require('aws-sdk/clients/s3');
 
 //Amazon s3 config
 AWS.config.update(
@@ -11,7 +13,6 @@ AWS.config.update(
   
   });
 
-const router = new express.Router();
 //Multer config
 //memory storage keeps file data in a buffer
 const upload = multer({
@@ -23,6 +24,7 @@ const upload = multer({
 router.post('/imageUpload/upload', upload.single('theseNamesMustMatch'), (req, res) => {
   //req.files is the 'theseNamesMustMatch' file
   const key = `${directory}/${uuid.v4()}`;
+  const S3_BUCKET = process.env.Bucket
 
   console.log(req.file[0]);
   let noSpaces = req.file[0].split(' ');
@@ -30,7 +32,7 @@ router.post('/imageUpload/upload', upload.single('theseNamesMustMatch'), (req, r
   console.log(lowercase);
 
   S3.putObject({
-    Bucket: "lagomify-user-uploads",
+    Bucket: S3_BUCKET,
     Key: key,
     ContentType: 'image/*',
     Body: req.file.buffer,
