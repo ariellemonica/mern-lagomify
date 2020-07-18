@@ -1,22 +1,22 @@
-import React from "react";
+import React from 'react';
 import { TextField, Button } from '@material-ui/core';
-import API from "../utils/API";
+import API from '../utils/API';
 
 class ItemAdd extends React.Component {
     state = {
-        name: '',
-        description: '',
-        location: ''
+      name: '',
+      description: '',
+      location: ''
     };
 
     handleTextChange = (event) => {
-        const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        })
+      const { name, value } = event.target;
+      this.setState({
+        [name]: value
+      });
     }
 
-    //mn - next step - find out why it's not getting to db
+    // mn - next step - find out why it's not getting to db
     handleButtonClick = (event) => {
         event.preventDefault();
         console.log('the current state: ' + this.state.name)
@@ -45,4 +45,3 @@ class ItemAdd extends React.Component {
 }
 
 export default ItemAdd;
-

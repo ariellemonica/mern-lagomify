@@ -1,19 +1,53 @@
 require('dotenv');
+
 const mongoose = require('mongoose');
-const router = require("express").Router();
+const router = require('express').Router();
 
 // Mongo Database
 const db = require('../models');
+const MONGODB_URI =
+  process.env.MONGODB_URI || 'mongodb://localhost/lagomifydb';
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/lagomifydb", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+mongoose.connect(
+  MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+
+mongoose.connection
+  .on('error', console.error.bind(
+    console, 'There was an error connecting to the database.'))
+  .once('connected', () => {
+    console.log('Successfully connected to the database.');
+  });
 
 // do some things - set up routes
 module.exports = (() => {
-  //hard coded for testing
+  // router.get('/', (req, res) => {
+  //   // landing page ...
+  // });
+
+  // router.get('/items', (req, res) => {
+  //   // items for sale page...
+  // });
+
+  router.get('/learn', (req, res) => {
+    db.Resource
+      .find({})
+      .then(docs => res.json(docs))
+      .catch(err => res.status(422).json(err));
+  });
+
+  // router.get('/rooms', (req, res) => {
+  //   // rooms and crap ...
+  // });
+
+  // router.post('/item/:id', (req, res) => {
+  //   // post an item for sale (put it in db) ...
+  // });
+
+  // hard coded for testing
   // use req.body when you get to it
   router.post('/item', (req, res) => {
     console.log(req.body);
@@ -26,7 +60,7 @@ module.exports = (() => {
     }).then(() => {
       res.send('Successfully added.');
     });
-  })
+  });
 
   // mn - simple find item by id - can be modified later or chris can blow this away if he's already written something, i wrote this mainly for testing
   // mn - tested in BE via api call
@@ -38,7 +72,7 @@ module.exports = (() => {
         res.json(itemData);
       })
       .catch((err) => console.log(err));
-  })
+  });
 
   // mn - update an item by id
   // mn - tested in BE via api call
@@ -52,12 +86,12 @@ module.exports = (() => {
       location: req.body.location,
       status: req.body.status
     }, () => {
-      console.log('record is updated ... hopefully')
+      console.log('record is updated ... hopefully');
     }).then((itemData) => {
       res.json(itemData);
     })
-    .catch((err) => console.log(err));
-  })
+      .catch((err) => console.log(err));
+  });
 
   // mn - hardcoded find by user - this will need to be updated
   // mn - capture user whose active section this is, pass through
@@ -65,7 +99,7 @@ module.exports = (() => {
     // console.log('this is the item user: ' + req.params.createdBy);
     // req.auth.user.id -- use this for 'createdBy'
     // mongoose populate to grab user's name
-    db.Item.find({ createdBy: 'User 2'}, function(err, result) {
+    db.Item.find({ createdBy: 'User 2' }, function (err, result) {
       if (err) {
         console.log(err);
       } else {
@@ -75,7 +109,7 @@ module.exports = (() => {
       console.log(itemData);
       res.json(itemData);
     }).catch((err) => console.log(err));
-  })
+  });
 
   return router;
 })();
