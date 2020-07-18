@@ -4,7 +4,7 @@ import { DropzoneArea } from 'material-ui-dropzone';
 const upload = require('superagent');
 
 class FileUpload extends React.Component {
-      onDrop: function(files) {
+      onDrop: function (files) {
         upload.post('/upload')
         .attach('theseNamesMustMatch', files[0])
         .end(( err, res) => {
@@ -13,7 +13,7 @@ class FileUpload extends React.Component {
         })
       }
 
-      render() {
+      render() { 
         return (
           <DropzoneArea
             acceptedFiles={['image/*']}
@@ -21,8 +21,8 @@ class FileUpload extends React.Component {
             onChange={(files) => console.log('Files:', files)}
             onDrop={this.onDrop}
           />
-        )
+        );
     }
-}
+};
 
 export default FileUpload;
