@@ -8,5 +8,8 @@ export default {
       },
       body: JSON.stringify(item)
     });
+  },
+  getResources: () => {
+    return fetch('/api/learn');
   }
 };
