@@ -54,7 +54,11 @@ class FileUpload extends React.Component {
             acceptedFiles={['image/*']}
             dropzoneText={"Drag and drop an image here or click"}
             onChange={(files) => {
-              let testFile = new Blob(JSON.stringify(files[0]), { type: 'application/json' });
+              //let testFile = new Blob(JSON.stringify(files[0]), { type: 'application/json' });
+              let testFile = fileObject; 
+              //get File Object
+              var fileObject = getFile();
+              
               this.props.handleState({ files: testFile })
             }}
             // onSubmit={this.handleSubmit}
