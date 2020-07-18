@@ -3,11 +3,26 @@ import { TextField, Button } from '@material-ui/core';
 import API from "../utils/API";
 
 class ItemAdd extends React.Component {
-    state = {
-        name: '',
-        description: '',
-        location: ''
-    };
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            user: null,
+            name: '',
+            description: '',
+            location: ''
+        };
+    }
+
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.user !== this.props.user) {
+    //         // they are probably logged in
+    //         console.log('they are probably logged in');
+    //         this.setState({
+    //             user: this.props.user
+    //         });
+    //     }
+    // }
 
     handleTextChange = (event) => {
         const { name, value } = event.target;
@@ -32,7 +47,7 @@ class ItemAdd extends React.Component {
         return (
             <>
                 <h1>Catalog Your Item</h1>
-                <form noValidate autocomplete="off">
+                <form noValidate autoComplete="off">
                     <TextField name="name" value={this.state.name} label="Item Name" variant="outlined" onChange={this.handleTextChange} />
                     <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
                     <TextField name="location" value={this.state.location} label="Item's Location" variant="outlined" onChange={this.handleTextChange} />

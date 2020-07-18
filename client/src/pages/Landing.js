@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-const passport = require('passport');
-// import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin } from 'react-google-login';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,9 +19,30 @@ export default ({setUser}) => {
   
     const responseGoogle = (response) => {
         console.log(response);
-        localStorage.setItem("google_token", JSON.stringify(response.tokenId));
-        setUser(response.profileObj);
-        window.location.replace('/member')
+        
+
+        fetch('/auth/user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + response.tokenId
+          },
+          body: JSON.stringify({ googleId: response.profileObj.googleId })
+        }).then((res) => {
+          console.log(res.status)
+
+          if (res.status === 200) {
+            // all is well
+            localStorage.setItem("google_token", JSON.stringify(response.tokenId));
+            setUser(response.profileObj);
+            window.location.replace('/member')
+          } else {
+            console.log('Unauthorized access.');
+            
+          }
+        });
+
+        
       }
     
       const handleFailure = res => console.log("google auth failed - ", res)

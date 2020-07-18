@@ -7,17 +7,20 @@ import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
 import './App.css';
 import {authContext} from './utils/appContext';
-import {getUser} from './utils/API';
+import API from './utils/API';
 import ItemAdd from './pages/ItemAdd';
 
 function App() {
+  let loggedIn = false;
   const [user, setUser] = useState(null);
   useEffect(()=>{
     const token = localStorage.getItem("google_token") ? JSON.parse(localStorage.getItem("google_token")) : null
     if(token){
-      getUser(token).then(({data})=> setUser(data))
+      API.getUser(token).then(({data})=> setUser(data))
     }
   }, [])
+
+  console.log(user);
 
   return (
     <Router>
@@ -28,7 +31,9 @@ function App() {
           <Route path="/member" exact component={Member} />
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={SignUp} />
-          <Route exact path="/add" component={ItemAdd} />
+          <Route exact path="/add" render={() => {
+            return <ItemAdd user={user} />
+          }} />
         </Switch>
       </authContext.Provider>
     </Router>
