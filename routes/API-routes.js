@@ -103,9 +103,9 @@ module.exports = (() => {
       if (err) {
         console.log(err);
       } else {
-        res.json(result)
+        res.json(result);
       }
-    }).then( (itemData) => {
+    }).then((itemData) => {
       console.log(itemData);
       res.json(itemData);
     }).catch((err) => console.log(err));

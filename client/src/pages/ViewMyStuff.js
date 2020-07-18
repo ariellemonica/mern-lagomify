@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Button } from '@material-ui/core';
 import Carousel from 'react-material-ui-carousel';
 import { Main, CarouselItem } from '../components';
-import API from '../utils/API';
+// import API from '../utils/API';
 
 const useStyles = makeStyles(theme => ({
   root: {
