@@ -1,9 +1,10 @@
 require('dotenv');
 const express = require("express");
-
+const multer = require ('multer')
 const mongoose = require("mongoose");
 const apiRoutes = require("./routes/API-routes");
 const app = express();
+const path = require ('path');
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
@@ -13,8 +14,30 @@ app.use(express.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-// Add routes, both API and view
+// Add routes, both API, imageUpload and view
 app.use('/api', apiRoutes);
+app.use('/imageUpload', imageUploadRoutes)
+
+//app.post('/upload', (req, res) => {
+  //upload(req, res, (err) => {
+    //if(err) {
+      //res.render('index', {
+        //msg: err
+      //});
+    //} else {
+      //if(req.file == undefined){
+        //res.render('index', {
+          //msg: 'Error: No File Selected!'
+        //});
+      //} else {
+        //res.render('index', {
+          //msg: 'File Uploaded!',
+          //file:`uploads/${req.file.filename}`
+        //});
+      //}
+    //}
+  //}); 
+//});
 
 // Start the API server
 app.listen(PORT, function() {
