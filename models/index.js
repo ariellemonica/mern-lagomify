@@ -3,6 +3,6 @@ module.exports = (() => {
     Resource: require('./resource'),
     Item: require('./item'),
     Test: require('./test'),
-    User: require("./user")
+    User: require('./user')
   };
 })();

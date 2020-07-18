@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   Button,
   Card, CardActions, CardActionArea, CardContent, CardMedia,
-  Typography } from '@material-ui/core';
+  Typography
+} from '@material-ui/core';
 import LinkIcon from '@material-ui/icons/Link';
 
 const useStyles = makeStyles({
