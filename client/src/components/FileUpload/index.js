@@ -5,14 +5,14 @@ const axios = require('axios');
 
 class FileUpload extends React.Component {
 
-      // onDrop = (files) => {
-      //   upload.post('/upload')
-      //   .attach('theseNamesMustMatch', files[0])
-      //   .end(( err, res) => {
-      //     if (err) console.log (err);
-      //     alert('File uploaded!')
-      //   })
-      // };
+      onDrop = (files) => {
+         upload.post('/upload')
+         .attach('theseNamesMustMatch', files[0])
+         .end(( err, res) => {
+           if (err) console.log (err);
+           alert('File uploaded!')
+         })
+       };
 
       handleSubmit = (e, files) => {
         e.preventDefault();

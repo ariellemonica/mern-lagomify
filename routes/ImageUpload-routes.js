@@ -10,7 +10,6 @@ AWS.config.update(
     region: 'us-west-1', // Put your aws region here
     accessKeyId: process.env.AWSAccessKeyId,
     secretAccessKey: process.env.AWSSecretKey
-  
   });
 
 //Multer config
@@ -21,8 +20,12 @@ const upload = multer({
   limits: { fileSize: 52428800 },
 });
 
+//presignedUploadUrl will be a URL inside the lagomify-user-uploads S3 Bucket, in the items directory
+//const presignedUploadUrl = await getPresignedUploadUrl('lagomify-user-uploads', 'items');
+
 router.post('/imageUpload/upload', upload.single('theseNamesMustMatch'), (req, res) => {
   //req.files is the 'theseNamesMustMatch' file
+  const directory = 'items';
   const key = `${directory}/${uuid.v4()}`;
   const S3_BUCKET = process.env.Bucket
 
