@@ -2,12 +2,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// mn - when tamar adds her bit image url will have to change to an array of objects
+// mn - the image object will need to contain the aws id and the aws url
 const itemSchema = new Schema({
   name: { type: String, required: true },
   description: { type: String },
   location: { type: String, required: true },
   imageUrl: { type: String, default: 'http://placehold.it/300x200' },
-  status: { type: String, enum: ['donated', 'tossed', 'sold', 'keep'], default: 'keep' },
+  status: { type: String, enum: ['toDonate', 'toToss,', 'toSell', 'donated', 'tossed', 'sold', 'keep'], default: 'keep' },
   // donated: { type: Boolean },
   // tossed: { type: Boolean },
   // sold: { type: Boolean },

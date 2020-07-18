@@ -18,28 +18,29 @@ class ItemAdd extends React.Component {
 
     // mn - next step - find out why it's not getting to db
     handleButtonClick = (event) => {
-      event.preventDefault();
-      console.log('the current state: ' + this.state.name);
-      API.addItem({
-        name: this.state.name,
-        description: this.state.description,
-        location: this.state.location
-      });
-      // .catch(err => console.log(err));
+        event.preventDefault();
+        console.log('the current state: ' + this.state.name)
+        API.addItem({
+            name: this.state.name,
+            description: this.state.description,
+            location: this.state.location
+        })
+            .catch(err => console.log(err));
     }
 
-    render () {
-      return (
-        <>
-          <h1>Add Item Form!</h1>
-          <form noValidate autocomplete="off">
-            <TextField name="name" value={this.state.name} label="Item Name" variant="outlined" onChange={this.handleTextChange} />
-            <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
-            <TextField name="location" value={this.state.location} label="Item's Location" variant="outlined" onChange={this.handleTextChange} />
-            <Button variant="contained" color="primary" onClick={this.handleButtonClick}>Primary</Button>
-          </form>
-        </>
-      );
+    render() {
+        return (
+            <>
+                <h1>Catalog Your Item</h1>
+                <form noValidate autocomplete="off">
+                    <TextField name="name" value={this.state.name} label="Item Name" variant="outlined" onChange={this.handleTextChange} />
+                    <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
+                    <TextField name="location" value={this.state.location} label="Item's Location" variant="outlined" onChange={this.handleTextChange} />
+                    <Button variant="contained" color="primary" onClick={this.handleButtonClick}>
+                        Add Item</Button>
+                </form>
+            </>
+        )
     }
 }
 
