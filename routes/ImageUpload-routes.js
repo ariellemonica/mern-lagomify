@@ -20,11 +20,19 @@ const upload = multer({
   limits: { fileSize: 52428800 },
 });
 
-router.post('/upload', upload.single('theseNamesMustMatch'), (req, res) => {
+router.post('/imageUpload/upload', upload.single('theseNamesMustMatch'), (req, res) => {
   //req.files is the 'theseNamesMustMatch' file
+  const key = `${directory}/${uuid.v4()}`;
+
+  console.log(req.file[0]);
+  let noSpaces = req.file[0].split(' ');
+  let lowerCase = noSpaces.join('-').toLowerCase();
+  console.log(lowercase);
+
   S3.putObject({
-    Bucket: lagomify-user-uploads,
-    Key: '',
+    Bucket: "lagomify-user-uploads",
+    Key: key,
+    ContentType: 'image/*',
     Body: req.file.buffer,
     ACL: 'public-read', //your permissions
   }, (err) => {
@@ -39,7 +47,7 @@ module.exports = router
 //const path = require ('path');
 
 //async function getPresignedUploadUrl(bucket, directory) {
-   //const key = `${directory}/${uuid.v4()}`;
+  //  const key = ;
     //const url = await s3
     //.getSignedUrl('putObject', {
       //Bucket: bucket,

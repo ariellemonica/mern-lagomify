@@ -3,6 +3,7 @@ const express = require("express");
 const multer = require ('multer')
 const mongoose = require("mongoose");
 const apiRoutes = require("./routes/API-routes");
+const imageUploadRoutes = require('./routes/ImageUpload-routes');
 const app = express();
 const path = require ('path');
 const PORT = process.env.PORT || 3001;

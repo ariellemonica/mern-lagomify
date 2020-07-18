@@ -26,7 +26,6 @@ function App() {
       </Route>
     </Router>
   );
-  <script src="/dist/main.js"></script>
 }
 
 export default App;
