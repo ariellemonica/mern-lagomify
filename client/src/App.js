@@ -9,6 +9,8 @@ import './App.css';
 import {authContext} from './utils/appContext';
 import API from './utils/API';
 import ItemAdd from './pages/ItemAdd';
+import LearnMore from './pages/LearnMore';
+import ItemDetails from './pages/ItemDetails';
 
 function App() {
   let loggedIn = false;
@@ -31,13 +33,14 @@ function App() {
           <Route path="/member" exact component={Member} />
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={SignUp} />
+          <Route exact path="/learn" component={LearnMore} />
+          <Route exact path="/view-item/:id" component={ ItemDetails } />
           <Route exact path="/add" render={() => {
             return <ItemAdd user={user} />
           }} />
         </Switch>
       </authContext.Provider>
-    </Router>
-  );
-}
-
+      </Router>
+)
+        }
 export default App;

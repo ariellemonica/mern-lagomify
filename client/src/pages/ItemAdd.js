@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 import { TextField, Button } from '@material-ui/core';
-import API from "../utils/API";
+import API from '../utils/API';
 
-class ItemAdd extends React.Component {
-    constructor(props) {
-        super(props);
+ class ItemAdd extends React.Component {
+//     constructor(props) {
+//         super(props);
 
-        this.state = {
-            user: null,
-            name: '',
-            description: '',
-            location: ''
-        };
-    }
+//         this.state = {
+//             user: null,
+//             name: '',
+//             description: '',
+//             location: ''
+//         };
+//     }
 
     // componentDidUpdate(prevProps) {
     //     if (prevProps.user !== this.props.user) {
@@ -23,15 +23,20 @@ class ItemAdd extends React.Component {
     //         });
     //     }
     // }
+    state = {
+      name: '',
+      description: '',
+      location: ''
+    };
 
     handleTextChange = (event) => {
-        const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        })
+      const { name, value } = event.target;
+      this.setState({
+        [name]: value
+      });
     }
 
-    //mn - next step - find out why it's not getting to db
+    // mn - next step - find out why it's not getting to db
     handleButtonClick = (event) => {
         event.preventDefault();
         console.log('the current state: ' + this.state.name)
@@ -40,7 +45,7 @@ class ItemAdd extends React.Component {
             description: this.state.description,
             location: this.state.location
         })
-        // .catch(err => console.log(err));
+            .catch(err => console.log(err));
     }
 
     render() {
@@ -52,7 +57,7 @@ class ItemAdd extends React.Component {
                     <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
                     <TextField name="location" value={this.state.location} label="Item's Location" variant="outlined" onChange={this.handleTextChange} />
                     <Button variant="contained" color="primary" onClick={this.handleButtonClick}>
-                        Primary</Button>
+                        Add Item</Button>
                 </form>
             </>
         )
@@ -60,4 +65,3 @@ class ItemAdd extends React.Component {
 }
 
 export default ItemAdd;
-
