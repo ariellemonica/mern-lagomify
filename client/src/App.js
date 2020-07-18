@@ -5,12 +5,14 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ItemAdd from './pages/ItemAdd';
 import LearnMore from './pages/LearnMore';
 import ItemDetails from './pages/ItemDetails';
+import ViewMyStuff from './pages/ViewMyStuff';
 
 function App () {
   return (
     <Router>
       <Route exact path="/add" component={ItemAdd} />
       <Route exact path="/learn" component={LearnMore} />
+      <Route exact path="/view" component={ViewMyStuff} />
       <Route exact path="/view-item/:id" component={ ItemDetails } />
       <Route exact path="/">
         <div className="App">
