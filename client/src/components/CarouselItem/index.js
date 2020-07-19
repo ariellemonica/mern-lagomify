@@ -6,11 +6,9 @@ import {
 } from '@material-ui/core';
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: 360
-  },
   media: {
-    height: 360
+    minHeight: '50vh',
+    minWidth: '50vh'
   },
   caption: {
     backgroundColor: fade('#000', 0.3),
@@ -33,9 +31,9 @@ const CarouselItem = (props) => {
     <Card>
       <CardActionArea>
         <CardMedia
-          className={classes.media}
           image={props.item.image}
           title={props.item.name}
+          className={classes.media}
         >
           <Typography variant="caption" className={classes.caption}>{props.item.name}</Typography>
         </CardMedia>
