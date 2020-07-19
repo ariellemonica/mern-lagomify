@@ -7,12 +7,14 @@ import { Main, CarouselItem } from '../components';
 import API from '../utils/API';
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
+  spaceBottom: {
+    marginBottom: '1rem'
   },
   stretch: {
     display: 'flex',
-    justifyContent: 'space-between'
+    direction: 'row',
+    justifyContent: 'space-between',
+    width: '50vh'
   }
 }));
 
@@ -24,55 +26,51 @@ const ViewMyStuff = () => {
     name: 'Welcome',
     image: '..assets/img/green-wooden-chair.jpg'
   }];
-  const [items4Sale, setItems4Sale] = useState(initState);
+  const [myItems, setMyItems] = useState(initState);
   const classes = useStyles();
 
   useEffect(() => {
+    handleFetch();
+  }, []);
+
+  const handleFetch = () => {
     const fetchItems = async () => {
       await API.getMyItems()
         .then(resp => resp.json())
-        .then(async data => await setItems4Sale(data))
+        .then(data => setMyItems(data))
         .catch(err => console.error(err.stack));
     };
 
     fetchItems();
-  }, []);
+  };
 
   return (
     <Main>
-      <Grid container>
+      <Grid container
+        direction="column"
+        justify="space-between"
+        alignItems="center"
+      >
         <Grid item xs={12}>
-          <Typography variant="h2">View Stuff</Typography>
+          <Typography variant="h2" gutterBottom>View My Stuff</Typography>
         </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h3">Rooms</Typography>
+        <Grid item xs={12}>
+          <Typography variant="body1" className={classes.spaceBottom}>
+            Browse your stuff below. Keep what brings you joy. Let go of what does not.
+          </Typography>
         </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h3">My Stuff</Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h3">&nbsp;</Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="body1">Browse your stuff below. Keep what brings you joy, and let go of what doesn't.</Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h3">&nbsp;</Typography>
-        </Grid>
-        <Grid item xs={6}>
-          <Carousel autoPlay={false}>
+        <Grid item xs={12}>
+          <Carousel
+            autoPlay={false} className={classes.spaceBottom}>
             {
-              items4Sale.map(item =>
+              myItems.map(item =>
                 <CarouselItem key={item._id} item={item} />)
             }
           </Carousel>
         </Grid>
-        <Grid item xs={6}>
-          <Typography variant="h3">&nbsp;</Typography>
-        </Grid>
-        <Grid item xs={6} className={classes.stretch}>
-          <Button color="secondary">This Item Doesn't</Button>
+        <Grid item xs={12} className={classes.stretch}>
           <Button>This Item Brings Me Joy</Button>
+          <Button color="secondary">This Item Does Not</Button>
         </Grid>
       </Grid>
     </Main>
