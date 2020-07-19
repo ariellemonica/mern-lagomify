@@ -17,8 +17,8 @@ const LearnMore = () => {
 
   useEffect(() => {
     API.getResources()
-      .then((resp) => resp.json())
-      .then((data) => setResources(data))
+      .then(resp => resp.json())
+      .then(data => setResources(data))
       .catch(err => console.error(err.stack));
   }, []);
 
