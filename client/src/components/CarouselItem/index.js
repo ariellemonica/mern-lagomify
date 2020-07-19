@@ -4,7 +4,6 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import {
   Card, CardActionArea, CardMedia, Typography
 } from '@material-ui/core';
-// import { Paper, Button } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -29,17 +28,6 @@ const useStyles = makeStyles({
 
 const CarouselItem = (props) => {
   const classes = useStyles();
-
-  /* return (
-    <Paper>
-      <h2>{props.item.name}</h2>
-      <p>{props.item.description}</p>
-
-      <Button className="CheckButton">
-          Check it out!
-      </Button>
-    </Paper>
-  ); */
 
   return (
     <Card>
