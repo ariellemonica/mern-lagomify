@@ -5,32 +5,7 @@ import { Main } from '../components';
 import API from '../utils/API';
 
 class ItemAdd extends React.Component {
-  //   constructor(props) {
-  //         super(props);
-
-  //         this.state = {
-  //             user: null,
-  //             name: '',
-  //             description: '',
-  //             location: ''
-  //         };
-  //     }
-
-  // componentDidUpdate(prevProps) {
-  //     if (prevProps.user !== this.props.user) {
-  //         // they are probably logged in
-  //         console.log('they are probably logged in');
-  //         this.setState({
-  //             user: this.props.user
-  //         });
-  //     }
-  // }
-  // const useStyles = makeStyles(() => ({
-  //     stretch: {
-  //         display: 'flex',
-  //         justifyContent: 'space-around'
-  //     }
-  // }));
+  
     state = {
       name: '',
       description: '',
