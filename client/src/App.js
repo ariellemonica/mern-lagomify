@@ -2,12 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { authContext } from './utils/appContext';
 import { SignUp, Login, Nav } from './components';
-/* import ItemAdd from './pages/ItemAdd';
-import LearnMore from './pages/LearnMore';
-import ItemDetails from './pages/ItemDetails';
-import ViewMyStuff from './pages/ViewMyStuff';
-import Landing from './pages/Landing';
-import Member from './pages/Member'; */
 import {
   ItemAdd, ItemDetails, Landing, LearnMore, Member, ViewMyStuff
 } from './pages';
@@ -44,7 +38,7 @@ function App () {
           <Route path="/login" exact component={Login} />
           <Route path="/signup" exact component={SignUp} />
           <Route exact path="/view" component={ViewMyStuff} />
-          <Route exact path="/view-item/:id" component={ ItemDetails } />
+          <Route exact path="/view-item/:id" component={ItemDetails} />
         </Switch>
       </authContext.Provider>
     </Router>
