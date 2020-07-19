@@ -28,9 +28,13 @@ module.exports = (() => {
   //   // landing page ...
   // });
 
-  // router.get('/items', (req, res) => {
-  //   // items for sale page...
-  // });
+  router.get('/items', (req, res) => {
+    // items for sale page...
+    db.Item
+      .find({})
+      .then(docs => res.json(docs))
+      .catch(err => res.status(422).json(err));
+  });
 
   router.get('/learn', (req, res) => {
     db.Resource
@@ -41,10 +45,6 @@ module.exports = (() => {
 
   // router.get('/rooms', (req, res) => {
   //   // rooms and crap ...
-  // });
-
-  // router.post('/item/:id', (req, res) => {
-  //   // post an item for sale (put it in db) ...
   // });
 
   // hard coded for testing
