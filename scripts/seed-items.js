@@ -8,7 +8,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/lagomifydb', {
 
 const itemSeed = [
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 1',
     description: 'Item 1 does something magical and is a keeper',
@@ -17,7 +17,7 @@ const itemSeed = [
     createdBy: 'User 1'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'tossed',
     name: 'Seeded Item 2',
     description: 'Item 2 does not bring me joy',
@@ -26,7 +26,7 @@ const itemSeed = [
     createdBy: 'User 2'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'donated',
     name: 'Seeded Item 3',
     description: 'Item 3 does not bring me joy but it might bring joy to someone else',
@@ -35,7 +35,7 @@ const itemSeed = [
     createdBy: 'User 3'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 4',
     description: 'Item 4 brings me joy',
@@ -44,7 +44,7 @@ const itemSeed = [
     createdBy: 'User 1'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 5',
     description: 'Item 5 brings me joy',
@@ -53,7 +53,7 @@ const itemSeed = [
     createdBy: 'User 1'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 6',
     description: 'Item 6 brings me joy',
@@ -62,7 +62,7 @@ const itemSeed = [
     createdBy: 'User 1'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 7',
     description: 'Item 7 brings User 2 joy',
@@ -71,7 +71,7 @@ const itemSeed = [
     createdBy: 'User 2'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 8',
     description: 'Item 8 brings User 2 joy',
@@ -80,7 +80,7 @@ const itemSeed = [
     createdBy: 'User 2'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 9',
     description: 'Item 9 brings User 2 joy',
@@ -89,7 +89,7 @@ const itemSeed = [
     createdBy: 'User 2'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 10',
     description: 'Item 10 brings User 3 joy',
@@ -98,7 +98,7 @@ const itemSeed = [
     createdBy: 'User 3'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 11',
     description: 'Item 11 brings User 3 joy',
@@ -107,7 +107,7 @@ const itemSeed = [
     createdBy: 'User 3'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 12',
     description: 'Item 12 brings User 3 joy',
@@ -116,7 +116,7 @@ const itemSeed = [
     createdBy: 'User 3'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 13',
     description: 'Item 13 brings User 4 joy',
@@ -125,7 +125,7 @@ const itemSeed = [
     createdBy: 'User 4'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 14',
     description: 'Item 14 brings User 4 joy',
@@ -134,7 +134,7 @@ const itemSeed = [
     createdBy: 'User 4'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 15',
     description: 'Item 15 brings User 4 joy',
@@ -143,7 +143,7 @@ const itemSeed = [
     createdBy: 'User 4'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 16',
     description: 'Item 16 brings User 4 joy',
@@ -152,7 +152,7 @@ const itemSeed = [
     createdBy: 'User 4'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 17',
     description: 'Item 17 brings User 5 joy',
@@ -161,7 +161,7 @@ const itemSeed = [
     createdBy: 'User 5'
   },
   {
-    imageUrl: 'http://placehold.it/300x300',
+    imageUrl: 'http://lorempixel.com/360/360/technics/',
     status: 'keep',
     name: 'Seeded Item 18',
     description: 'Item 18 brings User 5 joy',

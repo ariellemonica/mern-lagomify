@@ -1,4 +1,5 @@
 require('dotenv');
+
 const express = require('express');
 const apiRoutes = require('./routes/api-routes');
 const authRoutes = require('./routes/auth-routes.js');

@@ -64,6 +64,7 @@ db.Resource
   .then(() => db.Resource.collection.insertMany(resourceSeed))
   .then(data => {
     console.log(`${data.result.n} documents inserted into Resource!`);
+    process.exit(0);
   })
   .catch(err => {
     console.err(err.stack);
