@@ -36,8 +36,8 @@ export default function ButtonAppBar () {
           </Typography>
           <Button color="inherit" href="/">Home</Button>
           <Button color="inherit" href="/member">Account</Button>
-          <Button color="inherit" href="/items">My Items</Button>
-          <Button color="inherit" href="/more">Learn More</Button>
+          <Button color="inherit" href="/view">My Items</Button>
+          <Button color="inherit" href="/learn">Learn More</Button>
         </Toolbar>
       </AppBar>
     </div>
