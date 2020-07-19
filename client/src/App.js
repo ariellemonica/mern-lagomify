@@ -1,47 +1,54 @@
-import React, {useEffect, useState} from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import Landing from './pages/Landing';
-import Member from './pages/Member';
-import Nav from './components/Nav/Nav';
-import Login from './components/Login/Login';
-import SignUp from './components/SignUp/SignUp';
-import './App.css';
-import {authContext} from './utils/appContext';
-import API from './utils/API';
-import ItemAdd from './pages/ItemAdd';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { authContext } from './utils/appContext';
+import { SignUp, Login, Nav } from './components';
+/* import ItemAdd from './pages/ItemAdd';
 import LearnMore from './pages/LearnMore';
 import ItemDetails from './pages/ItemDetails';
+import ViewMyStuff from './pages/ViewMyStuff';
+import Landing from './pages/Landing';
+import Member from './pages/Member'; */
+import {
+  ItemAdd, ItemDetails, Landing, LearnMore, Member, ViewMyStuff
+} from './pages';
+import API from './utils/API';
+import './App.css';
 
 function App () {
-  let loggedIn = false;
   const [user, setUser] = useState(null);
-  useEffect(()=>{
-    const token = localStorage.getItem("google_token") ? JSON.parse(localStorage.getItem("google_token")) : null
-    if(token){
-      API.getUser(token).then(({data})=> setUser(data))
+  useEffect(() => {
+    const token =
+      localStorage.getItem('google_token')
+        ? JSON.parse(localStorage.getItem('google_token'))
+        : null;
+    if (token) {
+      API.getUser(token).then(({ data }) => setUser(data));
     }
-  }, [])
+  }, []);
 
   console.log(user);
 
   return (
     <Router>
-      <authContext.Provider value={{user}}>
+      <authContext.Provider value={{ user }}>
         <Nav />
         <Switch>
-          <Route path="/" exact component={()=> <Landing setUser={setUser}/>} />
-          <Route path="/member" exact component={Member} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/signup" exact component={SignUp} />
-          <Route exact path="/learn" component={LearnMore} />
-          <Route exact path="/view-item/:id" component={ ItemDetails } />
+          <Route path="/" exact component={() =>
+            <Landing setUser={setUser}/>} />
           {/* <Route path="/add" exact component={() => <ItemAdd user={user} /> } /> */}
           <Route exact path="/add" render={() => {
-            return <ItemAdd user={user} />
+            return <ItemAdd user={user} />;
           }} />
+          <Route path="/member" exact component={Member} />
+          <Route exact path="/learn" component={LearnMore} />
+          <Route path="/login" exact component={Login} />
+          <Route path="/signup" exact component={SignUp} />
+          <Route exact path="/view" component={ViewMyStuff} />
+          <Route exact path="/view-item/:id" component={ ItemDetails } />
         </Switch>
       </authContext.Provider>
-      </Router>
-)
-        }
+    </Router>
+  );
+}
+
 export default App;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import { Main, ResourceCard } from '../components';
@@ -15,10 +15,12 @@ const LearnMore = () => {
   const [resources, setResources] = useState([]);
   const classes = useStyles();
 
-  API.getResources()
-    .then((resp) => resp.json())
-    .then((data) => setResources(data))
-    .catch(err => console.error(err.stack));
+  useEffect(() => {
+    API.getResources()
+      .then((resp) => resp.json())
+      .then((data) => setResources(data))
+      .catch(err => console.error(err.stack));
+  }, []);
 
   return (
     <Main>

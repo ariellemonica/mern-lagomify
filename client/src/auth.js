@@ -1,15 +1,15 @@
 class auth {
-	constructor() {
-		this.isLoggedIn = false;
-	}
+  constructor () {
+    this.isLoggedIn = false;
+  }
 
-	checkLoggedIn = () => {
-		return this.isLoggedIn;
-	}
+  checkLoggedIn = () => {
+    return this.isLoggedIn;
+  }
 
-	login = () => {
-		this.isLoggedIn = true;
-	};
+  login = () => {
+    this.isLoggedIn = true;
+  };
 }
 
 export default auth;
