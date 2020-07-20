@@ -5,7 +5,6 @@ import { Main } from '../components';
 import API from '../utils/API';
 
 class ItemAdd extends React.Component {
-  
     state = {
       name: '',
       description: '',
