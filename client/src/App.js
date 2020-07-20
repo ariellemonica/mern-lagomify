@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { authContext } from './utils/appContext';
 import { SignUp, Login, Nav } from './components';
 import {
@@ -10,33 +10,38 @@ import './App.css';
 
 function App () {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const token =
       localStorage.getItem('google_token')
         ? JSON.parse(localStorage.getItem('google_token'))
         : null;
     if (token) {
-      API.getUser(token).then(({ data }) => setUser(data));
+      API.getUser(token).then(({ data }) => {
+        setUser(data)
+        setLoading(false);
+      });
+    }else{
+      setLoading(false)
     }
   }, []);
 
-  console.log(user);
-
   return (
     <Router>
-      <authContext.Provider value={{ user }}>
+      <authContext.Provider value={{ user, loading }}>
         <Nav />
         <Switch>
+        
           <Route path="/" exact component={() =>
             <Landing setUser={setUser}/>} />
-          {/* <Route path="/add" exact component={() => <ItemAdd user={user} /> } /> */}
+            <Route path="/signup" exact component={SignUp} />
+          <Route path="/login" exact component={Login} />
+          <Route exact path="/learn" component={LearnMore} />
+            { (!user&&!loading) ? <Redirect to="/"/> : "" }
           <Route exact path="/add" render={() => {
-            return <ItemAdd user={user} />;
+            return <ItemAdd />;
           }} />
           <Route path="/member" exact component={Member} />
-          <Route exact path="/learn" component={LearnMore} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/signup" exact component={SignUp} />
           <Route exact path="/view" component={ViewMyStuff} />
           <Route exact path="/view-item/:id" component={ItemDetails} />
         </Switch>
