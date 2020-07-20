@@ -4,8 +4,6 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const router = require('express').Router();
 const AWS = require('aws-sdk');
-const directory = 'items';
-//const key = `${directory}/${uuid.v4()}`;
 const s3_bucket = process.env.BUCKET;
 
 //Amazon s3 config
@@ -91,6 +89,7 @@ module.exports = (() => {
       } else {
         console.log(data);
         res.send('Done');
+        //add in db.create shit here
       }
     });
   });
