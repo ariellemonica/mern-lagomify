@@ -26,7 +26,14 @@ export default {
   },
   getItems: () => fetch('/api/view'),
   // mn - current user - handled in BE request.auth.user - this function is incomplete
-  getMyItems: () => fetch('/api/user/view-items'),
+  getMyItems: () => {
+    return fetch('/api/items', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  },
   getItem: (id) => {
     console.log(id);
     return fetch(`/api/item/${id}`, {
