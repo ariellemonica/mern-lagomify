@@ -1,4 +1,4 @@
-require('dotenv');
+require('dotenv').config();
 const express = require('express');
 const apiRoutes = require('./routes/API-routes');
 // const mongoose = require('mongoose');
