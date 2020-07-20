@@ -1,11 +1,5 @@
 import React from "react";
 import { DropzoneArea } from 'material-ui-dropzone';
-//import { DropzoneDialog } from 'material-ui-dropzone';
-//import Button from '@material-ui/core/Button';
-// const [open, setOpen] = React.useState(false);
-
-const axios = require('axios');
-
 
 class FileUpload extends React.Component {
   constructor() {
@@ -15,7 +9,7 @@ class FileUpload extends React.Component {
       file: []
     };
   }
-      
+
   handleChange = (files) => {
     console.log('Files:', files);
     this.setState({

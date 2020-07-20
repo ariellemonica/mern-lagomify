@@ -1,4 +1,4 @@
-require('dotenv');
+require('dotenv').config();
 
 const mongoose = require('mongoose');
 const multer = require('multer');
@@ -6,8 +6,31 @@ const router = require('express').Router();
 const AWS = require('aws-sdk');
 const directory = 'items';
 //const key = `${directory}/${uuid.v4()}`;
-const s3_bucket = process.env.Bucket;
+const s3_bucket = process.env.BUCKET;
 
+//const presignedGETURL = s3.getSignedUrl('getObject', {
+  //Bucket: s3_bucket,
+  //Key: 'example.png',
+  //Expires: 300, 
+  //Body: req.file.buffer,
+  //ACL: 'public-read', // your permisions  
+  //}, (err) => { 
+  //if (err) return res.status(400).send(err);
+  //console.log ("please work");
+  //res.send('File uploaded to S3');ds
+//});
+
+//const presignedPUTURL = s3.getSignedUrl('putObject', {
+  //Bucket: s3_bucket,
+  //Key: 'example.png', 
+  //Expires: 300,
+  //Body: req.file.buffer,
+  //ACL: 'public-read', // your permisions  
+  //}, (err) => { 
+  //if (err) return res.status(400).send(err);
+  //console.log ("please work");
+  //res.send('File uploaded to S3');
+//});
 
 //Amazon s3 config
 const s3 = new AWS.S3();
@@ -26,6 +49,7 @@ const upload = multer({
   //file size limitation in bytes
   limits: { fileSize: 52428800 },
 });
+
 
 // Mongo Database
 const db = require('../models');
@@ -96,16 +120,30 @@ module.exports = (() => {
       //res.send('File uploaded to S3');
     //});
 
-    s3.putObject({
-        Bucket: s3_bucket,
-        Key: 'example.png', 
-        Body: req.file.buffer,
-        ACL: 'public-read', // your permisions  
-      }, (err) => { 
-        if (err) return res.status(400).send(err);
-        console.log ("please work");
-        res.send('File uploaded to S3');
+
+    s3.upload({
+      Bucket: 'lagomify-user-uploads',
+      Key: 'image.png',
+      Body: req.file.buffer
+    }, (err, data) => {
+      if (err) {
+        console.log('Some error: ' + err);
+      } else {
+        console.log(data);
+        res.send('Done');
+      }
     });
+
+    //s3.getSignedUrl('putObject', {
+        //Bucket: s3_bucket,
+        //Key: 'example.png', 
+        //Body: req.file.buffer,
+        //ACL: 'public-read', // your permisions  
+      //}, (err) => { 
+        //if (err) return res.status(400).send(err);
+        //console.log ("please work");
+        //res.send('File uploaded to S3');
+    //});
 
     //db.Item.create({
     //name: req.body.name,
