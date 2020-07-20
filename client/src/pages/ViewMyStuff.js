@@ -85,7 +85,7 @@ const ViewMyStuff = () => {
         </Grid>
         <Grid item
           xs={12}
-          className={ clsx(classes.stretch, classes.spaceBottom) }>
+          className={clsx(classes.stretch, classes.spaceBottom)}>
           <Button data-item-id={itemId}>This Item Brings Me Joy</Button>
           <Button data-item-id={itemId} color="secondary">
             This Item Does Not
