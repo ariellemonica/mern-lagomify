@@ -1,13 +1,30 @@
+import axios from 'axios';
+
+// axios.post('api/item', data, {
+//   //   body: JSON.stringify(this.state)
+//   // }).then(() => {
+//   //   console.log('request happened');
+//   // });
+
 export default {
-  addItem: (item) => {
-    console.log(item);
-    return fetch('/api/item', {
-      method: 'POST',
+  addItem: (data) => {
+    console.log(data);
+
+    return axios.post('/api/item', {
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'multipart/form-data'
       },
-      body: JSON.stringify(item)
+      data: data
     });
+
+
+    // return fetch('/api/item', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify(item)
+    // });
   },
   getResources: () => {
     return fetch('/api/learn');

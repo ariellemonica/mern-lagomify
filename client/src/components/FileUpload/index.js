@@ -30,37 +30,36 @@ class FileUpload extends React.Component {
         //});
       //};
       
-      handleChange = (files) => {
-        console.log('Files:', files);
+  handleChange = (files) => {
+    console.log('Files:', files);
+    this.setState({
+      files
+    });
+  };
 
-        this.setState({
-          files
-        });
-      };
+  // handleSubmit = (e, files) => {
+  //   e.preventDefault();
 
-      handleSubmit = (e, files) => {
-        e.preventDefault();
-        axios.post('imageUpload/upload', {
-          body: files
-        }).then(() => {
-          console.log('request happened');
-        });
-      };
+  //   const data = new FormData();
+  //   data.append('file', this.state.files[0]);
 
-      render() { 
-        return (
-          <>
-          <DropzoneArea
-            acceptedFiles={['image/*']}
-            dropzoneText={"Drag and drop an image here or click"}
-            onChange={(files) => {
-              //let testFile = new Blob(JSON.stringify(files[0]), { type: 'application/json' });
-              let testFile = fileObject; 
-              //get File Object
-              var fileObject = getFile();
-              
-              this.props.handleState({ files: testFile })
-            }}
+  //   axios.post('imageUpload/upload', data, {
+  //     body: files
+  //   }).then(() => {
+  //     console.log('request happened');
+  //   });
+  // };
+
+  render() { 
+    return (
+      <>
+      <DropzoneArea
+        acceptedFiles={['image/*']}
+        dropzoneText={"Drag and drop an image here or click"}
+         
+        onChange={(files) => {  
+          this.props.handleState({ files: files })
+        }}
             // onSubmit={this.handleSubmit}
           />
           <div>
@@ -84,8 +83,8 @@ class FileUpload extends React.Component {
             /> */}
           </div>
           </>
-        );
-    }
+      );
+  }
 };
 
 export default FileUpload;

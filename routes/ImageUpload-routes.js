@@ -22,7 +22,7 @@ const upload = multer({
 router.post('/upload', upload.single('theseNamesMustMatch'), (req, res) => {
   const directory = 'items';
   const key = `${directory}/${uuid.v4()}`;
-  const S3_BUCKET = process.env.Bucket
+  const S3_BUCKET = process.env.Bucket;
 
   console.log(req.file[0]);
   let noSpaces = req.file[0].split(' ');
@@ -31,8 +31,8 @@ router.post('/upload', upload.single('theseNamesMustMatch'), (req, res) => {
   
   // req.file is the 'theseNamesMustMatch' file
   s3.putObject({
-      Bucket: 'your-bucket-name',
-      Key: 'your-key-name', 
+      Bucket: S3_Bucket,
+      Key: key, 
       Body: req.file.buffer,
       ACL: 'public-read', // your permisions  
     }, (err) => { 

@@ -63,20 +63,20 @@ module.exports = (() => {
 
   // hard coded for testing
   // use req.body when you get to it
-  router.post('/item', upload.single('test'), (req, res) => {
+  router.post('/item', upload.single('file'), (req, res) => {
     console.log(req.body);
-    console.log(req.files);
+    console.log(req.file);
 
 
-    db.Item.create({
-      name: req.body.name,
-      description: req.body.description,
-      location: req.body.location,
-      owner: 'Test Owner',
-      createdBy: 'Test Creator'
-    }).then(() => {
-      res.send('Successfully added.');
-    });
+    // db.Item.create({
+    //   name: req.body.name,
+    //   description: req.body.description,
+    //   location: req.body.location,
+    //   owner: 'Test Owner',
+    //   createdBy: 'Test Creator'
+    // }).then(() => {
+    //   res.send('Successfully added.');
+    // });
   });
 
   // mn - simple find item by id - can be modified later or chris can blow this away if he's already written something, i wrote this mainly for testing
