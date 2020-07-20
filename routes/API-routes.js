@@ -5,7 +5,7 @@ const multer = require('multer');
 const router = require('express').Router();
 const AWS = require('aws-sdk');
 const directory = 'items';
-const key = `${directory}/${uuid.v4()}`;
+//const key = `${directory}/${uuid.v4()}`;
 const s3_bucket = process.env.Bucket;
 
 
@@ -82,26 +82,41 @@ module.exports = (() => {
     //let lowerCase = noSpaces.join('-').toLowerCase();
     //console.log(lowercase);
 
+    //async function getPresignedUploadUrl(bucket, directory) {
+      //const key = `${directory}/${uuid.v4()}`;
+      //const url = await s3
+      //.getSignedUrl('putObject', {
+      //Bucket: s3_bucket,
+      //Key: key, //file name
+      //Body: req.file.buffer,
+      //ACL: 'public-read', // your permisions  
+      //Expires: 300 //time to expire in seconds
+    //}, (err) => { 
+      //if (err) return res.status(400).send(err);
+      //res.send('File uploaded to S3');
+    //});
+
     s3.putObject({
         Bucket: s3_bucket,
-        Key: key, 
+        Key: 'example.png', 
         Body: req.file.buffer,
         ACL: 'public-read', // your permisions  
       }, (err) => { 
         if (err) return res.status(400).send(err);
+        console.log ("please work");
         res.send('File uploaded to S3');
     });
 
-    db.Item.create({
-    name: req.body.name,
-    description: req.body.description,
-    location: req.body.location,
-    owner: 'Test Owner',
-    imageUrl: 'https://aws.s3_bucket.com/190284312k31h23k.png',
-    createdBy: 'Test Creator'
-    }).then(() => {
-    res.send('Successfully added.');
-    });
+    //db.Item.create({
+    //name: req.body.name,
+    //description: req.body.description,
+    //location: req.body.location,
+    //owner: 'Test Owner',
+    //imageUrl: 'https://aws.s3_bucket.com/190284312k31h23k.png',
+    //createdBy: 'Test Creator'
+    //}).then(() => {
+    //res.send('Successfully added.');
+    //});
     
   });
 
