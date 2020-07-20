@@ -1,15 +1,11 @@
 import React from 'react';
-<<<<<<< HEAD
-import { TextField, Button } from '@material-ui/core';
 import API from "../utils/API";
 import FileUpload from "../components/FileUpload";
 import axios from 'axios';
-=======
 // import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button, Typography } from '@material-ui/core';
 import { Main } from '../components';
-import API from '../utils/API';
->>>>>>> master
+
 
 class ItemAdd extends React.Component {
   //   constructor(props) {
@@ -57,7 +53,6 @@ class ItemAdd extends React.Component {
     };
 
     handleButtonClick = (event) => {
-<<<<<<< HEAD
         event.preventDefault();
     
         const data = new FormData();
@@ -70,30 +65,6 @@ class ItemAdd extends React.Component {
         });
     }
 
-    render() {
-        return (
-            <>
-                <h1>Catalog Your Item</h1>
-                <form noValidate autocomplete="off">
-                    <TextField name="name" value={this.state.name} label="Item Name" variant="outlined" onChange={this.handleTextChange} />
-                    <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
-                    <TextField name="location" value={this.state.location} label="Item's Location" variant="outlined" onChange={this.handleTextChange} />
-                    <FileUpload
-                        handleState={this.handleState}
-                        handleSubmit={this.handleSubmit}
-                    />
-                    <Button variant="contained" color="primary" onClick={this.handleButtonClick}>
-=======
-      event.preventDefault();
-      console.log('the current state: ' + this.state.name);
-      API.addItem({
-        name: this.state.name,
-        description: this.state.description,
-        location: this.state.location
-      })
-        .catch(err => console.log(err));
-    }
-
     render () {
       return (
         <Main>
@@ -102,8 +73,11 @@ class ItemAdd extends React.Component {
             <TextField name="name" value={this.state.name} label="Item Name" variant="outlined" onChange={this.handleTextChange} />
             <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
             <TextField name="location" value={this.state.location} label="Item's Location" variant="outlined" onChange={this.handleTextChange} />
+            <FileUpload
+              handleState={this.handleState}
+              handleSubmit={this.handleSubmit}
+            />
             <Button variant="contained" color="primary" onClick={this.handleButtonClick}>
->>>>>>> master
                         Add Item</Button>
           </form>
         </Main>
