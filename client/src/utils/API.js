@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+<<<<<<< HEAD
 // axios.post('api/item', data, {
 //   //   body: JSON.stringify(this.state)
 //   // }).then(() => {
@@ -12,6 +13,14 @@ export default {
     console.log('API file ' + JSON.stringify(data));
 
     return axios.post('/api/item', {
+=======
+export default {
+  getUser: token => axios.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${token}`),
+  addItem: (item) => {
+    console.log(item);
+    return fetch('/api/item', {
+      method: 'POST',
+>>>>>>> master
       headers: {
         'Content-Type': 'multipart/form-data'
       },

@@ -1,10 +1,9 @@
 require('dotenv');
 const express = require("express");
-const multer = require ('multer')
-const mongoose = require("mongoose");
 const apiRoutes = require("./routes/API-routes");
+const authRoutes = require('./routes/auth-routes.js');
+const path = require('path');
 const app = express();
-const path = require ('path');
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
@@ -17,6 +16,11 @@ if (process.env.NODE_ENV === 'production') {
 }
 // Add routes, both API, imageUpload and view
 app.use('/api', apiRoutes);
+app.use('/auth', authRoutes);
+
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
+});
 
 //app.post('/upload', (req, res) => {
   //upload(req, res, (err) => {

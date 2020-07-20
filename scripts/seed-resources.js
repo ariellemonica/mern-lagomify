@@ -54,7 +54,7 @@ const resourceSeed = [
     title: 'How Many Clothes Do I Need? A Practical Guide to Owning Fewer Clothes',
     link: 'https://www.becomingminimalist.com/a-practical-guide-to-owning-fewer-clothes/',
     date: new Date(2019, 10, 30),
-    image: '/assets/img/assorted-clothes-on-hangers.jpg',
+    image: '../assets/img/assorted-clothes-on-hangers.jpg',
     alt: 'Assorted Clothes on Hangers'
   }
 ];
