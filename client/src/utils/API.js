@@ -7,8 +7,9 @@ import axios from 'axios';
 //   // });
 
 export default {
+  // not used
   addItem: (data) => {
-    console.log(data);
+    console.log('API file ' + JSON.stringify(data));
 
     return axios.post('/api/item', {
       headers: {
@@ -16,16 +17,8 @@ export default {
       },
       data: data
     });
-
-
-    // return fetch('/api/item', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(item)
-    // });
   },
+  // END not used
   getResources: () => {
     return fetch('/api/learn');
   },

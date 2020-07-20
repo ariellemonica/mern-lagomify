@@ -63,20 +63,34 @@ module.exports = (() => {
 
   // hard coded for testing
   // use req.body when you get to it
-  router.post('/item', upload.single('file'), (req, res) => {
+  router.post('/item', upload.single('image'), (req, res) => {
     console.log(req.body);
     console.log(req.file);
 
+    s3.putObject({
+      Bucket: 'your-bucket-name',
+      Key: 'your-key-name', 
+      Body: req.file.buffer,
+      ACL: 'public-read', // your permisions
+    }, (err) => { 
+      if (err) return res.status(400).send(err);
 
-    // db.Item.create({
-    //   name: req.body.name,
-    //   description: req.body.description,
-    //   location: req.body.location,
-    //   owner: 'Test Owner',
-    //   createdBy: 'Test Creator'
-    // }).then(() => {
-    //   res.send('Successfully added.');
-    // });
+      // db.Item.create({
+      //   name: req.body.name,
+      //   description: req.body.description,
+      //   location: req.body.location,
+      //   owner: 'Test Owner',
+      //    imageUrl: 'https://aws.somebucket.com/190284312k31h23k.png
+      //   createdBy: 'Test Creator'
+      // }).then(() => {
+      //   res.send('Successfully added.');
+      // });
+
+      res.send('File uploaded to S3');
+    });
+
+
+    
   });
 
   // mn - simple find item by id - can be modified later or chris can blow this away if he's already written something, i wrote this mainly for testing
