@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-// import { Link } from 'react-router-dom';
 import {authContext} from '../../utils/appContext';
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +42,7 @@ export default function ButtonAppBar () {
           <Button color="inherit" href="/">Home</Button>
           <Button color="inherit" href="/member">Account</Button>
           <Button color="inherit" href="/items">My Items</Button>
-          <Button color="inherit" href="/more">Learn More</Button>
+          <Button color="inherit" href="/learn">Learn More</Button>
           {user ? <Button onClick={handleLogout} color="inherit" href="#">Log Out</Button> : ""}
         </Toolbar>
       </AppBar>

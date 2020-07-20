@@ -5,9 +5,6 @@ import { GoogleLogin } from 'react-google-login';
 import { Redirect } from 'react-router-dom';
 import {authContext} from '../utils/appContext'
 
-const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
-console.log(CLIENT_ID);
-
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {

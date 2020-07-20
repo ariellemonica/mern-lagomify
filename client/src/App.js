@@ -2,12 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { authContext } from './utils/appContext';
 import { SignUp, Login, Nav } from './components';
-/* import ItemAdd from './pages/ItemAdd';
-import LearnMore from './pages/LearnMore';
-import ItemDetails from './pages/ItemDetails';
-import ViewMyStuff from './pages/ViewMyStuff';
-import Landing from './pages/Landing';
-import Member from './pages/Member'; */
 import {
   ItemAdd, ItemDetails, Landing, LearnMore, Member, ViewMyStuff
 } from './pages';
@@ -18,7 +12,6 @@ function App () {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    console.log("use effect triggered")
     const token =
       localStorage.getItem('google_token')
         ? JSON.parse(localStorage.getItem('google_token'))
@@ -41,15 +34,14 @@ function App () {
         
           <Route path="/" exact component={() =>
             <Landing setUser={setUser}/>} />
-            { (!user&&!loading) ? <Redirect to="/"/>
-   : "" }
+            <Route path="/signup" exact component={SignUp} />
+          <Route path="/login" exact component={Login} />
+          <Route exact path="/learn" component={LearnMore} />
+            { (!user&&!loading) ? <Redirect to="/"/> : "" }
           <Route exact path="/add" render={() => {
             return <ItemAdd />;
           }} />
           <Route path="/member" exact component={Member} />
-          <Route exact path="/learn" component={LearnMore} />
-          <Route path="/login" exact component={Login} />
-          <Route path="/signup" exact component={SignUp} />
           <Route exact path="/view" component={ViewMyStuff} />
           <Route exact path="/view-item/:id" component={ ItemDetails } />
           
