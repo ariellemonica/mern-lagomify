@@ -49,11 +49,6 @@ const ViewMyStuff = () => {
     fetchItems();
   };
 
-  const onIdChgHandler = useCallback((event) => {
-    event.preventDefault();
-    console.log(`Item ID: ${itemId}`);
-  }, [itemId]);
-
   return (
     <Main>
       <Grid container
@@ -82,8 +77,8 @@ const ViewMyStuff = () => {
               myItems.map(item =>
                 <CarouselItem
                   key={item._id}
-                  onLoad={e => setItemId(e.target.id)}
                   item={item}
+                  itemState={{ itemId, setItemId }}
                 />)
             }
           </Carousel>
