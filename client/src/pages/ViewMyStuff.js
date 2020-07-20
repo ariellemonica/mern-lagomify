@@ -1,5 +1,5 @@
 // import React, { useState } from 'react';
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Button } from '@material-ui/core';
 import Carousel from 'react-material-ui-carousel';

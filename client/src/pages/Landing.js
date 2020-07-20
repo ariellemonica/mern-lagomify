@@ -49,7 +49,8 @@ export default ({ setUser }) => {
         <div style={{ display: 'inline-block' }}></div>
         <h1>Welcome to Lagomify</h1>
         <GoogleLogin
-          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+          // clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+          clientId={atob('OTcwODYzNTI5MDI0LWtqcmNtZzgyMzRkMWRkdmU5cmYzcDRpY3BzcmljbzBuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29t')}
           buttonText="Login with Google"
           onSuccess={responseGoogle}
           onFailure={handleFailure}
