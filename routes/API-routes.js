@@ -72,6 +72,7 @@ module.exports = (() => {
   // hard coded for testing
   // use req.body when you get to it
   router.post('/item', upload.single('image'), (req, res) => {
+    console.log(req.user);
     console.log(req.body);
     console.log(req.file);
 

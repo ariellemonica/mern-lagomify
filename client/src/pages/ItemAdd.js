@@ -36,7 +36,7 @@ class ItemAdd extends React.Component {
     
         axios.post('api/item', data).then(() => {
           console.log('request happened');
-          // window.location = 'someOtherPage'
+          window.location = '/view'
         });
     }
 
