@@ -8,30 +8,6 @@ const directory = 'items';
 //const key = `${directory}/${uuid.v4()}`;
 const s3_bucket = process.env.BUCKET;
 
-//const presignedGETURL = s3.getSignedUrl('getObject', {
-  //Bucket: s3_bucket,
-  //Key: 'example.png',
-  //Expires: 300, 
-  //Body: req.file.buffer,
-  //ACL: 'public-read', // your permisions  
-  //}, (err) => { 
-  //if (err) return res.status(400).send(err);
-  //console.log ("please work");
-  //res.send('File uploaded to S3');ds
-//});
-
-//const presignedPUTURL = s3.getSignedUrl('putObject', {
-  //Bucket: s3_bucket,
-  //Key: 'example.png', 
-  //Expires: 300,
-  //Body: req.file.buffer,
-  //ACL: 'public-read', // your permisions  
-  //}, (err) => { 
-  //if (err) return res.status(400).send(err);
-  //console.log ("please work");
-  //res.send('File uploaded to S3');
-//});
-
 //Amazon s3 config
 const s3 = new AWS.S3();
 //const S3 = require('aws-sdk/clients/s3');
@@ -101,29 +77,13 @@ module.exports = (() => {
     console.log(req.body);
     console.log(req.file);
 
-    //console.log(req.file[0]);
-    //let noSpaces = req.file[0].split(' ');
-    //let lowerCase = noSpaces.join('-').toLowerCase();
-    //console.log(lowercase);
+    const presignedURI = `${req.file.originalname.split('.')[0]}-${Date.now()}.${req.file.originalname.split('.')[1]}`.toLowerCase();
 
-    //async function getPresignedUploadUrl(bucket, directory) {
-      //const key = `${directory}/${uuid.v4()}`;
-      //const url = await s3
-      //.getSignedUrl('putObject', {
-      //Bucket: s3_bucket,
-      //Key: key, //file name
-      //Body: req.file.buffer,
-      //ACL: 'public-read', // your permisions  
-      //Expires: 300 //time to expire in seconds
-    //}, (err) => { 
-      //if (err) return res.status(400).send(err);
-      //res.send('File uploaded to S3');
-    //});
-
+    // console.log(presignedURI);
 
     s3.upload({
       Bucket: 'lagomify-user-uploads',
-      Key: 'image.png',
+      Key: presignedURI,
       Body: req.file.buffer
     }, (err, data) => {
       if (err) {
@@ -133,29 +93,6 @@ module.exports = (() => {
         res.send('Done');
       }
     });
-
-    //s3.getSignedUrl('putObject', {
-        //Bucket: s3_bucket,
-        //Key: 'example.png', 
-        //Body: req.file.buffer,
-        //ACL: 'public-read', // your permisions  
-      //}, (err) => { 
-        //if (err) return res.status(400).send(err);
-        //console.log ("please work");
-        //res.send('File uploaded to S3');
-    //});
-
-    //db.Item.create({
-    //name: req.body.name,
-    //description: req.body.description,
-    //location: req.body.location,
-    //owner: 'Test Owner',
-    //imageUrl: 'https://aws.s3_bucket.com/190284312k31h23k.png',
-    //createdBy: 'Test Creator'
-    //}).then(() => {
-    //res.send('Successfully added.');
-    //});
-    
   });
 
   // mn - simple find item by id - can be modified later or chris can blow this away if he's already written something, i wrote this mainly for testing
