@@ -23,7 +23,6 @@ class ItemAdd extends React.Component {
         this.setState(obj);
     };
 
-    // mn - next step - find out why it's not getting to db
     handleButtonClick = (event) => {
         event.preventDefault();
     
