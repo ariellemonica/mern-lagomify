@@ -4,16 +4,26 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const router = require('express').Router();
 const AWS = require('aws-sdk');
-const s3 = new AWS.S3();
-AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    subregion: 'us-west-2',
-});
+const directory = 'items';
+const key = `${directory}/${uuid.v4()}`;
+const s3_bucket = process.env.Bucket;
 
+
+//Amazon s3 config
+const s3 = new AWS.S3();
+//const S3 = require('aws-sdk/clients/s3');
+AWS.config.update(
+  {
+    region: 'us-west-1', 
+    accessKeyId: process.env.AWSAccessKeyId,
+    secretAccessKey: process.env.AWSSecretKey
+  });
+
+//Multer config
+//memory storage keeps file data in a buffer
 const upload = multer({
   storage: multer.memoryStorage(),
-  // file size limitation in bytes
+  //file size limitation in bytes
   limits: { fileSize: 52428800 },
 });
 
@@ -67,29 +77,31 @@ module.exports = (() => {
     console.log(req.body);
     console.log(req.file);
 
+    //console.log(req.file[0]);
+    //let noSpaces = req.file[0].split(' ');
+    //let lowerCase = noSpaces.join('-').toLowerCase();
+    //console.log(lowercase);
+
     s3.putObject({
-      Bucket: 'your-bucket-name',
-      Key: 'your-key-name', 
-      Body: req.file.buffer,
-      ACL: 'public-read', // your permisions
-    }, (err) => { 
-      if (err) return res.status(400).send(err);
-
-      // db.Item.create({
-      //   name: req.body.name,
-      //   description: req.body.description,
-      //   location: req.body.location,
-      //   owner: 'Test Owner',
-      //    imageUrl: 'https://aws.somebucket.com/190284312k31h23k.png
-      //   createdBy: 'Test Creator'
-      // }).then(() => {
-      //   res.send('Successfully added.');
-      // });
-
-      res.send('File uploaded to S3');
+        Bucket: s3_bucket,
+        Key: key, 
+        Body: req.file.buffer,
+        ACL: 'public-read', // your permisions  
+      }, (err) => { 
+        if (err) return res.status(400).send(err);
+        res.send('File uploaded to S3');
     });
 
-
+    db.Item.create({
+    name: req.body.name,
+    description: req.body.description,
+    location: req.body.location,
+    owner: 'Test Owner',
+    imageUrl: 'https://aws.s3_bucket.com/190284312k31h23k.png',
+    createdBy: 'Test Creator'
+    }).then(() => {
+    res.send('Successfully added.');
+    });
     
   });
 
