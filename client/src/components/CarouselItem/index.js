@@ -4,6 +4,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import {
   Card, CardActionArea, CardMedia, Typography
 } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
   media: {
@@ -29,13 +30,21 @@ const CarouselItem = (props) => {
 
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea
+        component={RouterLink}
+        to={`/api/item/${props.item._id}`}>
         <CardMedia
+          id={props.item._id}
           image={props.item.image}
+          // src={props.item.imageUrl}
           title={props.item.name}
           className={classes.media}
         >
-          <Typography variant="caption" className={classes.caption}>{props.item.name}</Typography>
+          <Typography variant="caption"
+            className={classes.caption}
+          >
+            {props.item.name}
+          </Typography>
         </CardMedia>
       </CardActionArea>
     </Card>
