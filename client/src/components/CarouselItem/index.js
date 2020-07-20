@@ -26,6 +26,7 @@ const useStyles = makeStyles({
 });
 
 const CarouselItem = (props) => {
+  const { itemId, setItemId } = props.itemState;
   const classes = useStyles();
 
   return (
@@ -38,7 +39,9 @@ const CarouselItem = (props) => {
           image={props.item.image}
           // src={props.item.imageUrl}
           title={props.item.name}
+          data-item-id={itemId}
           className={classes.media}
+          onFocus={setItemId(props.item._id)}
         >
           <Typography variant="caption"
             className={classes.caption}
