@@ -38,6 +38,35 @@ const ViewMyStuff = () => {
     handleFetch();
   }, []);
 
+  const handleClickMyItems = ev => {
+    ev.preventDefault();
+
+    const {
+      'data-item-id': { value: myItemId },
+      'data-item-action': { value: myItemAction }
+    } = ev.currentTarget.attributes;
+
+    const myItemUpdate = {
+      _id: myItemId,
+      action: myItemAction
+    };
+
+    const updateItems = async () => {
+      await API.updateMyItems(myItemUpdate)
+        .then(resp => resp.json())
+        .then(data => {
+          const { updated } = data;
+
+          (updated)
+            ? handleFetch()
+            : console.log('Nothing updated.');
+        })
+        .catch(err => console.error(err.stack));
+    };
+
+    updateItems();
+  };
+
   const handleFetch = () => {
     const fetchItems = async () => {
       await API.getMyItems()
@@ -86,8 +115,16 @@ const ViewMyStuff = () => {
         <Grid item
           xs={12}
           className={clsx(classes.stretch, classes.spaceBottom)}>
-          <Button data-item-id={itemId}>This Item Brings Me Joy</Button>
-          <Button data-item-id={itemId} color="secondary">
+          <Button color="default"
+            data-item-id={itemId}
+            data-item-action={true}
+            onClick={handleClickMyItems}>
+            This Item Brings Me Joy
+          </Button>
+          <Button color="secondary"
+            data-item-id={itemId}
+            data-item-action={false}
+            onClick={handleClickMyItems}>
             This Item Does Not
           </Button>
         </Grid>

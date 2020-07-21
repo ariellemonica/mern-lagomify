@@ -33,7 +33,7 @@ const CarouselItem = (props) => {
     <Card>
       <CardActionArea
         component={RouterLink}
-        to={`/api/item/${props.item._id}`}>
+        to={`/view-item/${props.item._id}`}>
         <CardMedia
           id={props.item._id}
           image={props.item.image}
@@ -41,11 +41,9 @@ const CarouselItem = (props) => {
           title={props.item.name}
           data-item-id={itemId}
           className={classes.media}
-          onFocus={setItemId(props.item._id)}
-        >
+          onFocus={setItemId(props.item._id)}>
           <Typography variant="caption"
-            className={classes.caption}
-          >
+            className={classes.caption}>
             {props.item.name}
           </Typography>
         </CardMedia>

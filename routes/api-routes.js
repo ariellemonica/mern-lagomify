@@ -31,7 +31,7 @@ module.exports = (() => {
   router.get('/items', (req, res) => {
     // items for sale page...
     db.Item
-      .find({})
+      .find({ status: 'keep' })
       .then(docs => res.json(docs))
       .catch(err => res.status(422).json(err));
   });
@@ -109,6 +109,29 @@ module.exports = (() => {
       console.log(itemData);
       res.json(itemData);
     }).catch((err) => console.log(err));
+  });
+
+  router.put('/user/items/:id', (req, res) => {
+    // DEBUG:
+    // console.log('We got to api-routes!');
+
+    const updatedStatus =
+      (req.body.status === 'true') ? 'keep' : 'toLetGo';
+
+    db.Item
+      .updateOne(
+        { _id: req.params.id },
+        { $set: { status: updatedStatus } })
+      .then(result => {
+        // DEBUG:
+        // console.log(JSON.stringify(result));
+
+        if (result.nModified > 0 && result.ok === 1) {
+          res.status(200).json({ updated: true });
+        }
+      })
+      .catch(err => res.status(422).json(err))
+      .finally(() => res.end());
   });
 
   return router;
