@@ -56,6 +56,112 @@ const resourceSeed = [
     date: new Date(2019, 10, 30),
     image: '../assets/img/assorted-clothes-on-hangers.jpg',
     alt: 'Assorted Clothes on Hangers'
+  },
+  // SERG'S ARTICLES BEGIN HERE!
+  {
+    title: 'How I Choose Items for my 33 Piece Wardrobe',
+    link: 'https://www.bemorewithless.com/choose-2/',
+    date: null,
+    image: '../assets/img/clothes-rack.jpg',
+    alt: 'Clothes Hang on Clothes Rack While Women Talk in Background'
+  },
+  {
+    title: 'Becoming Debt-Free: 21-day guide to help you get started',
+    link: 'https://www.bemorewithless.com/debt-free//',
+    date: null,
+    image: '../assets/img/flowers-book-laptop-guide.jpg',
+    alt: 'Bouquet of Peonies with a Laptop, an Open Book, and a Pen'
+  },
+  {
+    title: '7 Tiny Steps for the Beginner Minimalist',
+    link: 'https://www.bemorewithless.com/begin/',
+    date: null,
+    image: '../assets/img/board-game-start-space.jpg',
+    alt: 'The Start Space on a Board Game'
+  },
+  {
+    title: 'The Little Guide to Digital Decluttering',
+    link: 'https://www.bemorewithless.com/digitaldeclutter/',
+    date: null,
+    image: '../assets/img/desktop-with-planner.jpg',
+    alt: 'Desktop Seen from Above, with Coffee, Planner and Sunglasses on Top'
+  },
+  {
+    title: '10 Things to Add to a Simple Life',
+    link: 'https://www.bemorewithless.com/10-things-add-simple-life/',
+    date: null,
+    image: '../assets/img/butterfly-flowers.jpg',
+    alt: 'A Closeup of Flowers with a Butterfly On One of Them'
+  },
+  {
+    title: 'Simple Living Manifesto: 72 Ideas to Simplify Your Life',
+    link: 'https://www.zenhabits.net/simple-living-manifesto-72-ideas-to-simplify-your-life/',
+    date: null,
+    image: '../assets/img/victorious-silhouette.jpg',
+    alt: 'Silhouette of a Person With Arms Open Victoriously and the Dawn Sky Behind'
+  },
+  {
+    title: '21 Tips on Keeping a Simple Home with Kids',
+    link: 'https://www.zenhabits.net/21-tips-on-keeping-a-simple-home-with-kids/',
+    date: null,
+    image: '../assets/img/family-making-breakfast.jpg',
+    alt: 'A Happy Family Makes Breakfast Together in Their Kitchen'
+  },
+  {
+    title: 'The Minimalist Guide to Simple Housework',
+    link: 'https://www.zenhabits.net/the-minimalists-guide-to-simple-housework/',
+    date: null,
+    image: '../assets/img/streamlined-kitchen-brick-wall.jpg',
+    alt: 'A Clean and Organized Kitchen with a Brick Wall Backsplash'
+  },
+  {
+    title: '36 Great Tips for Keeping Travel as Simple as Possible (and Two Poems)',
+    link: 'https://www.zenhabits.net/36-great-tips-for-keeping-travel-as-simple-as-possible-and-two-poems/',
+    date: null,
+    image: '../assets/img/toy-minivan-luggage.jpg',
+    alt: 'A Toy Minivan with Luggage Stacked on Top, a Real Minivan in the Background'
+  },
+  {
+    title: 'Simplify Your Eating Habits and Meals',
+    link: 'https://www.zenhabits.net/simplify-your-eating-habits-and-meals/',
+    date: null,
+    image: '../assets/img/vegetable-bowl.jpg',
+    alt: 'A Japanese Vegetable Bowl and a Small Saucer with Soy Sauce'
+  },
+  {
+    title: 'The Secret to Having a Simplified Schedule',
+    link: 'https://www.nosidebar.com/simplified-schedule/',
+    date: null,
+    image: '../assets/img/yearly-planner-pen.jpg',
+    alt: 'Corner of Open Yearly Planner and Pen'
+  },
+  {
+    title: 'A Grace-Filled Beauty Routine',
+    link: 'https://www.nosidebar.com/a-grace-filled-beauty-routine/',
+    date: null,
+    image: '../assets/img/beauty-products.jpg',
+    alt: 'A Bottle of Unspecified Beauty Product and Oranments on a Ceramic Tray'
+  },
+  {
+    title: '4 Lessons From My Journey to Eco-Minimalism',
+    link: 'https://www.nosidebar.com/eco-minimalism/',
+    date: null,
+    image: '../assets/img/lone-leaf.jpg',
+    alt: 'A Transluscent, Heart-Shaped Leaf'
+  },
+  {
+    title: 'Looking Past the Likes',
+    link: 'https://www.nosidebar.com/looking-past-likes/',
+    date: null,
+    image: '../assets/img/women-side-hug.jpg',
+    alt: 'Two Women with Arms Around Each Other Walk Down Rural Path'
+  },
+  {
+    title: 'Cherishing the Old in Light of the New',
+    link: 'https://www.nosidebar.com/cherishing-the-old/',
+    date: null,
+    image: '../assets/img/lawn-chairs.jpg',
+    alt: 'Two Bamboo Outdoor Chairs and Side Table with Flowers'
   }
 ];
 
