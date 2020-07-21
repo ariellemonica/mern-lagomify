@@ -6,6 +6,8 @@ import Carousel from 'react-material-ui-carousel';
 import clsx from 'clsx';
 import { Main, CarouselItem } from '../components';
 import API from '../utils/API';
+// you will need to import context and get user details from that
+// then use an api call to get the data
 
 const useStyles = makeStyles(theme => ({
   spaceBottom: {
