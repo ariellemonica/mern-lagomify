@@ -31,6 +31,7 @@ const ViewMyStuff = () => {
     image: '..assets/img/green-wooden-chair.jpg'
   }];
   const [myItems, setMyItems] = useState(initState);
+  const [dataLoaded, setDataLoaded] = useState(false);
   const [itemId, setItemId] = useState(initState[0].id);
   const classes = useStyles();
 
@@ -72,6 +73,7 @@ const ViewMyStuff = () => {
       await API.getMyItems()
         .then(resp => resp.json())
         .then(data => setMyItems(data))
+        .then(() => setDataLoaded(true))
         .catch(err => console.error(err.stack));
     };
 
@@ -83,8 +85,7 @@ const ViewMyStuff = () => {
       <Grid container
         direction="column"
         justify="space-between"
-        alignItems="center"
-      >
+        alignItems="center">
         <Grid item xs={12}>
           <Typography variant="h2"
             gutterBottom
@@ -100,17 +101,19 @@ const ViewMyStuff = () => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Carousel
-            autoPlay={false} className={classes.spaceBottom}>
-            {
-              myItems.map(item =>
-                <CarouselItem
-                  key={item._id}
-                  item={item}
-                  itemState={{ itemId, setItemId }}
-                />)
-            }
-          </Carousel>
+          { dataLoaded
+            ? <Carousel
+              autoPlay={false} className={classes.spaceBottom}>
+              {
+                myItems.map(item =>
+                  <CarouselItem
+                    key={Math.floor(Math.random() * Math.floor(100000))}
+                    item={item}
+                    itemState={{ itemId, setItemId }}
+                  />)
+              }
+            </Carousel>
+            : null }
         </Grid>
         <Grid item
           xs={12}
@@ -128,9 +131,18 @@ const ViewMyStuff = () => {
             This Item Does Not
           </Button>
         </Grid>
-        <Typography variant="body2">
+        <Typography variant="body2" className={classes.spaceBottom}>
             Click on a photo to view more details about the item.
         </Typography>
+        <Grid item
+          xs={12}
+          align="center"
+          className={classes.spaceBottom}>
+          <Button color="primary"
+            href="./member">
+            Add Item
+          </Button>
+        </Grid>
       </Grid>
     </Main>
   );
