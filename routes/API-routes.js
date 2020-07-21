@@ -55,8 +55,8 @@ module.exports = (() => {
       name: req.body.name,
       description: req.body.description,
       location: req.body.location,
-      owner: 'Test Owner',
-      createdBy: 'Test Creator'
+      owner: req.body.owner,
+      createdBy: req.body.createdBy
     }).then(() => {
       res.send('Successfully added.');
     });
@@ -74,8 +74,6 @@ module.exports = (() => {
       .catch((err) => console.log(err));
   });
 
-  // mn - update an item by id
-  // mn - tested in BE via api call
   // mn - on frontend, what we'll want to do is make sure that the inputs follow the same name-value structure as add item page
   router.post('/item/:id', (req, res) => {
     console.log('this is the item id: ' + req.params.id);
