@@ -1,4 +1,5 @@
 import React from 'react';
+// import { authContext } from '../utils/appContext';
 // import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button, Typography } from '@material-ui/core';
 import { Main } from '../components';
@@ -9,8 +10,19 @@ class ItemAdd extends React.Component {
     state = {
       name: '',
       description: '',
+      createdBy: '',
+      owner: '',
       location: ''
     };
+
+    componentDidMount = () => {
+      // use this to capture current user id
+      console.log('user: ', this.props);
+      this.setState({
+        createdBy: this.props.user.sub,
+        owner: this.props.user.email
+      })
+    }
 
     handleTextChange = (event) => {
       const { name, value } = event.target;
@@ -25,8 +37,11 @@ class ItemAdd extends React.Component {
       console.log('the current state: ' + this.state.name);
       API.addItem({
         name: this.state.name,
+        // capture and assign user id from current session
         description: this.state.description,
-        location: this.state.location
+        location: this.state.location,
+        owner: this.state.owner,
+        createdBy: this.state.createdBy
       })
         .catch(err => console.log(err));
     }
