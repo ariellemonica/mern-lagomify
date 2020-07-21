@@ -3,6 +3,7 @@ import { authContext } from '../utils/appContext';
 import ItemAdd from '../pages/ItemAdd';
 import ViewMyStuff from '../pages/ViewMyStuff';
 
+// the user? div around the imported pages/components is necessary because we don't want them to load before authentication is done
 
 export default () => {
   const { user, loading } = useContext(authContext);
@@ -12,6 +13,6 @@ export default () => {
     {user?<div>
     <ItemAdd user = {user}/>
     <ViewMyStuff user = {user}/>
-    </div>:<div>Loading</div>}
+    </div>:<div>Loading user information ... </div>}
   </>)
 };
