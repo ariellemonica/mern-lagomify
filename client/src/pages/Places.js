@@ -21,18 +21,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Donate = () => {
+const Places = ({ type }) => {
   const [places, setPlaces] = useState([]);
   const classes = useStyles();
 
-  console.log('Donate');
-
   useEffect(() => {
-    API.getPlaces('donate')
+    API.getPlaces(type)
       .then(resp => resp.json())
       .then(data => setPlaces(data))
       .catch(err => console.error(err.stack));
-  }, []);
+  }, [type]);
 
   return (
     <Main>
@@ -42,13 +40,20 @@ const Donate = () => {
             align="center"
             gutterBottom
             className={classes.spaceTop}>
-            Donate
+            { (type === 'donate')
+              ? 'Donate'
+              : 'Sell'
+            }
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <Typography variant="body1"
+            align="justify"
             className={classes.spaceBottom}>
-            The following organizations will accept donations of used items in good condition. Please contact the particular organization you are interested in donating to for any restrictions.
+            { (type === 'donate')
+              ? 'Following are resources you can use to donate the items that do not bring you joy. These organizations will typically accept donations of used items in good condition. Please contact the particular organization you are interested in donating to for any restrictions.'
+              : 'Following are resources you can use to sell the items that do not bring you joy. Turn your unwanted items in to cash so you can pursue what really matters.'
+            }
           </Typography>
         </Grid>
         { places.length ? (
@@ -77,4 +82,4 @@ const Donate = () => {
   );
 };
 
-export default Donate;
+export default Places;

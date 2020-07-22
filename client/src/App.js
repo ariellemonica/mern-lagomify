@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import { authContext } from './utils/appContext';
 import { SignUp, Login, Nav } from './components';
 import {
-  Donate, ItemAdd, ItemDetails, Landing, LearnMore, Member, ViewMyStuff
+  ItemAdd, ItemDetails, Landing, LearnMore, Member, Places, ViewMyStuff
 } from './pages';
 import API from './utils/API';
 import './App.css';
@@ -37,8 +37,11 @@ function App () {
             <Landing setUser={setUser}/>} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/login" component={Login} />
-          <Route exact path="/donate" component={Donate} />
+          <Route exact path="/donate" render={props =>
+            <Places {...props} type={'donate'} />} />
           <Route exact path="/learn" component={LearnMore} />
+          <Route exact path="/sell" render={props =>
+            <Places {...props} type={'sell'} />} />
           { (!user && !loading) ? <Redirect to="/"/> : '' }
           <Route exact path="/add" render={() => {
             return <ItemAdd />;
