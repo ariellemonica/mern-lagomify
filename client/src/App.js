@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import { authContext } from './utils/appContext';
 import { SignUp, Login, Nav } from './components';
 import {
-  ItemAdd, ItemDetails, Landing, LearnMore, Member, ViewMyStuff
+  ItemAdd, ItemDetails, Landing, LearnMore, Member, Places, ViewMyStuff
 } from './pages';
 import API from './utils/API';
 import './App.css';
@@ -33,16 +33,20 @@ function App () {
         <Nav />
         <Switch>
 
-          <Route path="/" exact component={() =>
+          <Route exact path="/" component={() =>
             <Landing setUser={setUser}/>} />
-          <Route path="/signup" exact component={SignUp} />
-          <Route path="/login" exact component={Login} />
+          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/donate" render={props =>
+            <Places {...props} type={'donate'} />} />
           <Route exact path="/learn" component={LearnMore} />
+          <Route exact path="/sell" render={props =>
+            <Places {...props} type={'sell'} />} />
           { (!user && !loading) ? <Redirect to="/"/> : '' }
           <Route exact path="/add" render={() => {
             return <ItemAdd />;
           }} />
-          <Route path="/member" exact component={Member} />
+          <Route exact path="/member" component={Member} />
           <Route exact path="/view" component={ViewMyStuff} />
           <Route exact path="/view-item/:id" component={ItemDetails} />
         </Switch>

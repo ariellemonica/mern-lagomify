@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import clsx from 'clsx';
-import { Main, ResourceCard } from '../components';
+import { Main, PlaceCard } from '../components';
 import API from '../utils/API';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,16 +21,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const LearnMore = () => {
-  const [resources, setResources] = useState([]);
+const Places = ({ type }) => {
+  const [places, setPlaces] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
-    API.getResources()
+    API.getPlaces(type)
       .then(resp => resp.json())
-      .then(data => setResources(data))
+      .then(data => setPlaces(data))
       .catch(err => console.error(err.stack));
-  }, []);
+  }, [type]);
 
   return (
     <Main>
@@ -40,35 +40,40 @@ const LearnMore = () => {
             align="center"
             gutterBottom
             className={classes.spaceTop}>
-            Learn More
+            { (type === 'donate')
+              ? 'Donate'
+              : 'Sell'
+            }
           </Typography>
         </Grid>
         <Grid item xs={12}>
           <Typography variant="body1"
             align="justify"
             className={classes.spaceBottom}>
-            The following resources offer more information regarding minimalism and simplifying your life. Peruse them to find out how to make room in your life for what really matters.
+            { (type === 'donate')
+              ? 'Following are resources you can use to donate the items that do not bring you joy. These organizations will typically accept donations of used items in good condition. Please contact the particular organization you are interested in donating to for any restrictions.'
+              : 'Following are resources you can use to sell the items that do not bring you joy. Turn your unwanted items in to cash so you can pursue what really matters.'
+            }
           </Typography>
         </Grid>
-        { resources.length ? (
-          resources.map(resource => (
+        { places.length ? (
+          places.map(place => (
             <Grid item
-              key={resource.id}
+              key={place._id}
               xs={6}
               className={clsx(classes.stretch, classes.gapBottom)}>
-              <ResourceCard
-                key={resource.id}
-                title={resource.title}
-                link={resource.link}
-                img={resource.image}
-                alt={resource.alt}
+              <PlaceCard
+                name={place.name}
+                link={place.link}
+                logo={place.logo}
+                alt={place.name}
               />
             </Grid>
           ))
         ) : (
           <Grid item xs={12}>
             <Typography variant="body1">
-              There are no external resources available at this time. Please check back later.
+              There are no donation centers in our database at this time. Please check back later.
             </Typography>
           </Grid>
         )}
@@ -77,4 +82,4 @@ const LearnMore = () => {
   );
 };
 
-export default LearnMore;
+export default Places;

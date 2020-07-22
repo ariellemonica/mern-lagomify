@@ -1,4 +1,3 @@
-// import React, { useState } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Button } from '@material-ui/core';
@@ -26,8 +25,8 @@ const useStyles = makeStyles(theme => ({
 
 const ViewMyStuff = () => {
   const [myItems, setMyItems] = useState([]);
-  const [caroIndex, setCaroIndex] = useState(0);
-  const caro = useRef();
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const carousel = useRef();
   const classes = useStyles();
 
   useEffect(() => {
@@ -38,19 +37,21 @@ const ViewMyStuff = () => {
     return async (ev) => {
       ev.preventDefault();
 
-      const { _id } = myItems[caroIndex];
+      const { _id } = myItems[carouselIndex];
 
       try {
         const resp = await API.updateMyItems({ _id, action });
         const data = await resp.json();
+
         if (data.updated) {
-          if (caroIndex + 1 === myItems.length) {
-            caro.current.prev();
+          if (carouselIndex + 1 === myItems.length) {
+            carousel.current.prev();
           }
+
           handleFetch();
         } else {
-          caro.current.next();
           console.log('Nothing updated.');
+          carousel.current.next();
         }
       } catch (err) {
         console.error(err.stack);
@@ -59,7 +60,7 @@ const ViewMyStuff = () => {
   };
 
   const handleCarouselChange = (index) => {
-    setCaroIndex(index);
+    setCarouselIndex(index);
   };
 
   const handleFetch = async () => {
@@ -99,7 +100,7 @@ const ViewMyStuff = () => {
               className={classes.spaceBottom}
               autoPlay={false}
               onChange={handleCarouselChange}
-              ref={caro}>
+              ref={carousel}>
               {
                 myItems.map((item) =>
                   <CarouselItem

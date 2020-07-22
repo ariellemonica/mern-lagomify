@@ -1,3 +1,4 @@
+export { default as Places } from './Places';
 export { default as ItemAdd } from './ItemAdd';
 export { default as ItemDetails } from './ItemDetails';
 export { default as Landing } from './Landing';
