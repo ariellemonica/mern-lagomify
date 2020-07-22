@@ -28,7 +28,6 @@ const Donate = () => {
   console.log('Donate');
 
   useEffect(() => {
-    console.log("hi, there");
     API.getPlaces('donate')
       .then(resp => resp.json())
       .then(data => setPlaces(data))

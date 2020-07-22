@@ -74,7 +74,6 @@ module.exports = (() => {
   });
 
   router.get('/places/:type', (req, res) => {
-    console.log('We made it to routes!');
     db.Place
       .find({ type: req.params.type })
       .then(docs => res.json(docs))

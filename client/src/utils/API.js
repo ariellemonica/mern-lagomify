@@ -23,15 +23,7 @@ export default {
     });
   },
 
-  getPlaces: (type) => {
-    console.log('getPlaces()!');
-
-    const result = fetch(`/api/places/${type}`);
-
-    console.log(JSON.stringify(result));
-
-    return result;
-  },
+  getPlaces: (type) => fetch(`/api/places/${type}`),
 
   getResources: () => fetch('/api/learn'),
 
