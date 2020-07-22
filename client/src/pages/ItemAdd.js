@@ -1,18 +1,20 @@
 import React from 'react';
-// import { authContext } from '../utils/appContext';
-// import { makeStyles } from '@material-ui/core/styles';
+import API from "../utils/API";
+import FileUpload from "../components/FileUpload";
+import axios from 'axios';
 import { TextField, Button, Typography } from '@material-ui/core';
 import { Main } from '../components';
-import API from '../utils/API';
+
 
 class ItemAdd extends React.Component {
-    state = {
-      name: '',
-      description: '',
-      createdBy: '',
-      owner: '',
-      location: ''
-    };
+  state = {
+    name: '',
+    description: '',
+    files: null,
+    createdBy: '',
+    owner: '',
+    location: ''
+  };
 
     componentDidMount = () => {
       // use this to capture current user id
@@ -30,19 +32,23 @@ class ItemAdd extends React.Component {
       });
     }
 
-    // mn - next step - find out why it's not getting to db
+    handleState = (obj) => {
+      this.setState(obj);
+    };
+
     handleButtonClick = (event) => {
       event.preventDefault();
-      console.log('the current state: ' + this.state.name);
-      API.addItem({
-        name: this.state.name,
-        // capture and assign user id from current session
-        description: this.state.description,
-        location: this.state.location,
-        owner: this.state.owner,
-        createdBy: this.state.createdBy
-      })
-        .catch(err => console.log(err));
+    
+      const data = new FormData();
+      data.append('image', this.state.files[0]);
+      data.append('text', JSON.stringify(this.state));
+      console.log('this is the data' + data);
+    
+      axios.post('api/item', data).then(() => {
+        console.log('request happened');
+        window.location = '/view'
+        console.log("this is the story of a girl" + this.state.owner);
+      });
     }
 
     render () {
@@ -53,6 +59,10 @@ class ItemAdd extends React.Component {
             <TextField name="name" value={this.state.name} label="Item Name" variant="outlined" onChange={this.handleTextChange} />
             <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
             <TextField name="location" value={this.state.location} label="Item's Location" variant="outlined" onChange={this.handleTextChange} />
+            <FileUpload
+              handleState={this.handleState}
+              handleSubmit={this.handleSubmit}
+            />
             <Button variant="contained" color="primary" onClick={this.handleButtonClick}>
                         Add Item</Button>
           </form>
