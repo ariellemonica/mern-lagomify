@@ -33,7 +33,7 @@ export default ({ setUser }) => {
         // all is well
         localStorage.setItem('google_token', JSON.stringify(response.tokenId));
         setUser(response.profileObj);
-        window.location.replace('/member');
+        window.location.replace('/view');
       } else {
         console.log('Unauthorized access.');
       }

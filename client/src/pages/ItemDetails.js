@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Typography } from '@material-ui/core';
-
 import { Main } from '../components';
 import API from '../utils/API';
+
 
 class ItemDetails extends React.Component {
     state = {
@@ -20,10 +20,17 @@ class ItemDetails extends React.Component {
       this.setState({ _id, name, description, location, status, imageUrl });
     }
 
-    handleEditClick () {
+    handleEditClick = (e) => {
       // allows user to edit the item
       // bring to new page?
       // or display form components on this page?
+      e.preventDefault();
+      console.log("this items name is " + this.state.name);
+      console.log("this items description is " + this.state.description);
+      console.log("this items location is " + this.state.location);
+      console.log("this items id is " + this.state._id);
+
+      
     }
 
     handleDonateClick = (event) => {
