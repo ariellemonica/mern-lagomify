@@ -8,6 +8,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
   media: {
+    height: '100%',
     minHeight: '50vh',
     minWidth: '50vh'
   },
@@ -35,8 +36,7 @@ const CarouselItem = ({ item }) => {
         to={`/view-item/${item._id}`}>
         <CardMedia
           id={item._id}
-          image={item.image}
-          // src={item.imageUrl}
+          image={item.imageUrl}
           title={item.name}
           className={classes.media}>
           <Typography variant="caption"
