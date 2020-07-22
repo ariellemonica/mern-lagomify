@@ -17,6 +17,7 @@ function App () {
         ? JSON.parse(localStorage.getItem('google_token'))
         : null;
     if (token) {
+      // Do a try-catch here. If API.getUser() fails, set google_token to null.
       API.getUser(token).then(({ data }) => {
         setUser(data);
         setLoading(false);
