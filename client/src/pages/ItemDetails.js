@@ -1,7 +1,8 @@
 import React from 'react';
-import { Button, Typography } from '@material-ui/core';
+import { Button, Typography, TextField } from '@material-ui/core';
 import { Main } from '../components';
 import API from '../utils/API';
+
 
 
 class ItemDetails extends React.Component {
@@ -31,7 +32,7 @@ class ItemDetails extends React.Component {
       console.log("this items id is " + this.state._id);
 
       
-
+      
       
     }
 
@@ -94,6 +95,18 @@ class ItemDetails extends React.Component {
           <Button variant='contained' color='primary'onClick={this.handleDonateClick}>Donate</Button>
           <Button variant='contained' color='primary' onClick={this.handleSellClick}>Sell</Button>
           <Button variant='contained' color='primary'onClick={this.handleTossClick}>Toss</Button>
+          <div className="edit-form" style={{marginTop: "5%" }}>
+          <form noValidate autoComplete="off">
+            <TextField name="name" value={this.state.name} label="Item Name" variant="outlined" onChange={this.handleTextChange} />
+            <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
+            <TextField name="location" value={this.state.location} label="Item's Location" variant="outlined" onChange={this.handleTextChange} />
+            <Button variant="contained" color="primary" onClick={this.handleButtonClick} style={{ margin: "1%" }}>
+                        Save</Button>
+            <Button variant="contained" color="primary" onClick={this.handleButtonClick}>
+                        Cancel</Button>
+          </form>
+          </div>
+          
         </Main>
       );
     }
