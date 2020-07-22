@@ -10,9 +10,9 @@ export default () => {
   console.log(user, loading);
   return (<>
     <h1>HELLO {user?.name}</h1>
-    {user?<div>
-    <ItemAdd user = {user}/>
-    {/* <ViewMyStuff user = {user}/> */}
-    </div>:<div>Loading user information ... </div>}
-  </>)
+    {user ? <div>
+      <ItemAdd user = {user}/>
+      {/* <ViewMyStuff user = {user}/> */}
+    </div> : <div>Loading user information ... </div>}
+  </>);
 };

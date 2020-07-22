@@ -1,21 +1,21 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { GoogleLogin } from 'react-google-login';
 import { Redirect } from 'react-router-dom';
-import {authContext} from '../utils/appContext'
+import { authContext } from '../utils/appContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1)
-    },
+    }
   }
 }));
 
 export default ({ setUser }) => {
   const classes = useStyles();
-  const {user,loading} = useContext(authContext)
+  const { user, loading } = useContext(authContext);
   const responseGoogle = (response) => {
     console.log(response);
 
@@ -43,25 +43,26 @@ export default ({ setUser }) => {
   const handleFailure = res => console.log('google auth failed - ', res);
   return (
     <>
-    { (!user&&!loading) ? ""
-    : <Redirect to="/member"/> }
-    <div className={classes.root} style={{ textAlign: 'center', marginTop: '10em' }}>
-      <div style={{ display: 'inline-block' }}></div>
-      <h1>Welcome to Lagomify</h1>
-      <GoogleLogin 
-    clientId={atob("OTcwODYzNTI5MDI0LWtqcmNtZzgyMzRkMWRkdmU5cmYzcDRpY3BzcmljbzBuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29t")}
-    buttonText="Login with Google"
-    onSuccess={responseGoogle}
-    onFailure={handleFailure}
-    cookiePolicy={'single_host_origin'}
-  />
-  <div>
+      { (!user && !loading) ? ''
+        : <Redirect to="/member"/> }
+      <div className={classes.root} style={{ textAlign: 'center', marginTop: '10em' }}>
+        <div style={{ display: 'inline-block' }}></div>
+        <h1>Welcome to Lagomify</h1>
+        <GoogleLogin
+          // clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+          clientId={atob('OTcwODYzNTI5MDI0LWtqcmNtZzgyMzRkMWRkdmU5cmYzcDRpY3BzcmljbzBuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29t')}
+          buttonText="Login with Google"
+          onSuccess={responseGoogle}
+          onFailure={handleFailure}
+          cookiePolicy={'single_host_origin'}
+        />
+        <div>
 
-  </div>
+        </div>
         <Button className={classes.buttonStyle} variant="contained" color="primary" size="large" href="/signup">
           Create Account
-      </Button>
-    </div>
+        </Button>
+      </div>
     </>
   );
 };

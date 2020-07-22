@@ -6,7 +6,6 @@ import { Main } from '../components';
 import API from '../utils/API';
 
 class ItemAdd extends React.Component {
-  
     state = {
       name: '',
       description: '',
@@ -21,7 +20,7 @@ class ItemAdd extends React.Component {
       this.setState({
         createdBy: this.props.user.sub,
         owner: this.props.user.email
-      })
+      });
     }
 
     handleTextChange = (event) => {

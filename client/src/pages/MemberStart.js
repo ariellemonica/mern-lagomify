@@ -6,5 +6,5 @@ export default () => {
   console.log(user, loading);
   return (<>
     <h1>HELLO {user?.name}</h1>
-  </>)
+  </>);
 };
