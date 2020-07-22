@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import { DropzoneArea } from 'material-ui-dropzone';
 
 class FileUpload extends React.Component {
-  constructor() {
+  constructor () {
     super();
 
     this.state = {
@@ -17,19 +17,19 @@ class FileUpload extends React.Component {
     });
   };
 
-  render() { 
+  render () {
     return (
       <>
-      <DropzoneArea
-        acceptedFiles={['image/*']}
-        dropzoneText={"Drag and drop an image here or click"} 
-        onChange={(files) => {  
-          this.props.handleState({ files: files })
-        }}
-      />
+        <DropzoneArea
+          acceptedFiles={['image/*']}
+          dropzoneText={'Drag and drop an image here or click'}
+          onChange={(files) => {
+            this.props.handleState({ files: files });
+          }}
+        />
       </>
-      );
+    );
   }
-};
+}
 
 export default FileUpload;
