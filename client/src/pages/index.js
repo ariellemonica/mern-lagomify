@@ -1,3 +1,4 @@
+export { default as Donate } from './Donate';
 export { default as ItemAdd } from './ItemAdd';
 export { default as ItemDetails } from './ItemDetails';
 export { default as Landing } from './Landing';

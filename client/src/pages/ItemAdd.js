@@ -1,10 +1,9 @@
 import React from 'react';
-import API from "../utils/API";
-import FileUpload from "../components/FileUpload";
+// import API from '../utils/API';
+import FileUpload from '../components/FileUpload';
 import axios from 'axios';
 import { TextField, Button, Typography } from '@material-ui/core';
 import { Main } from '../components';
-
 
 class ItemAdd extends React.Component {
   state = {
@@ -38,16 +37,16 @@ class ItemAdd extends React.Component {
 
     handleButtonClick = (event) => {
       event.preventDefault();
-    
+
       const data = new FormData();
       data.append('image', this.state.files[0]);
       data.append('text', JSON.stringify(this.state));
       console.log('this is the data' + data);
-    
+
       axios.post('api/item', data).then(() => {
         console.log('request happened');
-        window.location = '/view'
-        console.log("this is the story of a girl" + this.state.owner);
+        window.location = '/view';
+        console.log('this is the story of a girl' + this.state.owner);
       });
     }
 
