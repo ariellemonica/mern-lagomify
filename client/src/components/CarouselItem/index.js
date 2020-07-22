@@ -8,6 +8,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
   media: {
+    height: '100%',
     minHeight: '50vh',
     minWidth: '50vh'
   },
@@ -25,26 +26,22 @@ const useStyles = makeStyles({
   }
 });
 
-const CarouselItem = (props) => {
-  const { itemId, setItemId } = props.itemState;
+const CarouselItem = ({ item }) => {
   const classes = useStyles();
 
   return (
     <Card>
       <CardActionArea
         component={RouterLink}
-        to={`/view-item/${props.item._id}`}>
+        to={`/view-item/${item._id}`}>
         <CardMedia
-          id={props.item._id}
-          //image={props.item.image}
-          src={props.item.imageUrl}
-          title={props.item.name}
-          data-item-id={itemId}
-          className={classes.media}
-          onFocus={setItemId(props.item._id)}>
+          id={item._id}
+          image={item.imageUrl}
+          title={item.name}
+          className={classes.media}>
           <Typography variant="caption"
             className={classes.caption}>
-            {props.item.name}
+            {item.name}
           </Typography>
         </CardMedia>
       </CardActionArea>

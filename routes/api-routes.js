@@ -159,8 +159,7 @@ module.exports = (() => {
     // DEBUG:
     // console.log('We got to api-routes!');
 
-    const updatedStatus =
-      (req.body.status === 'true') ? 'keep' : 'toLetGo';
+    const updatedStatus = req.body.status ? 'keep' : 'toLetGo';
 
     db.Item
       .updateOne(
@@ -170,12 +169,9 @@ module.exports = (() => {
         // DEBUG:
         // console.log(JSON.stringify(result));
 
-        if (result.nModified > 0 && result.ok === 1) {
-          res.status(200).json({ updated: true });
-        }
+        res.json({ updated: result.nModified > 0 && result.ok === 1 });
       })
-      .catch(err => res.status(422).json(err))
-      .finally(() => res.end());
+      .catch(err => res.status(422).json(err));
   });
   return router;
 })();
