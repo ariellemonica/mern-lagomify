@@ -45,6 +45,7 @@ const LearnMore = () => {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="body1"
+            align="justify"
             className={classes.spaceBottom}>
             The following resources offer more information regarding minimalism and simplifying your life. Peruse them to find out how to make room in your life for what really matters.
           </Typography>
