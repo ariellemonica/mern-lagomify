@@ -27,11 +27,9 @@ class ItemDetails extends React.Component {
     }
 
     handleDonateClick = (event) => {
-      // changes status to 'toDonate'
       event.preventDefault();
       console.log('the current status: ' + this.state.status);
       console.log('the current item id: ' + this.state._id);
-      // changes status to 'toDonate'
       API.updateItem({
         _id: this.state._id,
         name: this.state.name,
@@ -40,14 +38,12 @@ class ItemDetails extends React.Component {
         status: 'toDonate'
       })
         .catch(err => console.log(err));
-      // bring user to page for resources to donate
     }
 
     handleSellClick = (event) => {
       event.preventDefault();
       console.log('the current status: ' + this.state.status);
       console.log('the current item id: ' + this.state._id);
-      // changes status to 'toSell'
       API.updateItem({
         _id: this.state._id,
         name: this.state.name,
@@ -56,7 +52,6 @@ class ItemDetails extends React.Component {
         status: 'toSell'
       })
         .catch(err => console.log(err));
-      // bring user to page for resources to sell
     }
 
     handleTossClick = (event) => {
