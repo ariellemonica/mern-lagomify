@@ -4,7 +4,6 @@ const express = require('express');
 const apiRoutes = require('./routes/api-routes');
 const authRoutes = require('./routes/auth-routes.js');
 const path = require('path');
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -16,8 +15,7 @@ app.use(express.json());
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
-
-// Add routes, both API and view
+// Add routes, both API, imageUpload and view
 app.use('/api', apiRoutes);
 app.use('/auth', authRoutes);
 
