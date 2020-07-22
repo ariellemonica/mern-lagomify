@@ -30,13 +30,11 @@ class ItemAdd extends React.Component {
       });
     }
 
-    // mn - next step - find out why it's not getting to db
     handleButtonClick = (event) => {
       event.preventDefault();
       console.log('the current state: ' + this.state.name);
       API.addItem({
         name: this.state.name,
-        // capture and assign user id from current session
         description: this.state.description,
         location: this.state.location,
         owner: this.state.owner,
