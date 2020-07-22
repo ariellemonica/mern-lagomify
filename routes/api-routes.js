@@ -1,7 +1,29 @@
 require('dotenv').config();
 
 const mongoose = require('mongoose');
+const multer = require('multer');
 const router = require('express').Router();
+const AWS = require('aws-sdk');
+const s3_bucket = process.env.BUCKET;
+
+//Amazon s3 config
+const s3 = new AWS.S3();
+//const S3 = require('aws-sdk/clients/s3');
+AWS.config.update(
+  {
+    region: 'us-west-1', 
+    accessKeyId: process.env.AWSAccessKeyId,
+    secretAccessKey: process.env.AWSSecretKey
+});
+
+//Multer config
+//memory storage keeps file data in a buffer
+const upload = multer({
+  storage: multer.memoryStorage(),
+  //file size limitation in bytes
+  limits: { fileSize: 52428800 },
+});
+
 
 // Mongo Database
 const db = require('../models');
@@ -13,7 +35,7 @@ mongoose.connect(
   MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-  });
+});
 
 mongoose.connection
   .on('error', console.error.bind(
@@ -49,17 +71,41 @@ module.exports = (() => {
 
   // hard coded for testing
   // use req.body when you get to it
-  router.post('/item', (req, res) => {
-    console.log("line 53 in api-routes" + req.body);
-    db.Item.create({
-      name: req.body.name,
-      description: req.body.description,
-      location: req.body.location,
-      owner: req.body.owner,
-      createdBy: req.body.createdBy
-    }).then(() => {
-      res.send('Successfully added.');
+  router.post('/item', upload.single('image'), (req, res) => {
+    console.log(req.owner);
+    console.log(req.body);
+    //console.log(req.file);
+
+    const presignedURI = `${req.file.originalname.split('.')[0]}-${Date.now()}.${req.file.originalname.split('.')[1]}`.toLowerCase();
+
+    // console.log(presignedURI);
+
+    s3.upload({
+      Bucket: 'lagomify-user-uploads',
+      Key: presignedURI,
+      Body: req.file.buffer
+    }, (err, data) => {
+      if (err) {
+        console.log('Some error: ' + err);
+      } else {
+        console.log(data);
+
+        let parsedData = JSON.parse(req.body.text)
+
+        db.Item.create({
+          name: parsedData.name,
+          description: parsedData.description,
+          location: parsedData.location,
+          owner: parsedData.owner,
+          imageUrl: data.Location,
+          createdBy: parsedData.createdBy
+        }).then(() => {
+          res.send('Successfully added.');
+        });
+      }  
     });
+
+    
   });
 
   // mn - simple find item by id - can be modified later or chris can blow this away if he's already written something, i wrote this mainly for testing
@@ -131,6 +177,5 @@ module.exports = (() => {
       .catch(err => res.status(422).json(err))
       .finally(() => res.end());
   });
-
   return router;
 })();
