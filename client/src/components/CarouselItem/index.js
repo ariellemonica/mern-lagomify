@@ -36,8 +36,8 @@ const CarouselItem = (props) => {
         to={`/view-item/${props.item._id}`}>
         <CardMedia
           id={props.item._id}
-          image={props.item.image}
-          // src={props.item.imageUrl}
+          //image={props.item.image}
+          src={props.item.imageUrl}
           title={props.item.name}
           data-item-id={itemId}
           className={classes.media}
