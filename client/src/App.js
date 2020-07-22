@@ -18,11 +18,11 @@ function App () {
         : null;
     if (token) {
       API.getUser(token).then(({ data }) => {
-        setUser(data)
+        setUser(data);
         setLoading(false);
       });
-    }else{
-      setLoading(false)
+    } else {
+      setLoading(false);
     }
   }, []);
 
@@ -31,20 +31,19 @@ function App () {
       <authContext.Provider value={{ user, loading }}>
         <Nav />
         <Switch>
-        
+
           <Route path="/" exact component={() =>
             <Landing setUser={setUser}/>} />
-            <Route path="/signup" exact component={SignUp} />
+          <Route path="/signup" exact component={SignUp} />
           <Route path="/login" exact component={Login} />
           <Route exact path="/learn" component={LearnMore} />
-            { (!user&&!loading) ? <Redirect to="/"/> : "" }
+          { (!user && !loading) ? <Redirect to="/"/> : '' }
           <Route exact path="/add" render={() => {
             return <ItemAdd />;
           }} />
           <Route path="/member" exact component={Member} />
           <Route exact path="/view" component={ViewMyStuff} />
-          <Route exact path="/view-item/:id" component={ ItemDetails } />
-          
+          <Route exact path="/view-item/:id" component={ItemDetails} />
         </Switch>
       </authContext.Provider>
     </Router>

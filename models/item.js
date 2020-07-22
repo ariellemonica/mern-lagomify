@@ -9,7 +9,7 @@ const itemSchema = new Schema({
   description: { type: String },
   location: { type: String, required: true },
   imageUrl: { type: String, default: 'http://placehold.it/300x200' },
-  status: { type: String, enum: ['toDonate', 'toToss,', 'toSell', 'donated', 'tossed', 'sold', 'keep'], default: 'keep' },
+  status: { type: String, enum: ['toLetGo', 'toDonate', 'toToss,', 'toSell', 'donated', 'tossed', 'sold', 'keep'], default: 'keep' },
   // donated: { type: Boolean },
   // tossed: { type: Boolean },
   // sold: { type: Boolean },

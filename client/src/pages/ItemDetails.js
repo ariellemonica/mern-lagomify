@@ -31,6 +31,8 @@ class ItemDetails extends React.Component {
       console.log("this items id is " + this.state._id);
 
       
+
+      
     }
 
     handleDonateClick = (event) => {

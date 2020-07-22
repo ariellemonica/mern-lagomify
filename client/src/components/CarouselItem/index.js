@@ -4,14 +4,12 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import {
   Card, CardActionArea, CardMedia, Typography
 } from '@material-ui/core';
-// import { Paper, Button } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: 360
-  },
   media: {
-    height: 360
+    minHeight: '50vh',
+    minWidth: '50vh'
   },
   caption: {
     backgroundColor: fade('#000', 0.3),
@@ -28,28 +26,26 @@ const useStyles = makeStyles({
 });
 
 const CarouselItem = (props) => {
+  const { itemId, setItemId } = props.itemState;
   const classes = useStyles();
-
-  /* return (
-    <Paper>
-      <h2>{props.item.name}</h2>
-      <p>{props.item.description}</p>
-
-      <Button className="CheckButton">
-          Check it out!
-      </Button>
-    </Paper>
-  ); */
 
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea
+        component={RouterLink}
+        to={`/view-item/${props.item._id}`}>
         <CardMedia
-          className={classes.media}
+          id={props.item._id}
           image={props.item.image}
+          // src={props.item.imageUrl}
           title={props.item.name}
-        >
-          <Typography variant="caption" className={classes.caption}>{props.item.name}</Typography>
+          data-item-id={itemId}
+          className={classes.media}
+          onFocus={setItemId(props.item._id)}>
+          <Typography variant="caption"
+            className={classes.caption}>
+            {props.item.name}
+          </Typography>
         </CardMedia>
       </CardActionArea>
     </Card>

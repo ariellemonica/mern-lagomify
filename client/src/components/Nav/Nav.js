@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import {authContext} from '../../utils/appContext';
+import { authContext } from '../../utils/appContext';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar () {
   const classes = useStyles();
-  const {user} = useContext(authContext);
+  const { user } = useContext(authContext);
 
   const handleLogout = () => {
     localStorage.clear("google_token");
@@ -63,7 +63,7 @@ export default function ButtonAppBar () {
           </Typography>
           <Button color="inherit" href="/">Home</Button>
           <Button color="inherit" href="/view">My Items</Button>
-          <Button color="inherit" href="/add">Add Item</Button>
+          <Button color="inherit" href="/member">Add Item</Button>
           <Button color="inherit" href="/learn">Learn More</Button>
           {/*user ? <Button onClick={handleLogout} color="inherit" href="#">Log Out</Button> : ""*/}
         </Toolbar>
