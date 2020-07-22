@@ -1,6 +1,7 @@
 require('dotenv');
-const express = require("express");
-const apiRoutes = require("./routes/API-routes");
+
+const express = require('express');
+const apiRoutes = require('./routes/api-routes');
 const authRoutes = require('./routes/auth-routes.js');
 const path = require('path');
 const app = express();
@@ -21,27 +22,6 @@ app.use('/auth', authRoutes);
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
-
-//app.post('/upload', (req, res) => {
-  //upload(req, res, (err) => {
-    //if(err) {
-      //res.render('index', {
-        //msg: err
-      //});
-    //} else {
-      //if(req.file == undefined){
-        //res.render('index', {
-          //msg: 'Error: No File Selected!'
-        //});
-      //} else {
-        //res.render('index', {
-          //msg: 'File Uploaded!',
-          //file:`uploads/${req.file.filename}`
-        //});
-      //}
-    //}
-  //}); 
-//});
 
 // Start the API server
 app.listen(PORT, function () {

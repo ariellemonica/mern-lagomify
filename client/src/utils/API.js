@@ -2,10 +2,17 @@ import axios from 'axios';
 
 export default {
   getUser: token => axios.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${token}`),
-  
-  getResources: () => {
-    return fetch('/api/learn');
+  addItem: (item) => {
+    console.log(item);
+    return fetch('/api/item', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(item)
+    });
   },
+  getResources: () => fetch('/api/learn'),
   // mn - this one may need a modifier to target the id
   updateItem: (item) => {
     console.log(item);
@@ -17,6 +24,19 @@ export default {
       body: JSON.stringify(item)
     }).then((res) => res.json());
   },
+  updateMyItems: update => {
+    // DEBUG:
+    // console.log(JSON.stringify(update));
+
+    return fetch(`/api/user/items/${update._id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ status: update.action }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  },
+  getItems: () => fetch('/api/view'),
   // mn - current user - handled in BE request.auth.user - this function is incomplete
   getMyItems: () => {
     return fetch('/api/items', {

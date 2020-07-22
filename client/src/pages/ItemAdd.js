@@ -2,19 +2,28 @@ import React from 'react';
 import API from "../utils/API";
 import FileUpload from "../components/FileUpload";
 import axios from 'axios';
-// import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button, Typography } from '@material-ui/core';
 import { Main } from '../components';
 
 
 class ItemAdd extends React.Component {
-  
-    state = {
-      name: '',
-      description: '',
-      location: '',
-      files: null
-    };
+  state = {
+    name: '',
+    description: '',
+    files: null,
+    createdBy: '',
+    owner: '',
+    location: ''
+  };
+
+    componentDidMount = () => {
+      // use this to capture current user id
+      console.log('user: ', this.props);
+      this.setState({
+        createdBy: this.props.user.sub,
+        owner: this.props.user.email
+      });
+    }
 
     handleTextChange = (event) => {
       const { name, value } = event.target;
@@ -24,20 +33,22 @@ class ItemAdd extends React.Component {
     }
 
     handleState = (obj) => {
-        this.setState(obj);
+      this.setState(obj);
     };
 
     handleButtonClick = (event) => {
-        event.preventDefault();
+      event.preventDefault();
     
-        const data = new FormData();
-        data.append('image', this.state.files[0]);
-        data.append('text', JSON.stringify(this.state));
+      const data = new FormData();
+      data.append('image', this.state.files[0]);
+      data.append('text', JSON.stringify(this.state));
+      console.log('this is the data' + data);
     
-        axios.post('api/item', data).then(() => {
-          console.log('request happened');
-          window.location = '/view'
-        });
+      axios.post('api/item', data).then(() => {
+        console.log('request happened');
+        window.location = '/view'
+        console.log("this is the story of a girl" + this.state.owner);
+      });
     }
 
     render () {
