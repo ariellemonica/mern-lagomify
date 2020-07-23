@@ -32,7 +32,6 @@ function App () {
       <authContext.Provider value={{ user, loading }}>
         <Nav />
         <Switch>
-
           <Route exact path="/" component={() =>
             <Landing setUser={setUser}/>} />
           <Route exact path="/signup" component={SignUp} />
