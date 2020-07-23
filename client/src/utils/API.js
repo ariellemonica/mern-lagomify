@@ -40,6 +40,7 @@ export default {
 
   updateItem: (item) => {
     console.log(item);
+    console.log(item._id);
     return fetch(`/api/item/${item._id}`, {
       method: 'POST',
       headers: {
@@ -58,4 +59,5 @@ export default {
       }
     });
   }
+  
 };

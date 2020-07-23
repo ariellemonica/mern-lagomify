@@ -131,6 +131,7 @@ module.exports = (() => {
 
   router.post('/item/:id', (req, res) => {
     console.log('this is the item id: ' + req.params.id);
+    // console.log('this is the item id: ' + req..id);
     // if we're allowing more fields to be updated, we can add more
     db.Item.findByIdAndUpdate(req.params.id, {
       name: req.body.name,
@@ -145,6 +146,7 @@ module.exports = (() => {
       .catch((err) => console.log(err));
   });
 
+
   /* ************************** PUT Routes ************************** */
   router.put('/user/items/:id', (req, res) => {
     const updatedStatus = req.body.status ? 'keep' : 'toLetGo';
@@ -158,6 +160,7 @@ module.exports = (() => {
       })
       .catch(err => res.status(422).json(err));
   });
+
 
   return router;
 })();
