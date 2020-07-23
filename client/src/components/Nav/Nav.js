@@ -28,9 +28,9 @@ export default function ButtonAppBar () {
   const { user } = useContext(authContext);
 
   const handleLogout = () => {
-    localStorage.clear("google_token");
-    window.location.replace("/")
-  }
+    localStorage.clear('google_token');
+    window.location.replace('/');
+  };
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -44,20 +44,20 @@ export default function ButtonAppBar () {
     <div className={classes.root}>
       <AppBar position="static" style={{ backgroundColor: '#000' }}>
         <Toolbar>
-      <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
             <MenuIcon />
           </IconButton>
-      <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        {user ? <MenuItem onClick={handleLogout}>Logout</MenuItem> : ""}
-      </Menu>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>My account</MenuItem>
+            {user ? <MenuItem onClick={handleLogout}>Logout</MenuItem> : ''}
+          </Menu>
           <Typography variant="h6" className={classes.title}>
               Lagomify
           </Typography>
@@ -65,7 +65,7 @@ export default function ButtonAppBar () {
           <Button color="inherit" href="/view">My Items</Button>
           <Button color="inherit" href="/member">Add Item</Button>
           <Button color="inherit" href="/learn">Learn More</Button>
-          {/*user ? <Button onClick={handleLogout} color="inherit" href="#">Log Out</Button> : ""*/}
+          {/* user ? <Button onClick={handleLogout} color="inherit" href="#">Log Out</Button> : "" */}
         </Toolbar>
       </AppBar>
     </div>
