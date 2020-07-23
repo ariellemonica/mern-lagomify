@@ -84,7 +84,7 @@ const ItemDetails = (props) => {
         name: "d91",
         description: "dedd",
         location: "new locatrwerewrion",
-        status: 'toKeep'
+        status: 'keep'
       })
       .catch(err => console.log(err));
       
