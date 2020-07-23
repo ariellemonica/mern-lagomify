@@ -58,16 +58,6 @@ export default {
         'Content-Type': 'application/json'
       }
     });
-  },
-  /*editItem: (item) => {
-    return fetch(`/api/item/${item._id}`, {
-      method: 'PUT',
-      //body: JSON.stringify(item),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(item)
-    }).then((res) => res.json());
-    
-  }*/
+  }
+  
 };
