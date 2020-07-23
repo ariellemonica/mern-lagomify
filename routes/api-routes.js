@@ -129,7 +129,6 @@ module.exports = (() => {
     });
   });
 
-  // mn - on frontend, what we'll want to do is make sure that the inputs follow the same name-value structure as add item page
   router.post('/item/:id', (req, res) => {
     console.log('this is the item id: ' + req.params.id);
     // if we're allowing more fields to be updated, we can add more
