@@ -13,10 +13,7 @@ export default {
 
   getItems: () => fetch('/api/view'),
 
-  // mn - current user - handled in BE request.auth.user - this function is incomplete
   getMyItems: (createdBy) => {
-    console.log('this log of user happens in the fetch');
-    console.log(createdBy);
     return fetch(`/api/items/${createdBy}`, {
       method: 'GET',
       headers: {
@@ -41,7 +38,6 @@ export default {
     });
   },
 
-  // mn - this one may need a modifier to target the id
   updateItem: (item) => {
     console.log(item);
     return fetch(`/api/item/${item._id}`, {

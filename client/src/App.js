@@ -48,9 +48,6 @@ function App () {
           }} />
           <Route exact path="/member" component={Member} />
           <Route exact path="/view" component={ViewMyStuff} />
-          {/* <Route exact path="/view" render={props => {
-            return <ViewMyStuff {... props}/>;
-          }}  /> */}
           <Route exact path="/view-item/:id" component={ItemDetails} />
         </Switch>
       </authContext.Provider>
