@@ -68,8 +68,25 @@ const ItemDetails = (props) => {
     }
   };
 
-  const handleEditClick = () => {
+  const handleEditClick = (e) => {
     // allows user to edit the item
+    // bring to new page?
+    // or display form components on this page?
+    e.preventDefault();
+      console.log("this items name is " + name);
+      console.log("this items description is " + description);
+      console.log("this items location is " + location);
+      console.log("this items id is " + _id);
+
+      API.updateItem({
+        _id: _id,
+        name: "d91",
+        description: "dedd",
+        location: "new locatrwerewrion",
+        status: 'keep'
+      })
+      .catch(err => console.log(err));
+      
     setEditMode(true);
   };
 
@@ -89,7 +106,7 @@ const ItemDetails = (props) => {
       .catch(err => console.log(err));
 
     // bring user to page for resources to donate
-    window.location = '/donate';
+    //window.location = '/donate';
   };
 
   const handleSellClick = (event) => {
@@ -107,7 +124,7 @@ const ItemDetails = (props) => {
       .catch(err => console.log(err));
 
     // bring user to page for resources to sell
-    window.location = '/sell';
+    //window.location = '/sell';
   };
 
   const handleTossClick = (event) => {
