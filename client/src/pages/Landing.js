@@ -44,7 +44,8 @@ export default ({ setUser }) => {
   const handleFailure = res => console.log('google auth failed - ', res);
   return (
     <>
-      { (!user && !loading) ? ''
+      { (!user && !loading)
+        ? ''
         : <Redirect to="/member"/> }
       <div className={classes.root} style={{ textAlign: 'center', marginTop: '10em' }}>
         <div style={{ display: 'inline-block' }}></div>
