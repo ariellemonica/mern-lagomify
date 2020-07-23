@@ -154,22 +154,6 @@ module.exports = (() => {
       .catch((err) => console.log(err));
   });
 
-  /*router.post('/item/:id', (req, res) => {
-    console.log('this is the item id: ' + req.params.id);
-    console.log('this is the item id: ' + req.body.id);
-    // if we're allowing more fields to be updated, we can add more
-    db.Item.findByIdAndUpdate(req.body.id, {
-      name: req.body.name,
-      description: req.body.description,
-      location: req.body.location,
-      status: req.body.status
-    }, () => {
-      console.log('record is updated ... hopefully');
-    }).then((itemData) => {
-      res.json(itemData);
-    })
-      .catch((err) => console.log(err));
-  });*/
 
   /* ************************** PUT Routes ************************** */
   router.put('/user/items/:id', (req, res) => {
@@ -185,24 +169,6 @@ module.exports = (() => {
       .catch(err => res.status(422).json(err));
   });
 
-   /*router.put('/item/:id', (req, res, next) => {
-    console.log('this is the item id: ' + req.params.id);
-
-    db.Item
-      .findOneAndUpdate(
-        { _id: req.params.id},
-        { $set: {
-          name: req.body.name,
-          description: req.body.description,
-          location: req.body.location
-         }
-        })
-         .then(result => {
-
-          res.json({ updated: result.nModified > 0 && result.ok === 1 });
-        })
-        .catch(err => res.status(422).json(err));
-  });*/
 
   return router;
 })();

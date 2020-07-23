@@ -111,8 +111,7 @@ const ViewMyStuff = () => {
             </Carousel>
             : null}
         </Grid>
-        <Grid item
-          xs={12}
+        <Grid item xs={12}
           className={clsx(classes.stretch, classes.spaceBottom)}>
           <Button color="default"
             onClick={handleActionClick(true)}>
@@ -126,8 +125,7 @@ const ViewMyStuff = () => {
         <Typography variant="body2" className={classes.spaceBottom}>
             Click on a photo to view more details about the item.
         </Typography>
-        <Grid item
-          xs={12}
+        <Grid item xs={12}
           align="center"
           className={classes.spaceBottom}>
           <Button color="primary"
