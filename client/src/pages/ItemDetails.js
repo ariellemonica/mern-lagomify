@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
-  Grid, Typography, Button,
-  FormControl, FormHelperText, InputLabel, TextField
+  Grid, Typography, Button, FormControl, FormHelperText, TextField
 } from '@material-ui/core';
 import clsx from 'clsx';
 import { Main } from '../components';
@@ -12,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   media: {
     borderRadius: 4,
     height: '100%',
-    minHeight: '50vh',
+    maxHeight: '50vh',
     minWidth: '50vh'
   },
   emphasis: {
@@ -35,6 +34,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const initFormData = Object.freeze({
+  name: '',
+  description: '',
+  location: ''
+});
+
 const ItemDetails = (props) => {
   const [_id, setId] = useState('');
   const [name, setName] = useState('');
@@ -43,6 +48,7 @@ const ItemDetails = (props) => {
   const [status, setStatus] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [editMode, setEditMode] = useState(false);
+  const [formData, setFormData] = useState(initFormData);
   const classes = useStyles();
 
   useEffect(() => {
@@ -50,7 +56,7 @@ const ItemDetails = (props) => {
 
     getItemDetails(params);
   }, [props,
-    _id, name, description, location, status, imageUrl, 
+    _id, name, description, location, status, imageUrl,
     editMode]);
 
   const getItemDetails = async ({ id }) => {
@@ -69,33 +75,29 @@ const ItemDetails = (props) => {
     }
   };
 
-  const handleEditClick = (e) => {
-    // allows user to edit the item
-    // bring to new page?
-    // or display form components on this page?
-    e.preventDefault();
-      console.log("this items name is " + name);
-      console.log("this items description is " + description);
-      console.log("this items location is " + location);
-      console.log("this items id is " + _id);
+  const handleFormInputChange = (event) => {
+    const { name, value } = event.target;
 
-      API.updateItem({
-        _id: _id,
-        name: "d91",
-        description: "dedd",
-        location: "new locatrwerewrion",
-        status: 'keep'
-      })
-      .catch(err => console.log(err));
-      
+    setFormData({
+      ...formData,
+      [name]: value.trim()
+    });
+  };
+
+  const handleEditClick = (event) => {
+    // allows user to edit the item
+    event.preventDefault();
+
     setEditMode(true);
   };
 
   const handleDonateClick = (event) => {
-    // changes status to 'toDonate'
     event.preventDefault();
-    console.log('the current status: ' + status);
-    console.log('the current item id: ' + _id);
+
+    // DEBUG:
+    // console.log('the current status: ' + status);
+    // console.log('the current item id: ' + _id);
+
     // changes status to 'toDonate'
     API.updateItem({
       _id: _id,
@@ -104,16 +106,18 @@ const ItemDetails = (props) => {
       location: location,
       status: 'toDonate'
     })
-      .catch(err => console.log(err));
-
-    // bring user to page for resources to donate
-    //window.location = '/donate';
+      // bring user to page for resources to donate
+      .then(() => { window.location = '/donate'; })
+      .catch(err => console.error(err.stack));
   };
 
   const handleSellClick = (event) => {
     event.preventDefault();
-    console.log('the current status: ' + status);
-    console.log('the current item id: ' + _id);
+
+    // DEBUG:
+    // console.log('the current status: ' + status);
+    // console.log('the current item id: ' + _id);
+
     // changes status to 'toSell'
     API.updateItem({
       _id: _id,
@@ -122,16 +126,19 @@ const ItemDetails = (props) => {
       location: location,
       status: 'toSell'
     })
-      .catch(err => console.log(err));
-
-    // bring user to page for resources to sell
-    //window.location = '/sell';
+      // bring user to page for resources to sell
+      .then(() => { window.location = '/sell'; })
+      .catch(err => console.error(err.stack));
   };
 
   const handleTossClick = (event) => {
     event.preventDefault();
-    console.log('the current status: ' + status);
-    console.log('the current item id: ' + _id);
+
+    // DEBUG:
+    // console.log('the current status: ' + status);
+    // console.log('the current item id: ' + _id);
+
+    // changes status to 'toToss'
     API.updateItem({
       _id: _id,
       name: name,
@@ -139,13 +146,22 @@ const ItemDetails = (props) => {
       location: location,
       status: 'toToss'
     })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err.stack));
   };
 
   const handleUpdateItem = (event) => {
     event.preventDefault();
 
-    // API call here ...
+    const { name, description, location } = formData;
+
+    API.updateItem({
+      _id: _id,
+      name: name,
+      description: description,
+      location: location,
+      status: 'keep'
+    })
+      .catch(err => console.error(err.stack));
 
     setEditMode(false);
   };
@@ -160,7 +176,7 @@ const ItemDetails = (props) => {
           <Typography variant='h2'
             gutterBottom
             className={classes.spaceTop}>
-            Item Details
+            My Item Details
           </Typography>
         </Grid>
         <Grid item xs={12}
@@ -171,28 +187,36 @@ const ItemDetails = (props) => {
           align="center"
           className={classes.spaceBottom}>
           { editMode
-            ? <form noValidate autoComplete="off">
+            ? <form noValidate
+              autoComplete="off"
+              onSubmit={handleUpdateItem}>
               <FormControl className={classes.spaceAround}>
                 <TextField id="item-name"
-                  label="Name"
-                  variant="outlined" />
+                  name="name"
+                  label="Item Name"
+                  variant="outlined"
+                  onChange={handleFormInputChange} />
                 <FormHelperText id="item-name-helper-text">
                   {name}
                 </FormHelperText>
               </FormControl>
               <FormControl className={classes.spaceAround}>
                 <TextField id="item-desc"
+                  name="description"
                   label="Item Description"
-                  variant="outlined" />
+                  variant="outlined"
+                  onChange={handleFormInputChange}/>
                 <FormHelperText id="item-desc-helper-text">
                   {description}
                 </FormHelperText>
               </FormControl>
               <FormControl className={classes.spaceAround}>
                 <TextField id="itemName"
-                  label="Location"
-                  variant="outlined" />
-                <FormHelperText id="item-desc-helper-text">
+                  name="location"
+                  label="Item Location"
+                  variant="outlined"
+                  onChange={handleFormInputChange}/>
+                <FormHelperText id="item-loc-helper-text">
                   {location}
                 </FormHelperText>
               </FormControl>
