@@ -23,20 +23,20 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ViewMyStuff = () => {
+  const { user } = useContext(authContext);
+  const [currentUser, setUser] = useState(user);
   const [myItems, setMyItems] = useState([]);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const carousel = useRef();
   const classes = useStyles();
-  const { user } = useContext(authContext);
-  const [ tmpUser, setUser ] = useState(user);
-  console.log(user);
 
   useEffect(() => {
-    setUser(user)
-    if (tmpUser) {
+    setUser(user);
+
+    if (currentUser) {
       handleFetch();
     }
-  }, [user, tmpUser]);
+  }, [user, currentUser]);
 
   const handleActionClick = (action) => {
     return async (ev) => {
@@ -70,8 +70,6 @@ const ViewMyStuff = () => {
 
   const handleFetch = async () => {
     try {
-      console.log('are we running handle fetch');
-      console.log(user.sub);
       const resp = await API.getMyItems(user.sub);
       const data = await resp.json();
 

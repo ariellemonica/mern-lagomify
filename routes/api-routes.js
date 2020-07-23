@@ -146,7 +146,6 @@ module.exports = (() => {
       .catch((err) => console.log(err));
   });
 
-
   /* ************************** PUT Routes ************************** */
   router.put('/user/items/:id', (req, res) => {
     const updatedStatus = req.body.status ? 'keep' : 'toLetGo';
@@ -160,7 +159,6 @@ module.exports = (() => {
       })
       .catch(err => res.status(422).json(err));
   });
-
 
   return router;
 })();
