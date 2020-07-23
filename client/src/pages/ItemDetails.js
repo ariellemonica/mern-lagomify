@@ -131,7 +131,7 @@ const ItemDetails = (props) => {
     // API call here ...
 
     setEditMode(false);
-  }
+  };
 
   return (
     <Main>
