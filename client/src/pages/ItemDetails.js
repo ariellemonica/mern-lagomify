@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   media: {
     borderRadius: 4,
     height: '100%',
-    minHeight: '50vh',
+    maxHeight: '50vh',
     minWidth: '50vh'
   },
   emphasis: {
@@ -49,7 +49,7 @@ const ItemDetails = (props) => {
 
     getItemDetails(params);
   }, [props,
-    _id, name, description, location, status, imageUrl, 
+    _id, name, description, location, status, imageUrl,
     editMode]);
 
   const getItemDetails = async ({ id }) => {
@@ -142,7 +142,7 @@ const ItemDetails = (props) => {
           <Typography variant='h2'
             gutterBottom
             className={classes.spaceTop}>
-            Item Details
+            My Item Details
           </Typography>
         </Grid>
         <Grid item xs={12}
@@ -156,7 +156,7 @@ const ItemDetails = (props) => {
             ? <form noValidate autoComplete="off">
               <FormControl className={classes.spaceAround}>
                 <TextField id="item-name"
-                  label="Name"
+                  label="Item Name"
                   variant="outlined" />
                 <FormHelperText id="item-name-helper-text">
                   {name}
@@ -172,9 +172,9 @@ const ItemDetails = (props) => {
               </FormControl>
               <FormControl className={classes.spaceAround}>
                 <TextField id="itemName"
-                  label="Location"
+                  label="Item Location"
                   variant="outlined" />
-                <FormHelperText id="item-desc-helper-text">
+                <FormHelperText id="item-loc-helper-text">
                   {location}
                 </FormHelperText>
               </FormControl>
