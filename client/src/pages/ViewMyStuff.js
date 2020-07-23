@@ -1,5 +1,4 @@
-// import React, { useState } from 'react';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Button } from '@material-ui/core';
 import Carousel from 'react-material-ui-carousel';
@@ -25,61 +24,54 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ViewMyStuff = () => {
-  // It's necessary to set the initial state with one item so
-  // the carousel will render properly on page load.
-  const initState = [{
-    id: 0,
-    name: 'Welcome',
-    image: '..assets/img/green-wooden-chair.jpg'
-  }];
-  const [myItems, setMyItems] = useState(initState);
-  const [dataLoaded, setDataLoaded] = useState(false);
-  const [itemId, setItemId] = useState(initState[0].id);
+  const [myItems, setMyItems] = useState([]);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const carousel = useRef();
   const classes = useStyles();
 
   useEffect(() => {
     handleFetch();
   }, []);
 
-  const handleClickMyItems = ev => {
-    ev.preventDefault();
+  const handleActionClick = (action) => {
+    return async (ev) => {
+      ev.preventDefault();
 
-    const {
-      'data-item-id': { value: myItemId },
-      'data-item-action': { value: myItemAction }
-    } = ev.currentTarget.attributes;
+      const { _id } = myItems[carouselIndex];
 
-    const myItemUpdate = {
-      _id: myItemId,
-      action: myItemAction
+      try {
+        const resp = await API.updateMyItems({ _id, action });
+        const data = await resp.json();
+
+        if (data.updated) {
+          if (carouselIndex + 1 === myItems.length) {
+            carousel.current.prev();
+          }
+
+          handleFetch();
+        } else {
+          console.log('Nothing updated.');
+          carousel.current.next();
+        }
+      } catch (err) {
+        console.error(err.stack);
+      }
     };
-
-    const updateItems = async () => {
-      await API.updateMyItems(myItemUpdate)
-        .then(resp => resp.json())
-        .then(data => {
-          const { updated } = data;
-
-          (updated)
-            ? handleFetch()
-            : console.log('Nothing updated.');
-        })
-        .catch(err => console.error(err.stack));
-    };
-
-    updateItems();
   };
 
-  const handleFetch = () => {
-    const fetchItems = async () => {
-      await API.getMyItems()
-        .then(resp => resp.json())
-        .then(data => setMyItems(data))
-        .then(() => setDataLoaded(true))
-        .catch(err => console.error(err.stack));
-    };
+  const handleCarouselChange = (index) => {
+    setCarouselIndex(index);
+  };
 
-    fetchItems();
+  const handleFetch = async () => {
+    try {
+      const resp = await API.getMyItems();
+      const data = await resp.json();
+
+      setMyItems(data);
+    } catch (err) {
+      console.error(err.stack);
+    }
   };
 
   return (
@@ -103,33 +95,31 @@ const ViewMyStuff = () => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          { dataLoaded
+          {myItems.length
             ? <Carousel
-              autoPlay={false} className={classes.spaceBottom}>
+              className={classes.spaceBottom}
+              autoPlay={false}
+              onChange={handleCarouselChange}
+              ref={carousel}>
               {
-                myItems.map(item =>
+                myItems.map((item) =>
                   <CarouselItem
-                    key={Math.floor(Math.random() * Math.floor(100000))}
+                    key={item._id}
                     item={item}
-                    itemState={{ itemId, setItemId }}
                   />)
               }
             </Carousel>
-            : null }
+            : null}
         </Grid>
         <Grid item
           xs={12}
           className={clsx(classes.stretch, classes.spaceBottom)}>
           <Button color="default"
-            data-item-id={itemId}
-            data-item-action={true}
-            onClick={handleClickMyItems}>
+            onClick={handleActionClick(true)}>
             This Item Brings Me Joy
           </Button>
           <Button color="secondary"
-            data-item-id={itemId}
-            data-item-action={false}
-            onClick={handleClickMyItems}>
+            onClick={handleActionClick(false)}>
             This Item Does Not
           </Button>
         </Grid>

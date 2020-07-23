@@ -4,26 +4,26 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 const router = require('express').Router();
 const AWS = require('aws-sdk');
+
+// Is this used? If not, let's get rid of it.
 const s3_bucket = process.env.BUCKET;
 
-//Amazon s3 config
+// Amazon s3 config
 const s3 = new AWS.S3();
-//const S3 = require('aws-sdk/clients/s3');
-AWS.config.update(
-  {
-    region: 'us-west-1', 
-    accessKeyId: process.env.AWSAccessKeyId,
-    secretAccessKey: process.env.AWSSecretKey
+// const S3 = require('aws-sdk/clients/s3');
+AWS.config.update({
+  region: 'us-west-1',
+  accessKeyId: process.env.AWSAccessKeyId,
+  secretAccessKey: process.env.AWSSecretKey
 });
 
-//Multer config
-//memory storage keeps file data in a buffer
+// Multer config
+// memory storage keeps file data in a buffer
 const upload = multer({
   storage: multer.memoryStorage(),
-  //file size limitation in bytes
+  // file size limitation in bytes
   limits: { fileSize: 52428800 },
 });
-
 
 // Mongo Database
 const db = require('../models');
@@ -35,7 +35,7 @@ mongoose.connect(
   MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
-});
+  });
 
 mongoose.connection
   .on('error', console.error.bind(
@@ -44,11 +44,19 @@ mongoose.connection
     console.log('Successfully connected to the database.');
   });
 
-// do some things - set up routes
 module.exports = (() => {
-  // router.get('/', (req, res) => {
-  //   // landing page ...
-  // });
+  /* ************************** GET Routes ************************** */
+  // mn - simple find item by id - can be modified later or chris can blow this away if he's already written something, i wrote this mainly for testing
+  // mn - tested in BE via api call
+  router.get('/item/:id', (req, res) => {
+    console.log('this is the item id: ' + req.params.id);
+    db.Item.findById(req.params.id)
+      .then((itemData) => {
+        console.log(itemData);
+        res.json(itemData);
+      })
+      .catch((err) => console.log(err));
+  });
 
   router.get('/items', (req, res) => {
     // items for sale page...
@@ -65,10 +73,32 @@ module.exports = (() => {
       .catch(err => res.status(422).json(err));
   });
 
-  // router.get('/rooms', (req, res) => {
-  //   // rooms and crap ...
-  // });
+  router.get('/places/:type', (req, res) => {
+    db.Place
+      .find({ type: req.params.type })
+      .then(docs => res.json(docs))
+      .catch(err => res.status(422).json(err));
+  });
 
+  // mn - hardcoded find by user - this will need to be updated
+  // mn - capture user whose active section this is, pass through
+  router.get('/user/view-items', (req, res) => {
+    // console.log('this is the item user: ' + req.params.createdBy);
+    // req.auth.user.id -- use this for 'createdBy'
+    // mongoose populate to grab user's name
+    db.Item.find({ createdBy: 'User 2' }, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.json(result);
+      }
+    }).then((itemData) => {
+      console.log(itemData);
+      res.json(itemData);
+    }).catch((err) => console.log(err));
+  });
+
+  /* ************************** POST Routes ************************* */
   // hard coded for testing
   // use req.body when you get to it
   router.post('/item', upload.single('image'), (req, res) => {
@@ -90,7 +120,7 @@ module.exports = (() => {
       } else {
         console.log(data);
 
-        let parsedData = JSON.parse(req.body.text)
+        let parsedData = JSON.parse(req.body.text);
 
         db.Item.create({
           name: parsedData.name,
@@ -102,27 +132,14 @@ module.exports = (() => {
         }).then(() => {
           res.send('Successfully added.');
         });
-      }  
+      }
     });
-
-    
-  });
-
-  // mn - simple find item by id - can be modified later or chris can blow this away if he's already written something, i wrote this mainly for testing
-  // mn - tested in BE via api call
-  router.get('/item/:id', (req, res) => {
-    console.log('this is the item id: ' + req.params.id);
-    db.Item.findById(req.params.id)
-      .then((itemData) => {
-        console.log(itemData);
-        res.json(itemData);
-      })
-      .catch((err) => console.log(err));
   });
 
   // mn - on frontend, what we'll want to do is make sure that the inputs follow the same name-value structure as add item page
   router.post('/item/:id', (req, res) => {
     console.log('this is the item id: ' + req.params.id);
+    // console.log('this is the item id: ' + req..id);
     // if we're allowing more fields to be updated, we can add more
     db.Item.findByIdAndUpdate(req.params.id, {
       name: req.body.name,
@@ -137,45 +154,55 @@ module.exports = (() => {
       .catch((err) => console.log(err));
   });
 
-  // mn - hardcoded find by user - this will need to be updated
-  // mn - capture user whose active section this is, pass through
-  router.get('/user/view-items', (req, res) => {
-    // console.log('this is the item user: ' + req.params.createdBy);
-    // req.auth.user.id -- use this for 'createdBy'
-    // mongoose populate to grab user's name
-    db.Item.find({ createdBy: 'User 2' }, function (err, result) {
-      if (err) {
-        console.log(err);
-      } else {
-        res.json(result);
-      }
+  /*router.post('/item/:id', (req, res) => {
+    console.log('this is the item id: ' + req.params.id);
+    console.log('this is the item id: ' + req.body.id);
+    // if we're allowing more fields to be updated, we can add more
+    db.Item.findByIdAndUpdate(req.body.id, {
+      name: req.body.name,
+      description: req.body.description,
+      location: req.body.location,
+      status: req.body.status
+    }, () => {
+      console.log('record is updated ... hopefully');
     }).then((itemData) => {
-      console.log(itemData);
       res.json(itemData);
-    }).catch((err) => console.log(err));
-  });
+    })
+      .catch((err) => console.log(err));
+  });*/
 
+  /* ************************** PUT Routes ************************** */
   router.put('/user/items/:id', (req, res) => {
-    // DEBUG:
-    // console.log('We got to api-routes!');
-
-    const updatedStatus =
-      (req.body.status === 'true') ? 'keep' : 'toLetGo';
+    const updatedStatus = req.body.status ? 'keep' : 'toLetGo';
 
     db.Item
       .updateOne(
         { _id: req.params.id },
         { $set: { status: updatedStatus } })
       .then(result => {
-        // DEBUG:
-        // console.log(JSON.stringify(result));
-
-        if (result.nModified > 0 && result.ok === 1) {
-          res.status(200).json({ updated: true });
-        }
+        res.json({ updated: result.nModified > 0 && result.ok === 1 });
       })
-      .catch(err => res.status(422).json(err))
-      .finally(() => res.end());
+      .catch(err => res.status(422).json(err));
   });
+
+   /*router.put('/item/:id', (req, res, next) => {
+    console.log('this is the item id: ' + req.params.id);
+
+    db.Item
+      .findOneAndUpdate(
+        { _id: req.params.id},
+        { $set: {
+          name: req.body.name,
+          description: req.body.description,
+          location: req.body.location
+         }
+        })
+         .then(result => {
+
+          res.json({ updated: result.nModified > 0 && result.ok === 1 });
+        })
+        .catch(err => res.status(422).json(err));
+  });*/
+
   return router;
 })();
