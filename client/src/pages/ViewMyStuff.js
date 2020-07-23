@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useContext } from 'react';
 import { authContext } from '../utils/appContext';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Button } from '@material-ui/core';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 import Carousel from 'react-material-ui-carousel';
 import clsx from 'clsx';
 import { Main, CarouselItem } from '../components';
@@ -133,8 +134,10 @@ const ViewMyStuff = () => {
         <Grid item xs={12}
           align="center"
           className={classes.spaceBottom}>
-          <Button color="primary"
-            href="./member">
+          <Button variant="contained"
+            color="primary"
+            href="./member"
+            startIcon={<AddBoxIcon />}>
             Add Item
           </Button>
         </Grid>

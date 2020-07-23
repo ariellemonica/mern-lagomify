@@ -4,6 +4,7 @@ import Button from '@material-ui/core/Button';
 import { GoogleLogin } from 'react-google-login';
 import { Redirect } from 'react-router-dom';
 import { authContext } from '../utils/appContext';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,7 +52,7 @@ export default ({ setUser }) => {
         <GoogleLogin
           // clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           clientId={atob('OTcwODYzNTI5MDI0LWtqcmNtZzgyMzRkMWRkdmU5cmYzcDRpY3BzcmljbzBuLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29t')}
-          buttonText="Login with Google"
+          buttonText="LOGIN WITH GOOGLE"
           onSuccess={responseGoogle}
           onFailure={handleFailure}
           cookiePolicy={'single_host_origin'}
@@ -59,7 +60,12 @@ export default ({ setUser }) => {
         <div>
 
         </div>
-        <Button className={classes.buttonStyle} variant="contained" color="primary" size="large" href="/signup">
+        <Button variant="contained"
+          color="primary"
+          size="large"
+          href="/signup"
+          startIcon={<AccountCircleIcon />}
+          className={classes.buttonStyle}>
           Create Account
         </Button>
       </div>
