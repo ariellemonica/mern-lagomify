@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import { authContext } from '../utils/appContext';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Button } from '@material-ui/core';
 import Carousel from 'react-material-ui-carousel';
@@ -23,15 +24,23 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
 const ViewMyStuff = () => {
   const [myItems, setMyItems] = useState([]);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const carousel = useRef();
   const classes = useStyles();
+  const { user } = useContext(authContext);
+  const [ tmpUser, setUser ] = useState(user);
+  console.log(user);
+  // console.log(user.sub);
 
   useEffect(() => {
-    handleFetch();
-  }, []);
+    setUser(user)
+    if (tmpUser) {
+      handleFetch();
+    }
+  }, [user, tmpUser]);
 
   const handleActionClick = (action) => {
     return async (ev) => {
@@ -65,7 +74,9 @@ const ViewMyStuff = () => {
 
   const handleFetch = async () => {
     try {
-      const resp = await API.getMyItems();
+      console.log('are we running handle fetch');
+      console.log(user.sub);
+      const resp = await API.getMyItems(user.sub);
       const data = await resp.json();
 
       setMyItems(data);

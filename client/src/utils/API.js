@@ -14,8 +14,10 @@ export default {
   getItems: () => fetch('/api/view'),
 
   // mn - current user - handled in BE request.auth.user - this function is incomplete
-  getMyItems: () => {
-    return fetch('/api/items', {
+  getMyItems: (createdBy) => {
+    console.log('this log of user happens in the fetch');
+    console.log(createdBy);
+    return fetch(`/api/items/${createdBy}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

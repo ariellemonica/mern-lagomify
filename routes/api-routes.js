@@ -22,7 +22,7 @@ AWS.config.update({
 const upload = multer({
   storage: multer.memoryStorage(),
   // file size limitation in bytes
-  limits: { fileSize: 52428800 },
+  limits: { fileSize: 52428800 }
 });
 
 // Mongo Database
@@ -58,10 +58,11 @@ module.exports = (() => {
       .catch((err) => console.log(err));
   });
 
-  router.get('/items', (req, res) => {
+  router.get('/items/:createdBy', (req, res) => {
     // items for sale page...
+    console.log(req.params.createdBy);
     db.Item
-      .find({ status: 'keep' })
+      .find({ status: 'keep', createdBy: req.params.createdBy })
       .then(docs => res.json(docs))
       .catch(err => res.status(422).json(err));
   });
@@ -104,7 +105,6 @@ module.exports = (() => {
   router.post('/item', upload.single('image'), (req, res) => {
     console.log(req.owner);
     console.log(req.body);
-    //console.log(req.file);
 
     const presignedURI = `${req.file.originalname.split('.')[0]}-${Date.now()}.${req.file.originalname.split('.')[1]}`.toLowerCase();
 
@@ -120,7 +120,7 @@ module.exports = (() => {
       } else {
         console.log(data);
 
-        let parsedData = JSON.parse(req.body.text);
+        const parsedData = JSON.parse(req.body.text);
 
         db.Item.create({
           name: parsedData.name,
