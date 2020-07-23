@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
+import { authContext } from '../utils/appContext';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Typography, Button } from '@material-ui/core';
 import Carousel from 'react-material-ui-carousel';
 import clsx from 'clsx';
 import { Main, CarouselItem } from '../components';
 import API from '../utils/API';
-// you will need to import context and get user details from that
-// then use an api call to get the data
 
 const useStyles = makeStyles(theme => ({
   spaceBottom: {
@@ -28,10 +27,16 @@ const ViewMyStuff = () => {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const carousel = useRef();
   const classes = useStyles();
+  const { user } = useContext(authContext);
+  const [ tmpUser, setUser ] = useState(user);
+  console.log(user);
 
   useEffect(() => {
-    handleFetch();
-  }, []);
+    setUser(user)
+    if (tmpUser) {
+      handleFetch();
+    }
+  }, [user, tmpUser]);
 
   const handleActionClick = (action) => {
     return async (ev) => {
@@ -65,7 +70,9 @@ const ViewMyStuff = () => {
 
   const handleFetch = async () => {
     try {
-      const resp = await API.getMyItems();
+      console.log('are we running handle fetch');
+      console.log(user.sub);
+      const resp = await API.getMyItems(user.sub);
       const data = await resp.json();
 
       setMyItems(data);
