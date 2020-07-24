@@ -8,6 +8,7 @@ const AWS = require('aws-sdk');
 // Amazon s3 config
 const s3 = new AWS.S3();
 // const S3 = require('aws-sdk/clients/s3');
+
 AWS.config.update({
   region: 'us-west-1',
   accessKeyId: process.env.AWSAccessKeyId,

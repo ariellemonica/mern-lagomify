@@ -27,7 +27,7 @@ For more information about Material-UI and how it works, you can visit https://m
 ### Amazon S3
 Amazon Simple Storage Service (Amazon S3) is an object storage service. We used Amazon S3 to store the items our users were uploading to the site in the cloud. This involved having to create an AWS profile, create the S3 bucket that would store the items, uploading the files from the client side UI to the server, and linking the items in the s3 bucket to our MongoDB database. 
 
-We use Multer to make sure the files were uploaded to to the server. When a web client uploads a file to a server, it is generally submitted through a form and encoded as multipart/form-data. Multer is the middleware used for Express and Node.js to makes it easy to handle this multipart/form-data when your users upload files. 
+We use Multer to make sure the files were uploaded to the server. When a web client uploads a file to a server, it is generally submitted through a form and encoded as multipart/form-data. Multer is the middleware used for Express and Node.js to makes it easy to handle this multipart/form-data when your users upload files. 
 
 
 #### App Layout
