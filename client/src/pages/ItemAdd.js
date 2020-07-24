@@ -1,173 +1,74 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {
-  Grid, Typography, Button, FormControl, FormHelperText, TextField
-} from '@material-ui/core';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import clsx from 'clsx';
+import React from 'react';
+import API from "../utils/API";
+import FileUpload from "../components/FileUpload";
 import axios from 'axios';
-import { Main, FileUpload } from '../components';
+import { TextField, Button, Typography } from '@material-ui/core';
+import { Main } from '../components';
 
-const useStyles = makeStyles(theme => ({
-  centered: {
-    textAlign: 'center'
-  },
-  spaceAround: {
-    margin: 'auto 0.5rem'
-  },
-  spaceBottom: {
-    marginBottom: '1rem'
-  },
-  spaceTop: {
-    marginTop: '2rem'
-  },
-  lessSpaceTop: {
-    marginTop: '1rem'
-  },
-  firstChild: {
-    marginLeft: 0
-  },
-  lastChild: {
-    marginRight: 0
-  }
-}));
 
-const ItemAdd = ({ user: { sub, email } }) => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [files, setFiles] = useState(null);
-  const [createdBy, setCreatedBy] = useState('');
-  const [owner, setOwner] = useState('');
-  const [location, setLocation] = useState('');
-  const classes = useStyles();
+class ItemAdd extends React.Component {
+  state = {
+    name: '',
+    description: '',
+    files: null,
+    createdBy: '',
+    owner: '',
+    location: ''
+  };
 
-  useEffect(() => {
-    setCreatedBy(sub);
-    setOwner(email);
-  }, [sub, email]);
-
-  const handleTextChange = (event) => {
-    const { name, value } = event.target;
-
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-      case 'description':
-        setDescription(value);
-        break;
-      case 'location':
-        setLocation(value);
-        break;
-      default:
-        // Do nothing!
+    componentDidMount = () => {
+      // use this to capture current user id
+      console.log('user: ', this.props);
+      this.setState({
+        createdBy: this.props.user.sub,
+        owner: this.props.user.email
+      });
     }
-  };
 
-  const handleState = ({
-    name, description, files, createdBy, owner, location
-  }) => {
-    setName(name);
-    setDescription(description);
-    setFiles(files);
-    setLocation(location);
-  };
+    handleTextChange = (event) => {
+      const { name, value } = event.target;
+      this.setState({
+        [name]: value
+      });
+    }
 
-  const handleButtonClick = (event) => {
-    event.preventDefault();
-
-    const data = new FormData();
-    const state = {
-      name: name,
-      description: description,
-      files: files,
-      createdBy: createdBy || '',
-      owner: owner || '',
-      location: location
+    handleState = (obj) => {
+      this.setState(obj);
     };
 
-    data.append('image', files[0]);
-    data.append('text', JSON.stringify(state));
+    handleButtonClick = (event) => {
+      event.preventDefault();
+    
+      const data = new FormData();
+      data.append('image', this.state.files[0]);
+      data.append('text', JSON.stringify(this.state));
+      console.log('this is the data' + data);
+    
+      axios.post('api/item', data).then(() => {
+        console.log('request happened');
+        window.location = '/view'
+        console.log("this is the story of a girl" + this.state.owner);
+      });
+    }
 
-    axios.post('api/item', data).then(() => {
-      window.location = '/view';
-    });
-  };
-
-  return (
-    <Main>
-      <Grid container
-        direction="column"
-        justify="space-between"
-        alignItems="center">
-        <Grid item xs={12}>
-          <Typography variant='h2'
-            gutterBottom
-            className={classes.spaceTop}>
-            Add My Item
-          </Typography>
-        </Grid>
-        <Grid item xs={12}
-          className={classes.spaceBottom}>
-          <Typography variant="body1"
-            align="justify">
-              Add your item to your collection below. Once your item is added to your collection, you can decide if item brings you joy not. If it does not, then you can determine if you want to sell it, donate, or toss it.
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
+    render () {
+      return (
+        <Main>
+          <Typography variant='h2'>Catalog Your Item</Typography>
           <form noValidate autoComplete="off">
-            <FormControl className={clsx(
-              classes.spaceAround,
-              classes.spaceBottom,
-              classes.firstChild)}>
-              <TextField id="item-name"
-                name="name"
-                label="Item Name"
-                variant="outlined"
-                onChange={handleTextChange} />
-              <FormHelperText id="item-name-helper-text">
-                the name of your item
-              </FormHelperText>
-            </FormControl>
-            <FormControl className={clsx(
-              classes.spaceAround,
-              classes.spaceBottom)}>
-              <TextField name="description"
-                label="Item Description"
-                variant="outlined"
-                onChange={handleTextChange} />
-              <FormHelperText id="item-desc-helper-text">
-                a brief description of your item
-              </FormHelperText>
-            </FormControl>
-            <FormControl className={clsx(
-              classes.spaceAround,
-              classes.spaceBottom,
-              classes.lastChild)}>
-              <TextField name="location"
-                label="Item Location"
-                variant="outlined"
-                onChange={handleTextChange} />
-              <FormHelperText id="item-loc-helper-text">
-                the room this item occupies
-              </FormHelperText>
-            </FormControl>
-            <FileUpload handleState={handleState} />
-            <div className={clsx(
-              classes.centered,
-              classes.lessSpaceTop)}>
-              <Button variant="contained"
-                color="primary"
-                startIcon={<CloudUploadIcon />}
-                onClick={handleButtonClick}>
-                Add My Item
-              </Button>
-            </div>
+            <TextField name="name" value={this.state.name} label="Item Name" variant="outlined" onChange={this.handleTextChange} />
+            <TextField name="description" value={this.state.description} label="Description" variant="outlined" onChange={this.handleTextChange} />
+            <TextField name="location" value={this.state.location} label="Item's Location" variant="outlined" onChange={this.handleTextChange} />
+            <FileUpload
+              handleState={this.handleState}
+              handleSubmit={this.handleSubmit}
+            />
+            <Button variant="contained" color="primary" onClick={this.handleButtonClick}>
+                        Add Item</Button>
           </form>
-        </Grid>
-      </Grid>
-    </Main>
-  );
-};
+        </Main>
+      );
+    }
+}
 
 export default ItemAdd;
