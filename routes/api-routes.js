@@ -124,7 +124,7 @@ module.exports = (() => {
           createdBy: parsedData.createdBy
         }).then(() => {
           res.send('Successfully added.');
-        });
+        }).catch((err) => console.log(err));
       }
     });
   });
