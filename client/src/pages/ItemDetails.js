@@ -3,6 +3,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid, Typography, Button, FormControl, FormHelperText, TextField
 } from '@material-ui/core';
+import CancelIcon from '@material-ui/icons/Cancel';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+// import InfoIcon from '@material-ui/icons/Info';
+import LocalOfferIcon from '@material-ui/icons/LocalOffer';
+import LoyaltyIcon from '@material-ui/icons/Loyalty';
+import UpdateIcon from '@material-ui/icons/Update';
 import clsx from 'clsx';
 import { Main } from '../components';
 import API from '../utils/API';
@@ -26,11 +33,17 @@ const useStyles = makeStyles(theme => ({
   spaceTop: {
     marginTop: '2rem'
   },
+  contract: {
+    display: 'flex',
+    direction: 'row',
+    justifyContent: 'space-around',
+    width: '50vh'
+  },
   stretch: {
     display: 'flex',
     direction: 'row',
     justifyContent: 'space-between',
-    width: '50vh'
+    width: '60vh'
   }
 }));
 
@@ -146,6 +159,8 @@ const ItemDetails = (props) => {
       location: location,
       status: 'toToss'
     })
+      // bring user to page for viewing items
+      .then(() => { window.location = '/view'; })
       .catch(err => console.error(err.stack));
   };
 
@@ -162,6 +177,12 @@ const ItemDetails = (props) => {
       status: 'keep'
     })
       .catch(err => console.error(err.stack));
+
+    setEditMode(false);
+  };
+
+  const handleCancelEdit = (event) => {
+    event.preventDefault();
 
     setEditMode(false);
   };
@@ -238,23 +259,44 @@ const ItemDetails = (props) => {
         </Grid>
         { editMode
           ? <Grid item x={12}
-            className={classes.spaceBottom}>
-            <Button color="primary" onClick={handleUpdateItem}>
+            className={clsx(classes.contract, classes.spaceBottom)}>
+            <Button variant="contained"
+              color="primary"
+              startIcon={<UpdateIcon />}
+              onClick={handleUpdateItem}>
               Update Item
+            </Button>
+            <Button variant="contained"
+              color="secondary"
+              startIcon={<CancelIcon />}
+              onClick={handleCancelEdit}>
+              Cancel Edit
             </Button>
           </Grid>
           : <Grid item x={12}
             className={clsx(classes.stretch, classes.spaceBottom)}>
-            <Button color='primary' onClick={handleEditClick}>
+            <Button variant="contained"
+              color='primary'
+              startIcon={<EditIcon />}
+              onClick={handleEditClick}>
               Edit Item
             </Button>
-            <Button color='default' onClick={handleDonateClick}>
+            <Button variant="contained"
+              color='default'
+              startIcon={<LoyaltyIcon />}
+              onClick={handleDonateClick}>
               Donate
             </Button>
-            <Button color='default' onClick={handleSellClick}>
+            <Button variant="contained"
+              color='default'
+              startIcon={<LocalOfferIcon />}
+              onClick={handleSellClick}>
               Sell
             </Button>
-            <Button color='secondary' onClick={handleTossClick}>
+            <Button variant="contained"
+              color='secondary'
+              startIcon={<DeleteIcon />}
+              onClick={handleTossClick}>
               Toss
             </Button>
           </Grid>

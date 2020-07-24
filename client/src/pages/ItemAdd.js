@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid, Typography, Button, FormControl, FormHelperText, TextField
 } from '@material-ui/core';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import clsx from 'clsx';
 import axios from 'axios';
 import { Main, FileUpload } from '../components';
@@ -155,7 +156,9 @@ const ItemAdd = ({ user: { sub, email } }) => {
             <div className={clsx(
               classes.centered,
               classes.lessSpaceTop)}>
-              <Button color="primary"
+              <Button variant="contained"
+                color="primary"
+                startIcon={<CloudUploadIcon />}
                 onClick={handleButtonClick}>
                 Add My Item
               </Button>
