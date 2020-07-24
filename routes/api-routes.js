@@ -5,9 +5,6 @@ const multer = require('multer');
 const router = require('express').Router();
 const AWS = require('aws-sdk');
 
-// Is this used? If not, let's get rid of it.
-const s3_bucket = process.env.BUCKET;
-
 // Amazon s3 config
 const s3 = new AWS.S3();
 // const S3 = require('aws-sdk/clients/s3');

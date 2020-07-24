@@ -6,7 +6,6 @@ import {
 import CancelIcon from '@material-ui/icons/Cancel';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-// import InfoIcon from '@material-ui/icons/Info';
 import LocalOfferIcon from '@material-ui/icons/LocalOffer';
 import LoyaltyIcon from '@material-ui/icons/Loyalty';
 import UpdateIcon from '@material-ui/icons/Update';
@@ -65,17 +64,13 @@ const ItemDetails = (props) => {
   const classes = useStyles();
 
   useEffect(() => {
-    const { match: { params } } = props;
+    getItemDetails();
+  }, [props.match.params.id]);
 
-    getItemDetails(params);
-  }, [props,
-    _id, name, description, location, status, imageUrl,
-    editMode]);
-
-  const getItemDetails = async ({ id }) => {
+  const getItemDetails = async () => {
     try {
       const { _id, name, description, location, status, imageUrl } =
-        await API.getItem(id);
+        await API.getItem(props.match.params.id);
 
       setId(_id);
       setName(name);
@@ -176,6 +171,7 @@ const ItemDetails = (props) => {
       location: location,
       status: 'keep'
     })
+      .then(() => getItemDetails())
       .catch(err => console.error(err.stack));
 
     setEditMode(false);
