@@ -64,13 +64,10 @@ const ItemAdd = ({ user: { sub, email } }) => {
     }
   };
 
-  const handleState = ({
-    name, description, files, createdBy, owner, location
+  const handleUpload = ({
+    files
   }) => {
-    setName(name);
-    setDescription(description);
     setFiles(files);
-    setLocation(location);
   };
 
   const handleButtonClick = (event) => {
@@ -152,7 +149,7 @@ const ItemAdd = ({ user: { sub, email } }) => {
                 the room this item occupies
               </FormHelperText>
             </FormControl>
-            <FileUpload handleState={handleState} />
+            <FileUpload handleState={handleUpload} />
             <div className={clsx(
               classes.centered,
               classes.lessSpaceTop)}>
